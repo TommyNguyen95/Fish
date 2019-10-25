@@ -1,0 +1,46 @@
+body {
+  background-color: #eee;
+  font-family: 'Montserrat', sans-serif;
+}
+
+body > div {
+  margin: 0 auto;
+  width: 90%;
+  max-width: 800px;
+}
+
+pre {
+  font-family: 'Source Code Pro', monospace;
+  padding: 10px;
+  background: #fff;
+}
+
+pre.a-test {
+  margin-bottom: 30px;
+}
+
+pre, hr {
+  margin-bottom: 30px;
+}
+
+.passed {
+  background-color: lightgreen;
+}
+
+.failed, .error {
+  background-color: lightpink;
+}
+
+.undone {
+  background-color: lightyellow;
+}
+
+.a-test hr {
+  margin: 15px 0;
+}
+
+footer {
+  background: #ddd;
+  padding: 10px;
+  text-align: center;
+}

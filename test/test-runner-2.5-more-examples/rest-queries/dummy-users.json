@@ -1,0 +1,17 @@
+[
+  {
+    "username": "Farbror Blå",
+    "password": "112112",
+    "role": "police"
+  },
+  {
+    "username": "Farbror Grå",
+    "password": "bankonme",
+    "role": "banker"
+  },
+  {
+    "username": "Mrs Green",
+    "password": "cleanair",
+    "role": "environmental activist"
+  }
+]
