@@ -18,14 +18,24 @@ const router = express.Router();
   * Create an user
   */
  router.post('/api/user', async (req, res) => {
-   console.log('kim ska träffa zoey så check: OUT sen check: IN')
   
    let save = new User(req.body);
-   console.log(req.body);
    let error;
    let result = await save.save().catch(err => error = err);
    res.json(result || error);
-   console.log(save)
+ })
+
+ /**
+  * Delete a user
+  */
+ router.delete('/api/user/:id', async (req, res) => {
+  try {
+    const deletedUser = await User.findByIdAndDelete(req.params.id);
+    !deletedUser && res.status(404).send();
+    res.send(deletedUser);
+  } catch (e) {
+    res.status(500).send();
+  }
  })
 
  module.exports = router;
