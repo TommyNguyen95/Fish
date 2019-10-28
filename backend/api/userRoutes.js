@@ -5,17 +5,17 @@ const router = express.Router();
 /**
  * Get all users
  */
- router.get('/api/users', async (req, res) => {
-   User.find({})
-   .exec()
-   .then(data => {
-     res.status(200).send(data);
-   })
- })
+router.get('/api/users', async (req, res) => {
+  User.find({})
+    .exec()
+    .then(data => {
+      res.status(200).send(data);
+    })
+})
 
- /**
- * Get user by ID
- */
+/**
+* Get user by ID
+*/
 router.get('/api/user/:id', (req, res) => {
   User.findById(req.params.id, (err, items) => {
     if (err) res.status(500).send(error)
@@ -26,7 +26,7 @@ router.get('/api/user/:id', (req, res) => {
 /**
  * Edit a User
  */
-router.put('/api/user/edit/:id', async (req,res) =>{
+router.put('/api/user/edit/:id', async (req, res) => {
   let user = await User.findById(req.params.id)
   user.username = req.body.username;
   user.password = req.body.password;
@@ -34,7 +34,7 @@ router.put('/api/user/edit/:id', async (req,res) =>{
   user.relations = req.body.relations;
   user.transactions = req.body.transactions;
   user.role = req.body.role;
-  user.save(function(err) {
+  user.save(function (err) {
     if (err) {
       console.log(err)
       next(err)
@@ -44,14 +44,14 @@ router.put('/api/user/edit/:id', async (req,res) =>{
   })
 })
 
- /**
-  * Create an user
-  */
- router.post('/api/user', async (req, res) => {  
-   let save = new User(req.body);
-   let error;
-   let result = await save.save().catch(err => error = err);
-   res.json(result || error);
- })
+/**
+ * Create an user
+ */
+router.post('/api/user', async (req, res) => {
+  let save = new User(req.body);
+  let error;
+  let result = await save.save().catch(err => error = err);
+  res.json(result || error);
+})
 
- module.exports = router;
+module.exports = router;
