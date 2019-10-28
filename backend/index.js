@@ -6,6 +6,7 @@ const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const userRoutes = require('./api/userRoutes');
+const transactionsRoutes = require('./api/transactionsRoutes');
 
 connectToDb();
 
@@ -24,4 +25,5 @@ app.use(session({
 
 app.get('/', (req, res) => res.send('Välkommen till Fi$h super server'));
 app.use(userRoutes);
+app.use(transactionsRoutes);
 app.listen(config.PORT, () => console.log(`Gulligagruppens server is on port ${config.PORT}`));
