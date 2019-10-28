@@ -6,13 +6,14 @@ module.exports = ({apiPath, rules}) => {
  
   return function(req, res, next){
     console.log(req.url)
-    if(req.url.indexOf(apiPath) === -1){
+    if(req.url.indexOf(apiPath) === 0){
+      console.log('DELLA ÄR KUNG')
       // This is an api route.
       // Get the users role and the entity requested
       // (if not logged in set the role visitorr)
       let userRole = req.session.user ?
         req.session.user.role || 'visitor' : 'visitor';
-        console.log(req.session.user.role, 'SIMON')
+       // console.log(req.session.user.role, 'SIMON')
       let url = req.url;
       let method = req.method.toLowerCase();
       url += url.slice(-1) !== '/' ? '/' : '';
@@ -41,7 +42,7 @@ module.exports = ({apiPath, rules}) => {
  
       // Do not allow...
       // (don't say forbidden it encourages hackers)
-      res.send('Page not found.');
+      res.send('Page not found. heheehehe');
       return;
     }
   }
