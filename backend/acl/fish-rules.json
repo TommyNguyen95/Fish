@@ -24,8 +24,7 @@
       "child": "put"
     },
     "users": {
-      "admin": "all",
-      "visitor" : "all"
+      "admin": "all"
     }
   }
 }

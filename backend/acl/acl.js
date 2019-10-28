@@ -5,12 +5,14 @@ module.exports = ({apiPath, rules}) => {
   apiPath += apiPath.slice(-1) !== '/' ? '/' : '';
  
   return function(req, res, next){
-    if(req.url.indexOf(apiPath) === 0){
+    console.log(req.url)
+    if(req.url.indexOf(apiPath) === -1){
       // This is an api route.
       // Get the users role and the entity requested
       // (if not logged in set the role visitorr)
       let userRole = req.session.user ?
         req.session.user.role || 'visitor' : 'visitor';
+        console.log(req.session.user.role, 'SIMON')
       let url = req.url;
       let method = req.method.toLowerCase();
       url += url.slice(-1) !== '/' ? '/' : '';

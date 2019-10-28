@@ -13,7 +13,6 @@ connectToDb();
 
 const app = express();
 
-app.use(acl(fishRules));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(session({
@@ -27,4 +26,5 @@ app.use(session({
 
 app.get('/', (req, res) => res.send('Välkommen till Fi$h super server'));
 app.use(userRoutes);
+app.use(acl(fishRules));
 app.listen(config.PORT, () => console.log(`Gulligagruppens server is on port ${config.PORT}`));

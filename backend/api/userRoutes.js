@@ -6,8 +6,8 @@ const router = express.Router();
  * Get all users
  */
 router.get('/api/users', async (req, res) => {
-  req.session.user = 'bajs';
-  console.log(req.session.user)
+  req.session.user.role = '';
+  console.log(req.session)
   User.find({})
     .exec()
     .then(data => {
