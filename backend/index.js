@@ -6,11 +6,14 @@ const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const userRoutes = require('./api/userRoutes');
+const acl = require('./acl/acl');
+const fishRules = require('./acl/fish-rules.json') 
 
 connectToDb();
 
 const app = express();
 
+app.use(acl(fishRules));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(session({

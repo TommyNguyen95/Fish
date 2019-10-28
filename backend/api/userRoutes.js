@@ -6,6 +6,8 @@ const router = express.Router();
  * Get all users
  */
 router.get('/api/users', async (req, res) => {
+  req.session.user = 'bajs';
+  console.log(req.session.user)
   User.find({})
     .exec()
     .then(data => {
@@ -17,9 +19,12 @@ router.get('/api/users', async (req, res) => {
 * Get user by ID
 */
 router.get('/api/user/:id', (req, res) => {
-  User.findById(req.params.id, (err, items) => {
+  User.findById(req.params.id, (err, user) => {
+    if(user.role === 'child'){
+      
+    }
     if (err) res.status(500).send(error)
-    res.status(200).json(items);
+    res.status(200).json(user);
   });
 });
 
@@ -53,5 +58,9 @@ router.post('/api/user', async (req, res) => {
   let result = await save.save().catch(err => error = err);
   res.json(result || error);
 })
+
+
+
+
 
 module.exports = router;
