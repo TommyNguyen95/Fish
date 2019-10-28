@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(session({
-  secret: 'Två laxar i en lax ask',
+  secret: config.salt,
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({
