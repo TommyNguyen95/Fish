@@ -1,0 +1,5 @@
+CMD login mongo:
+
+ mongo "mongodb+srv://fishatlas0-unjwa.mongodb.net/test"  --username delshad
+
+ Lösen: dela123

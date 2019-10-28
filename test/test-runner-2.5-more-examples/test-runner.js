@@ -50,7 +50,7 @@ async function run() {
         i: run
       });
       let req = {
-        uri: restBasePath + q.path,
+        uri: restBasePath + q.path + '?t=1',
         method: q.method,
         'content-type': 'application/json',
         json: q.body,
@@ -110,7 +110,7 @@ async function run() {
   let jsonFileName = fileName.split('.html').join('.json')
   fs.writeFileSync(fileName, displayTemplate(niceDate, all), 'utf-8');
   fs.writeFileSync(jsonFileName, JSON.stringify(all, '', '  '), 'utf-8');
-  open(fileName);
+  open(fileName, {app: ['google chrome']});
 }
 
 // A basic display template
