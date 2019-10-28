@@ -6,7 +6,7 @@ let transactionSchema = new Schema({
   from: { type: Schema.Types.ObjectId, ref: 'User' },
   amount: Number,
   date: { type: Date, default: Date.now },
-  message: String,
+  message: { type: String }
 })
 
-module.exports = mongoose.model('transactionSchema', transactionSchema);
+module.exports = mongoose.model('transactions', transactionSchema);

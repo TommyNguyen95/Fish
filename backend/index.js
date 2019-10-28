@@ -7,11 +7,13 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const userRoutes = require('./api/userRoutes');
 const transactionsRoutes = require('./api/transactionsRoutes');
+const dbtoggler = require('./dbtoggler');
 
-connectToDb();
-
+// Initial connection to DB
+connectToDb()
 const app = express();
 
+app.use(dbtoggler())
 app.use(cors());
 app.use(bodyParser.json());
 app.use(session({
