@@ -2,21 +2,21 @@
     "apiPath": "/api",
     "rules": {
       "login": {
-        "visitor": "post, get",
+        "visitor": "post get",
         "admin": "all",
         "user": "all",
         "child": "all"
       },
       "transactions": {
         "admin": "all",
-        "user": "get, post",
-        "child": "get, post"
+        "user": "get post",
+        "child": "get post"
       },
       "user": {
         "visitor": "post",
         "admin": "all",
         "child": "get",
-        "user": "get, post"
+        "user": "get post"
       },
       "edit": {
         "admin": "all",

@@ -44,6 +44,11 @@ router.post('/api/user', async (req, res) => {
         password: encryptPassword(req.body.password),
         role: 'child'
       });
+
+      let parent = await User.findById(req.session.user._id)
+      parent.relations.push(save._id)
+      parent.save()
+
     }
   } else {
     save = new User({
