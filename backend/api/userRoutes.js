@@ -39,11 +39,14 @@ router.post('/api/user', async (req, res) => {
   
   if(req.session.user){
     if (req.session.user.role === 'user') {
+      console.log(req.session.user)
       save = new User({
         ...req.body,
         password: encryptPassword(req.body.password),
         role: 'child'
       });
+      console.log(save)
+      
     }
   } else {
     save = new User({
