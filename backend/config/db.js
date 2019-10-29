@@ -15,7 +15,8 @@ const connectToDb = (which = 'live') => {
       global.currdb = which;
     }
     which = which == 'test' ? config.db_test : config.db;
-    mongoose.connect(which, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true})
+    // Fix for deprecation errors. useCreateIndex: true
+    mongoose.connect(which, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
       .then(() => {
         resolve("Success!");
       })
