@@ -10,7 +10,8 @@ let userSchema = new Schema({
   parent: String,
   transactions: Array,
   created: { type: Date, default: Date.now },
-  ssn: { type: String, required: true }
+  ssn: { type: String, required: true },
+  active:false
 });
 
 module.exports = mongoose.model("User", userSchema);

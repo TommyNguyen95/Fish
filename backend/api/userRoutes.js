@@ -3,6 +3,7 @@ const User = require('../schemas/userSchema');
 const session = require('express-session');
 const config = require('../config/config')
 const router = express.Router();
+const activationMail = require('../nodemailer')
 const encryptPassword = require('../helpers/encryptPassword')
 
 /**
@@ -22,6 +23,9 @@ router.get('/api/users', async (req, res) => {
 router.get('/api/user/:id', (req, res) => {
   User.findById(req.params.id, (err, user) => {
     if (user.role === 'child') {
+   if(!error){
+    activationMail(save)
+   }
 
     }
     if (err) res.status(500).send(error)
@@ -93,6 +97,22 @@ router.put('/api/user/edit/:id', async (req, res) => {
  * Delete a user
  */
 router.delete('/api/user/:id', async (req, res) => {
+ /**Activate route */
+
+ router.get('/api/activate/:id', async (req, res) => {
+
+  let user = await User.findById(req.params.id)
+  user.active = true;
+  let result = await user.save().catch(err => error = err);
+  let error;
+  res.json(result || error);
+
+})
+
+
+ /**
+  * Delete a user
+  */
   try {
     if (req.session.user._id === req.params.id) {
       let user = await User.findById(req.session.user._id);
