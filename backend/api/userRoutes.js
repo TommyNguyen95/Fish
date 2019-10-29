@@ -9,7 +9,6 @@ const encryptPassword = require('../helpers/encryptPassword')
  * Get all users
  */
 router.get('/api/users', async (req, res) => {
-  console.log(req.session)
   User.find({})
     .exec()
     .then(data => {
@@ -20,14 +19,18 @@ router.get('/api/users', async (req, res) => {
 /**
 * Get user by ID
 */
-router.get('/api/user/:id', (req, res) => {
-  User.findById(req.params.id, (err, user) => {
-    if (user.role === 'child') {
-
+router.get('/api/user/:id', async (req, res) => {
+  try {
+    console.log(req.session.user.role)
+    if(req.session.user._id === req.params.id || req.session.user.role === 'admin'){
+      let user = await User.findById(req.params.id).populate("relations")
+      res.json(user)
+    }else {
+      res.status(500).send({ status: 'error' });
     }
-    if (err) res.status(500).send(error)
-    res.status(200).json(user);
-  });
+  } catch (e) {
+    res.status(500).send({ status: 'error' });
+  }
 })
 
 /**
