@@ -1,5 +1,9 @@
 CMD login mongo:
 
- mongo "mongodb+srv://fishatlas0-unjwa.mongodb.net/test"  --username delshad
+LIVE + TEST server:
+mongo "mongodb+srv://team2booking-w2vly.mongodb.net/fish-live" --username team2admin
 
- Lösen: dela123
+Lösenord: P4ssw0rd
+
+use fish-live // För live server..
+use fish-test // För test server..
