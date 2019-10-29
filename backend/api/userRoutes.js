@@ -8,33 +8,60 @@ const encryptPassword = require('../helpers/encryptPassword')
 /**
  * Get all users
  */
- router.get('/api/users', async (req, res) => {
-   User.find({})
-   .exec()
-   .then(data => {
-     res.status(200).send(data);
-     console.log(data)
-   })
- })
+router.get('/api/users', async (req, res) => {
+  console.log(req.session)
+  User.find({})
+    .exec()
+    .then(data => {
+      res.status(200).send(data);
+    })
+})
 
- /**
-  * Create a user
-  */
- router.post('/api/user', async (req, res) => {
+/**
+* Get user by ID
+*/
+router.get('/api/user/:id', (req, res) => {
+  User.findById(req.params.id, (err, user) => {
+    if (user.role === 'child') {
+
+    }
+    if (err) res.status(500).send(error)
+    res.status(200).json(user);
+  });
+})
+
+/**
+ * Create a user
+ */
+router.post('/api/user', async (req, res) => {
+
+  let save;
   
-   let save = new User({
-     ...req.body,
-     password: encryptPassword(req.body.password)
-   });
-   let error;
-   let result = await save.save().catch(err => error = err);
-   res.json(result || error);
- })
+  if(req.session.user){
+    if (req.session.user.role === 'user') {
+      save = new User({
+        ...req.body,
+        password: encryptPassword(req.body.password),
+        role: 'child'
+      });
+    }
+  } else {
+    save = new User({
+      ...req.body,
+      password: encryptPassword(req.body.password),
+      role: 'user'
+    });
+  }
 
- /**
-  * Delete a user
-  */
- router.delete('/api/user/:id', async (req, res) => {
+  let error;
+  let result = await save.save().catch(err => error = err);
+  res.json(result || error);
+})
+
+/**
+ * Delete a user
+ */
+router.delete('/api/user/:id', async (req, res) => {
   try {
     const deletedUser = await User.findByIdAndDelete(req.params.id);
     !deletedUser && res.status(404).send();
@@ -42,18 +69,18 @@ const encryptPassword = require('../helpers/encryptPassword')
   } catch (e) {
     res.status(500).send();
   }
- })
+})
 
- /**
-  * login
-  */
- router.post('/api/login', async (req, res) => {
-  let {username, password} = req.body;
+/**
+ * login
+ */
+router.post('/api/login', async (req, res) => {
+  let { username, password } = req.body;
   password = encryptPassword(password);
-  let user = await User.findOne({username, password})
+  let user = await User.findOne({ username, password })
     .select('username role').exec();
-  if(user){ req.session.user = user };
-  res.json(user ? user : {error: 'not found'});
+  if (user) { req.session.user = user };
+  res.json(user ? user : { error: 'not found' });
 });
 
 /**
@@ -62,16 +89,17 @@ const encryptPassword = require('../helpers/encryptPassword')
 router.get('/api/login', (req, res) => {
   res.json(req.session.user ?
     req.session.user :
-    {status: 'not logged in'}
+    { status: 'not logged in' }
   );
 });
- 
+
 /**
  * logout
  */
 router.delete('/api/login', (req, res) => {
   delete req.session.user;
-  res.json({status: 'logged out'});
+  res.json({ status: 'logged out' });
 });
 
- module.exports = router;
+
+module.exports = router;
