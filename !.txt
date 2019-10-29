@@ -1,0 +1,9 @@
+CMD login mongo:
+
+LIVE + TEST server:
+mongo "mongodb+srv://team2booking-w2vly.mongodb.net/fish-live" --username team2admin
+
+Lösenord: P4ssw0rd
+
+use fish-live // För live server..
+use fish-test // För test server..

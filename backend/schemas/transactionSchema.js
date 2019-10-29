@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let transactionSchema = new Schema({
-  to: { type: Schema.Types.ObjectId, ref: 'User'},
-  from: { type: Schema.Types.ObjectId, ref: 'User'},
+  to: { type: Schema.Types.ObjectId, ref: 'User' },
+  from: { type: Schema.Types.ObjectId, ref: 'User' },
   amount: Number,
-  date: Date, default: Date.now,
-  message: String,
+  date: { type: Date, default: Date.now },
+  message: { type: String }
 })
 
-module.exports = mongoose.model('transactionSchema', transactionSchema);
+module.exports = mongoose.model('transactions', transactionSchema);

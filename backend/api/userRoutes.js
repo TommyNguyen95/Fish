@@ -67,9 +67,9 @@ router.post('/api/user', async (req, res) => {
   let error;
   let result = await save.save().catch(err => error = err);
   res.json(result || error);
-  if(!error){
+  if (!error) {
     activationMail(save)
-   }
+  }
 })
 
 /**
@@ -97,9 +97,9 @@ router.put('/api/user/edit/:id', async (req, res) => {
  * Delete a user
  */
 router.delete('/api/user/:id', async (req, res) => {
- /**
-  * Delete a user
-  */
+  /**
+   * Delete a user
+   */
   try {
     if (req.session.user._id === req.params.id) {
       let user = await User.findById(req.session.user._id);
@@ -152,9 +152,9 @@ router.delete('/api/user/:id', async (req, res) => {
   }
 })
 
- /**Activate route */
+/**Activate route */
 
- router.get('/api/activate/:id', async (req, res) => {
+router.get('/api/activate/:id', async (req, res) => {
 
   let user = await User.findById(req.params.id)
   user.active = true;
