@@ -16,7 +16,7 @@
       "visitor": "post",
       "admin": "all",
       "child": "get",
-      "user": "get post"
+      "user": "get post delete"
     },
     "edit": {
       "admin": "all",

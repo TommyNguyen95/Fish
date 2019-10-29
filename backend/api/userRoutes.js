@@ -9,7 +9,6 @@ const encryptPassword = require('../helpers/encryptPassword')
  * Get all users
  */
 router.get('/api/users', async (req, res) => {
-  console.log(req.session)
   User.find({})
     .exec()
     .then(data => {
@@ -34,16 +33,16 @@ router.get('/api/user/:id', (req, res) => {
  * Create a user
  */
 router.post('/api/user', async (req, res) => {
-
   let save;
-  
-  if(req.session.user){
+  if (req.session.user) {
     if (req.session.user.role === 'user') {
       save = new User({
         ...req.body,
         password: encryptPassword(req.body.password),
-        role: 'child'
+        role: 'child',
+        parent: req.session.user_id
       });
+      User.findOneAndUpdate({})
     }
   } else {
     save = new User({
@@ -63,9 +62,52 @@ router.post('/api/user', async (req, res) => {
  */
 router.delete('/api/user/:id', async (req, res) => {
   try {
-    const deletedUser = await User.findByIdAndDelete(req.params.id);
-    !deletedUser && res.status(404).send();
-    res.send(deletedUser);
+    if (req.session.user._id === req.params.id) {
+      let user = await User.findById(req.session.user._id);
+      let userRelations = user.relations;
+      userRelations.forEach(async child => {
+        const deletedChild = await User.findByIdAndDelete(child);
+        !deletedChild && res.status(404).send();
+        res.send(deletedChild);
+      })
+      const deletedParent = await User.findByIdAndDelete(req.session.user._id);
+      res.send(deletedParent);
+    } else {
+      let parent = await User.findById(req.session.user._id)
+      parent.relations.forEach(async (child, index) => {
+        if (child == req.params.id) {
+          parent.relations.splice(index, 1);
+          const deletedChild = await User.findByIdAndDelete(req.params.id);
+          parent.save();
+          res.send(deletedChild);
+        }
+      })
+    }
+
+    if (req.session.user.role === 'admin') {
+      let deleteUser = await User.findById(req.params.id)
+      if (deleteUser.parent) {
+        let parent = await User.findById(deleteUser.parent)
+        parent.relations.forEach(async (child, index) => {
+          if (child == req.params.id) {
+            parent.relations.splice(index, 1);
+            await parent.save();
+            let deleted = await User.findByIdAndDelete(req.params.id)
+            res.send(deleted);
+          }
+        })
+      } else {
+        let userRelations = deleteUser.relations;
+        userRelations.forEach(async child => {
+          const deletedChild = await User.findByIdAndDelete(child);
+          !deletedChild && res.status(404).send();
+          res.send(deletedChild);
+        })
+        const deletedParent = await User.findByIdAndDelete(req.params.id);
+        res.send(deletedParent);
+      }
+    }
+
   } catch (e) {
     res.status(500).send();
   }

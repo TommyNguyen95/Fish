@@ -7,6 +7,7 @@ let userSchema = new Schema({
   role: { type: String, required: true },
   balance: Number,
   relations: Array,
+  parent: String,
   transactions: Array,
   created: { type: Date, default: Date.now },
   ssn: { type: String, required: true }
