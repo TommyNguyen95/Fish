@@ -1,9 +1,13 @@
 const nodemailer = require('nodemailer');
 
-async function main() {
+async function activationMail(user) {
   // Generate test SMTP service account from ethereal.email
- 
+  if(!user){
+    return
+  }
 
+  let {id,username} = user
+ 
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
     host: "smtp.sendgrid.net",
@@ -21,15 +25,17 @@ async function main() {
   // send mail with defined transport object
   let info = await transporter.sendMail({
     from: '"FI$H" <fishapplication@outlook.com>', // sender address
-    to: 'tommyduynguyen95@gmail.com', // list of receivers
+    to: username, // list of receivers
     subject: 'Welcome to FI$H-APP', // Subject line
-    text: 'BRURRHH', // plain text body
-    // html: '<b>Hello world?</b>' // html body
+    text: "klicka här för att aktivera", // plain text body
+    html: `<a href="http://localhost:3001/api/activate/${id}">AKTIVERA</a>`
   });
 
   console.log('Message sent: %s', info.messageId);
-  console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
 
 }
 
-main().catch(console.error);
+activationMail().catch(console.error);
+
+module.exports = activationMail
