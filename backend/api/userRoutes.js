@@ -9,7 +9,7 @@ const encryptPassword = require('../helpers/encryptPassword')
  * Get all users
  */
 router.get('/api/users', async (req, res) => {
-  User.find({})
+  User.find()
     .exec()
     .then(data => {
       res.status(200).send(data);
@@ -45,7 +45,8 @@ router.post('/api/user', async (req, res) => {
       save = new User({
         ...req.body,
         password: encryptPassword(req.body.password),
-        role: 'child'
+        role: 'child',
+        parent: req.session.user._id
       });
 
       let parent = await User.findById(req.session.user._id)
