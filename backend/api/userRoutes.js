@@ -23,9 +23,6 @@ router.get('/api/users', async (req, res) => {
 router.get('/api/user/:id', (req, res) => {
   User.findById(req.params.id, (err, user) => {
     if (user.role === 'child') {
-   if(!error){
-    activationMail(save)
-   }
 
     }
     if (err) res.status(500).send(error)
@@ -70,6 +67,9 @@ router.post('/api/user', async (req, res) => {
   let error;
   let result = await save.save().catch(err => error = err);
   res.json(result || error);
+  if(!error){
+    activationMail(save)
+   }
 })
 
 /**
@@ -97,19 +97,6 @@ router.put('/api/user/edit/:id', async (req, res) => {
  * Delete a user
  */
 router.delete('/api/user/:id', async (req, res) => {
- /**Activate route */
-
- router.get('/api/activate/:id', async (req, res) => {
-
-  let user = await User.findById(req.params.id)
-  user.active = true;
-  let result = await user.save().catch(err => error = err);
-  let error;
-  res.json(result || error);
-
-})
-
-
  /**
   * Delete a user
   */
@@ -163,6 +150,18 @@ router.delete('/api/user/:id', async (req, res) => {
   } catch (e) {
     res.status(500).send();
   }
+})
+
+ /**Activate route */
+
+ router.get('/api/activate/:id', async (req, res) => {
+
+  let user = await User.findById(req.params.id)
+  user.active = true;
+  let result = await user.save().catch(err => error = err);
+  let error;
+  res.json(result || error);
+
 })
 
 /**
