@@ -34,6 +34,7 @@ router.get('/api/user/:id', (req, res) => {
  */
 router.post('/api/user', async (req, res) => {
   let save;
+
   if (req.session.user) {
     if (req.session.user.role === 'user') {
       save = new User({
@@ -42,7 +43,7 @@ router.post('/api/user', async (req, res) => {
         role: 'child',
         parent: req.session.user_id
       });
-      User.findOneAndUpdate({})
+
     }
   } else {
     save = new User({
@@ -52,9 +53,40 @@ router.post('/api/user', async (req, res) => {
     });
   }
 
+  if (req.session.user) {
+    if (req.session.user.role === 'admin') {
+      save = new User({
+        ...req.body,
+        password: encryptPassword(req.body.password),
+        role: 'user'
+      })
+    }
+  }
+
   let error;
   let result = await save.save().catch(err => error = err);
   res.json(result || error);
+})
+
+/**
+ * Edit a user
+ */
+router.put('/api/user/edit/:id', async (req, res) => {
+  let user = await User.findById(req.params.id)
+  user.username = req.body.username;
+  user.password = req.body.password;
+  user.ssn = req.body.ssn;
+  user.relations = req.body.relations;
+  user.transactions = req.body.transactions;
+  user.role = req.body.role;
+  user.save(function (err) {
+    if (err) {
+      console.log(err)
+      next(err)
+    } else {
+      res.status(200).send()
+    }
+  })
 })
 
 /**
@@ -120,7 +152,7 @@ router.post('/api/login', async (req, res) => {
   let { username, password } = req.body;
   password = encryptPassword(password);
   let user = await User.findOne({ username, password })
-    .select('username role').exec();
+    .select('username role relations').exec();
   if (user) { req.session.user = user };
   res.json(user ? user : { error: 'not found' });
 });
