@@ -83,21 +83,23 @@ router.post('/api/user', async (req, res) => {
  * Edit a user
  */
 router.put('/api/user/edit/:id', async (req, res) => {
-  let user = await User.findById(req.params.id)
-  user.username = req.body.username;
-  user.password = req.body.password;
-  user.ssn = req.body.ssn;
-  user.relations = req.body.relations;
-  user.transactions = req.body.transactions;
-  user.role = req.body.role;
-  user.save(function (err) {
-    if (err) {
-      console.log(err)
-      next(err)
-    } else {
-      res.status(200).send()
-    }
-  })
+  if(req.session.user.role === 'admin'){
+    let user = await User.findById(req.params.id)
+    user.username = req.body.username;
+    user.password = encryptPassword(req.body.password);
+    user.ssn = req.body.ssn;
+    user.relations = req.body.relations;
+    user.transactions = req.body.transactions;
+    user.role = req.body.role;
+    user.save(function (err) {
+      if (err) {
+        console.log(err)
+        next(err)
+      } else {
+        res.status(200).send()
+      }
+    })
+  }
 })
 
 /**
