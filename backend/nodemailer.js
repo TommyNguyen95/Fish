@@ -28,7 +28,7 @@ async function activationMail(user) {
     to: username, // list of receivers
     subject: 'Welcome to FI$H-APP', // Subject line
     text: "klicka här för att aktivera", // plain text body
-    html: `<a href="http://localhost:3001/api/activate/${id}">AKTIVERA</a>`
+    html: `<a href="http://localhost:3001/api/activate/${id}">KLICKA HÄR FÖR ATT AKTIVERA DITT KONTO</a>`
   });
 
   console.log('Message sent: %s', info.messageId);
@@ -37,5 +37,9 @@ async function activationMail(user) {
 }
 
 activationMail().catch(console.error);
+
+
+
+
 
 module.exports = activationMail

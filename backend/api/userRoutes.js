@@ -160,7 +160,7 @@ router.get('/api/activate/:id', async (req, res) => {
   user.active = true;
   let result = await user.save().catch(err => error = err);
   let error;
-  res.json(result || error);
+  res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}`|| error);
 
 })
 

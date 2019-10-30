@@ -25,6 +25,9 @@
     },
     "users": {
       "admin": "all"
+    },
+    "activate": {
+      "visitor": "get"
     }
   }
 }
