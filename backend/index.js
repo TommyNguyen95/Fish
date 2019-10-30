@@ -9,7 +9,7 @@ const userRoutes = require('./api/userRoutes');
 const transactionsRoutes = require('./api/transactionsRoutes');
 const dbtoggler = require('./dbtoggler');
 const acl = require('./acl/acl');
-const fishRules = require('./acl/fish-rules.json') 
+const fishRules = require('./acl/fish-rules.json')
 
 // Initial connection to DB
 connectToDb()

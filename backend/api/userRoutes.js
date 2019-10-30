@@ -21,18 +21,18 @@ router.get('/api/users', async (req, res) => {
 * Get user by ID
 */
 router.get('/api/user/:id', async (req, res) => {
-  try{
-      if(req.session.user._id === req.params.id){
-        let user = await User.findById(req.params.id)
-        res.status(200).json(user);
-      }else if(req.session.user.role === 'admin'){
-        let user = await User.findById(req.params.id)
-        res.status(200).json(user);
-      }else{
-        res.status(500).json({status: 'error'});
-      }
-  }catch{
-    res.status(500).json({status: 'error'});
+  try {
+    if (req.session.user._id === req.params.id) {
+      let user = await User.findById(req.params.id)
+      res.status(200).json(user);
+    } else if (req.session.user.role === 'admin') {
+      let user = await User.findById(req.params.id)
+      res.status(200).json(user);
+    } else {
+      res.status(500).json({ status: 'error' });
+    }
+  } catch{
+    res.status(500).json({ status: 'error' });
   }
 
 })
@@ -164,7 +164,7 @@ router.get('/api/activate/:id', async (req, res) => {
   user.active = true;
   let result = await user.save().catch(err => error = err);
   let error;
-  res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}`|| error);
+  res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}` || error);
 
 })
 

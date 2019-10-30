@@ -2,12 +2,12 @@ const nodemailer = require('nodemailer');
 
 async function activationMail(user) {
   // Generate test SMTP service account from ethereal.email
-  if(!user){
+  if (!user) {
     return
   }
 
-  let {id,username} = user
- 
+  let { id, username } = user
+
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
     host: "smtp.sendgrid.net",
