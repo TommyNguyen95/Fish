@@ -62,3 +62,4 @@ typings/
 .DS_Store
 
 *.DS_Store
+test/test-runner-2.5-more-examples/test-runner.js
