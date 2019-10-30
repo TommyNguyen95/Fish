@@ -20,14 +20,21 @@ router.get('/api/users', async (req, res) => {
 /**
 * Get user by ID
 */
-router.get('/api/user/:id', (req, res) => {
-  User.findById(req.params.id, (err, user) => {
-    if (user.role === 'child') {
+router.get('/api/user/:id', async (req, res) => {
+  try{
+      if(req.session.user._id === req.params.id){
+        let user = await User.findById(req.params.id)
+        res.status(200).json(user);
+      }else if(req.session.user.role === 'admin'){
+        let user = await User.findById(req.params.id)
+        res.status(200).json(user);
+      }else{
+        res.status(500).json({status: 'error'});
+      }
+  }catch{
+    res.status(500).json({status: 'error'});
+  }
 
-    }
-    if (err) res.status(500).send(error)
-    res.status(200).json(user);
-  });
 })
 
 /**
@@ -97,9 +104,6 @@ router.put('/api/user/edit/:id', async (req, res) => {
  * Delete a user
  */
 router.delete('/api/user/:id', async (req, res) => {
-  /**
-   * Delete a user
-   */
   try {
     if (req.session.user._id === req.params.id) {
       let user = await User.findById(req.session.user._id);
