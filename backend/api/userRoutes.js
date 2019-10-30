@@ -20,30 +20,39 @@ router.get('/api/users', async (req, res) => {
 /**
 * Get user by ID
 */
-router.get('/api/user/:id', (req, res) => {
-  User.findById(req.params.id, (err, user) => {
-    if (user.role === 'child') {
-
+router.get('/api/user/:id', async (req, res) => {
+  try {
+    console.log(req.session.user.role)
+    if(req.session.user._id === req.params.id || req.session.user.role === 'admin'){
+      let user = await User.findById(req.params.id).populate("relations")
+      res.json(user)
+    }else {
+      res.status(500).send({ status: 'error' });
     }
-    if (err) res.status(500).send(error)
-    res.status(200).json(user);
-  });
+  } catch (e) {
+    res.status(500).send({ status: 'error' });
+  }
 })
 
 /**
  * Create a user
  */
 router.post('/api/user', async (req, res) => {
-  let save;
 
-  if (req.session.user) {
+  let save;
+  
+  if(req.session.user){
     if (req.session.user.role === 'user') {
       save = new User({
         ...req.body,
         password: encryptPassword(req.body.password),
         role: 'child',
-        parent: req.session.user_id
+        parent: req.session.user._id
       });
+
+      let parent = await User.findById(req.session.user._id)
+      parent.relations.push(save._id)
+      parent.save()
 
     }
   } else {
@@ -54,22 +63,9 @@ router.post('/api/user', async (req, res) => {
     });
   }
 
-  if (req.session.user) {
-    if (req.session.user.role === 'admin') {
-      save = new User({
-        ...req.body,
-        password: encryptPassword(req.body.password),
-        role: 'user'
-      })
-    }
-  }
-
   let error;
   let result = await save.save().catch(err => error = err);
   res.json(result || error);
-  if (!error) {
-    activationMail(save)
-  }
 })
 
 /**
@@ -97,9 +93,6 @@ router.put('/api/user/edit/:id', async (req, res) => {
  * Delete a user
  */
 router.delete('/api/user/:id', async (req, res) => {
-  /**
-   * Delete a user
-   */
   try {
     if (req.session.user._id === req.params.id) {
       let user = await User.findById(req.session.user._id);
@@ -160,7 +153,7 @@ router.get('/api/activate/:id', async (req, res) => {
   user.active = true;
   let result = await user.save().catch(err => error = err);
   let error;
-  res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}`|| error);
+  res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}` || error);
 
 })
 
