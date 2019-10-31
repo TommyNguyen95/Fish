@@ -69,6 +69,7 @@ router.post('/api/user', async (req, res) => {
   res.json(result || error);
   if (!error) {
     activate(save)
+    console.log(save)
   }
 })
 
@@ -199,10 +200,13 @@ router.get('/api/resetpassword/:id', async (req, res) => {
  * login
  */
 router.post('/api/login', async (req, res) => {
-  let { username, password } = req.body;
+  let { username, password} = req.body;
   password = encryptPassword(password);
   let user = await User.findOne({ username, password })
-    .select('username role relations').exec();
+  .select('username role relations active').exec();
+  if(user.active===false){
+    return res.json('Du måste aktivera ditt konto innan du kan logga in!')
+  }
   if (user) { req.session.user = user };
   res.json(user ? user : { error: 'not found' });
 });

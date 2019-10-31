@@ -11,7 +11,7 @@ let userSchema = new Schema({
   transactions: Array,
   created: { type: Date, default: Date.now },
   ssn: { type: String, required: true },
-  active: false
+  active: { type: Boolean, default: false}
 });
 
 module.exports = mongoose.model("User", userSchema);
