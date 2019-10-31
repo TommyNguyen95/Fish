@@ -28,6 +28,13 @@
     },
     "activate": {
       "visitor": "get"
+    },
+    "resetpassword":{
+      "visitor":"get",
+      "user":"get"
+    },
+    "sendresetlink":{
+      "user":"get"
     }
   }
 }

@@ -3,7 +3,8 @@ const User = require('../schemas/userSchema');
 const session = require('express-session');
 const config = require('../config/config')
 const router = express.Router();
-const activationMail = require('../nodemailer')
+const activationMail= require('../nodemailer')
+const {reset,activate,sendResetLink}= require('../nodemailer')
 const encryptPassword = require('../helpers/encryptPassword')
 
 /**
@@ -66,6 +67,9 @@ router.post('/api/user', async (req, res) => {
   let error;
   let result = await save.save().catch(err => error = err);
   res.json(result || error);
+  if (!error) {
+   activate(save)
+  }
 })
 
 /**
@@ -154,6 +158,44 @@ router.get('/api/activate/:id', async (req, res) => {
   let result = await user.save().catch(err => error = err);
   let error;
   res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}` || error);
+
+})
+
+
+router.get('/api/sendresetlink/:id', async (req, res) => {
+
+
+  let user = await User.findById(req.params.id)
+
+ sendResetLink(user)
+ res.json(`Klicka på länken i din email för att återställa lösenordet.`|| error);
+
+})
+
+router.get('/api/resetpassword/:id', async (req, res) => {
+
+
+  let user = await User.findById(req.params.id)
+  let error;
+  tester(5)
+
+ async function tester(length){
+ 
+  
+    let newPassword           = '';
+    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+       newPassword += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    user.password = newPassword;
+    let result = await user.save().catch(err => error = err);
+    return res.json(`Ditt lösenord är återställt. Lösenord: ${newPassword}`|| error);
+  }
+
+
+ reset(user)
+
 
 })
 
