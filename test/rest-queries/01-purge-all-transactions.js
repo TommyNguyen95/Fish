@@ -1,5 +1,5 @@
 module.exports = ({ expect, assert, response }) => ({
-  path: 'transactionsSecretPurgeUrl',
+  path: 'transactions',
   method: 'delete',
   test() {
     expect(response).to.be.an('array').that.is.empty;

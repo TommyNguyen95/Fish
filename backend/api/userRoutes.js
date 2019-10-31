@@ -13,7 +13,9 @@ router.get('/api/users', async (req, res) => {
   User.find({})
     .exec()
     .then(data => {
-      res.status(200).send(data);
+      // res.status(200).send(data);
+      req.session.user.role = "user"
+      res.status(200).json(req.session);
     })
 })
 
@@ -173,6 +175,7 @@ router.post('/api/login', async (req, res) => {
  * check if/which user that is logged in
  */
 router.get('/api/login', (req, res) => {
+  // req.session.user = {}
   res.json(req.session.user ?
     req.session.user :
     { status: 'not logged in' }

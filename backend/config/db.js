@@ -6,7 +6,7 @@ const connectToDb = (which = 'live') => {
   return new Promise((resolve, reject) => {
     if (global.currdb) {
       if (global.currdb == which) {
-        resolve("Success!");
+        resolve();
         return;
       } else {
         global.currdb = which;
@@ -18,7 +18,7 @@ const connectToDb = (which = 'live') => {
     // Fix for deprecation errors. useCreateIndex: true
     mongoose.connect(which, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
       .then(() => {
-        resolve("Success!");
+        resolve();
       })
       .catch(err => console.log(err));
     global.db = mongoose.connection;

@@ -23,11 +23,16 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({
-    mongooseConnection: global.db
+    mongooseConnection: global.db,
+    collection: 's',
+    ttl: 14 * 24 * 60 * 60 //14 dagar
   })
-}));
+})
+)
 
-app.get('/', (req, res) => res.send('Välkommen till Fi$h super server'));
+app.get('/', (req, res) => {
+  res.send('Välkommen till Fi$h super server')
+});
 app.use(acl(fishRules));
 app.use(userRoutes);
 app.use(transactionsRoutes);
