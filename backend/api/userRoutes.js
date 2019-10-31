@@ -3,8 +3,8 @@ const User = require('../schemas/userSchema');
 const session = require('express-session');
 const config = require('../config/config')
 const router = express.Router();
-const activationMail= require('../nodemailer')
-const {reset,activate,sendResetLink}= require('../nodemailer')
+const activationMail = require('../nodemailer')
+const { reset, activate, sendResetLink } = require('../nodemailer')
 const encryptPassword = require('../helpers/encryptPassword')
 
 /**
@@ -24,10 +24,10 @@ router.get('/api/users', async (req, res) => {
 router.get('/api/user/:id', async (req, res) => {
   try {
     console.log(req.session.user.role)
-    if(req.session.user._id === req.params.id || req.session.user.role === 'admin'){
+    if (req.session.user._id === req.params.id || req.session.user.role === 'admin') {
       let user = await User.findById(req.params.id).populate("relations")
       res.json(user)
-    }else {
+    } else {
       res.status(500).send({ status: 'error' });
     }
   } catch (e) {
@@ -41,8 +41,8 @@ router.get('/api/user/:id', async (req, res) => {
 router.post('/api/user', async (req, res) => {
 
   let save;
-  
-  if(req.session.user){
+
+  if (req.session.user) {
     if (req.session.user.role === 'user') {
       save = new User({
         ...req.body,
@@ -68,7 +68,7 @@ router.post('/api/user', async (req, res) => {
   let result = await save.save().catch(err => error = err);
   res.json(result || error);
   if (!error) {
-   activate(save)
+    activate(save)
   }
 })
 
@@ -167,8 +167,8 @@ router.get('/api/sendresetlink/:id', async (req, res) => {
 
   let user = await User.findById(req.params.id)
 
- sendResetLink(user)
- res.json(`Klicka på länken i din email för att återställa lösenordet.`|| error);
+  sendResetLink(user)
+  res.json(`Klicka på länken i din email för att återställa lösenordet.` || error);
 
 })
 
@@ -177,25 +177,21 @@ router.get('/api/resetpassword/:id', async (req, res) => {
 
   let user = await User.findById(req.params.id)
   let error;
-  tester(5)
 
- async function tester(length){
- 
-  
-    let newPassword           = '';
-    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  resetPasswordLength(5)
+
+  async function resetPasswordLength(length) {
+    let newPassword = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
-    for ( let i = 0; i < length; i++ ) {
-       newPassword += characters.charAt(Math.floor(Math.random() * charactersLength));
+    for (let i = 0; i < length; i++) {
+      newPassword += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-    user.password = newPassword;
+    reset(user)
+    user.password = encryptPassword(newPassword);
     let result = await user.save().catch(err => error = err);
-    return res.json(`Ditt lösenord är återställt. Lösenord: ${newPassword}`|| error);
+    return res.json(`Ditt lösenord är återställt. Lösenord: ${newPassword}` || error);
   }
-
-
- reset(user)
-
 
 })
 
