@@ -41,7 +41,7 @@ module.exports = ({ apiPath, rules }) => {
 
       // Do not allow...
       // (don't say forbidden it encourages hackers)
-      res.send('No Acesss, sorry buddy');
+      res.send('No access!');
       return;
     }
   }

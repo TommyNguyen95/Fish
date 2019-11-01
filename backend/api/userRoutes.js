@@ -1,13 +1,10 @@
-const express = require('express');
-const User = require('../schemas/userSchema');
-const session = require('express-session');
-const config = require('../config/config')
-const router = express.Router();
-const activationMail = require('../nodemailer')
+const express = require('express')
+const User = require('../schemas/userSchema')
+const router = express.Router()
 const encryptPassword = require('../helpers/encryptPassword')
 
 /**
- * Get all users
+ * Get all users (TESTED - 01)
  */
 router.get('/api/users', async (req, res) => {
   User.find({})
@@ -20,15 +17,15 @@ router.get('/api/users', async (req, res) => {
 })
 
 /**
-* Get user by ID
+* Get user by ID (TESTED - 02)
 */
 router.get('/api/user/:id', async (req, res) => {
   try {
     console.log(req.session.user.role)
-    if(req.session.user._id === req.params.id || req.session.user.role === 'admin'){
+    if (req.session.user._id === req.params.id || req.session.user.role === 'admin') {
       let user = await User.findById(req.params.id).populate("relations")
       res.json(user)
-    }else {
+    } else {
       res.status(500).send({ status: 'error' });
     }
   } catch (e) {
@@ -37,62 +34,7 @@ router.get('/api/user/:id', async (req, res) => {
 })
 
 /**
- * Create a user
- */
-router.post('/api/user', async (req, res) => {
-
-  let save;
-  
-  if(req.session.user){
-    if (req.session.user.role === 'user') {
-      save = new User({
-        ...req.body,
-        password: encryptPassword(req.body.password),
-        role: 'child',
-        parent: req.session.user._id
-      });
-
-      let parent = await User.findById(req.session.user._id)
-      parent.relations.push(save._id)
-      parent.save()
-
-    }
-  } else {
-    save = new User({
-      ...req.body,
-      password: encryptPassword(req.body.password),
-      role: 'user'
-    });
-  }
-
-  let error;
-  let result = await save.save().catch(err => error = err);
-  res.json(result || error);
-})
-
-/**
- * Edit a user
- */
-router.put('/api/user/edit/:id', async (req, res) => {
-  let user = await User.findById(req.params.id)
-  user.username = req.body.username;
-  user.password = req.body.password;
-  user.ssn = req.body.ssn;
-  user.relations = req.body.relations;
-  user.transactions = req.body.transactions;
-  user.role = req.body.role;
-  user.save(function (err) {
-    if (err) {
-      console.log(err)
-      next(err)
-    } else {
-      res.status(200).send()
-    }
-  })
-})
-
-/**
- * Delete a user
+ * Delete a user (TESTED 03)
  */
 router.delete('/api/user/:id', async (req, res) => {
   try {
@@ -145,6 +87,61 @@ router.delete('/api/user/:id', async (req, res) => {
   } catch (e) {
     res.status(500).send();
   }
+})
+
+/**
+ * Edit a user (TESTED - 04)
+ */
+router.put('/api/user/edit/:id', async (req, res) => {
+  let user = await User.findById(req.params.id)
+  user.username = req.body.username;
+  user.password = req.body.password;
+  user.ssn = req.body.ssn;
+  user.relations = req.body.relations;
+  user.transactions = req.body.transactions;
+  user.role = req.body.role;
+  user.save(function (err) {
+    if (err) {
+      console.log(err)
+      next(err)
+    } else {
+      res.status(200).send()
+    }
+  })
+})
+
+/**
+ * Create a user (TESTED 05, 06, 07)
+ */
+router.post('/api/user', async (req, res) => {
+
+  let save;
+
+  if (req.session.user) {
+    if (req.session.user.role === 'user') {
+      save = new User({
+        ...req.body,
+        password: encryptPassword(req.body.password),
+        role: 'child',
+        parent: req.session.user._id
+      });
+
+      let parent = await User.findById(req.session.user._id)
+      parent.relations.push(save._id)
+      parent.save()
+
+    }
+  } else {
+    save = new User({
+      ...req.body,
+      password: encryptPassword(req.body.password),
+      role: 'user'
+    });
+  }
+
+  let error;
+  let result = await save.save().catch(err => error = err);
+  res.json(result || error);
 })
 
 /**Activate route */

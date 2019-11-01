@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const config = require('./config');
 
 const connectToDb = (which = 'live') => {
   let type = which;
@@ -14,7 +13,7 @@ const connectToDb = (which = 'live') => {
     } else {
       global.currdb = which;
     }
-    which = which == 'test' ? config.db_test : config.db;
+    which = which == 'test' ? global.config.db_test : global.config.db;
     // Fix for deprecation errors. useCreateIndex: true
     mongoose.connect(which, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
       .then(() => {

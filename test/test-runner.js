@@ -9,12 +9,15 @@ const open = require('open');
 const { restBasePath } = require('./rest-base-path.json');
 const store = {};
 
+// Empty logs directory and only keep last test-run?
+const expunge = true
+
 // Activate should
 chai.should();
 
 // Set a cookie jar
 let cookieJar = request.jar();
- 
+
 // Read the queries from the rest-queries folder
 const files = fs.readdirSync('./rest-queries');
 let source = [];
@@ -56,17 +59,17 @@ async function run() {
         json: q.body,
         jar: cookieJar
       };
-      let res = {error: 404};
+      let res = { error: 404 };
       try {
         res = await request(req);
       }
-      catch(e){}
+      catch (e) { }
       if (typeof res === 'string') {
         try {
           res = JSON.parse(res);
         }
-        catch(e){
-          res = {nonJSON: res};
+        catch (e) {
+          res = { nonJSON: res };
         }
       }
       Object.assign(response, res);
@@ -76,7 +79,7 @@ async function run() {
       delete req.jar;
       let t = {
         name: query.name,
-        request: {...req},
+        request: { ...req },
         response: res,
         tests: [],
         status: 'passed'
@@ -84,7 +87,7 @@ async function run() {
       try {
         q.setup();
       }
-      catch (e) {}
+      catch (e) { }
       let failedAt = -1;
       try {
         q.test();
@@ -108,9 +111,20 @@ async function run() {
   let niceDate = getNiceDate();
   let fileName = path.join(__dirname, 'logs', niceDate) + '.html';
   let jsonFileName = fileName.split('.html').join('.json')
+  if (expunge) {
+    let directory = path.join(__dirname, 'logs/')
+    fs.readdir(directory, (err, files) => {
+      if (err) throw err;
+      for (const file of files) {
+        fs.unlink(path.join(directory, file), err => {
+          if (err) throw err;
+        })
+      }
+    })
+  }
   fs.writeFileSync(fileName, displayTemplate(niceDate, all), 'utf-8');
   fs.writeFileSync(jsonFileName, JSON.stringify(all, '', '  '), 'utf-8');
-  open(fileName, {app: ['google chrome']});
+  open(fileName, { app: ['google chrome'] });
 }
 
 // A basic display template
@@ -192,7 +206,7 @@ function render(niceDate, all) {
 
 // old school nice date
 // not depending on locale
-function getNiceDate(){
+function getNiceDate() {
   let d = new Date();
   let t = '';
   t += d.getFullYear();
