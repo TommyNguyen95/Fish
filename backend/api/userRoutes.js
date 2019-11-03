@@ -1,6 +1,7 @@
 const express = require('express')
 const User = require('../schemas/userSchema')
 const router = express.Router()
+const { reset, activate, sendResetLink } = require('../nodemailer')
 const encryptPassword = require('../helpers/encryptPassword')
 
 /**
@@ -32,7 +33,6 @@ router.get('/api/user/:id', async (req, res) => {
     res.status(500).send({ status: 'error' });
   }
 })
-
 /**
  * Delete a user (TESTED 03)
  */
@@ -88,7 +88,6 @@ router.delete('/api/user/:id', async (req, res) => {
     res.status(500).send();
   }
 })
-
 /**
  * Edit a user (TESTED - 04)
  */
@@ -109,7 +108,6 @@ router.put('/api/user/edit/:id', async (req, res) => {
     }
   })
 })
-
 /**
  * Create a user (TESTED 05, 06, 07)
  */
@@ -142,10 +140,13 @@ router.post('/api/user', async (req, res) => {
   let error;
   let result = await save.save().catch(err => error = err);
   res.json(result || error);
+  if (!error) {
+    activate(save)
+    console.log(save)
+  }
 })
 
 /**Activate route */
-
 router.get('/api/activate/:id', async (req, res) => {
 
   let user = await User.findById(req.params.id)
@@ -155,19 +156,52 @@ router.get('/api/activate/:id', async (req, res) => {
   res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}` || error);
 
 })
+router.get('/api/sendresetlink/:id', async (req, res) => {
+
+
+  let user = await User.findById(req.params.id)
+
+  sendResetLink(user)
+  res.json(`Klicka på länken i din email för att återställa lösenordet.` || error);
+
+})
+router.get('/api/resetpassword/:id', async (req, res) => {
+
+
+  let user = await User.findById(req.params.id)
+  let error;
+
+  resetPasswordLength(5)
+
+  async function resetPasswordLength(length) {
+    let newPassword = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      newPassword += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    reset(user)
+    user.password = encryptPassword(newPassword);
+    let result = await user.save().catch(err => error = err);
+    return res.json(`Ditt lösenord är återställt. Lösenord: ${newPassword}` || error);
+  }
+
+})
 
 /**
  * login
  */
 router.post('/api/login', async (req, res) => {
-  let { username, password } = req.body;
+  let { username, password} = req.body;
   password = encryptPassword(password);
   let user = await User.findOne({ username, password })
-    .select('username role relations').exec();
+  .select('username role relations active').exec();
+  if(user.active===false){
+    return res.json('Du måste aktivera ditt konto innan du kan logga in!')
+  }
   if (user) { req.session.user = user };
   res.json(user ? user : { error: 'not found' });
 });
-
 /**
  * check if/which user that is logged in
  */
@@ -178,7 +212,6 @@ router.get('/api/login', (req, res) => {
     { status: 'not logged in' }
   );
 });
-
 /**
  * logout
  */
