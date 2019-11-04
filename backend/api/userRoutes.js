@@ -11,9 +11,7 @@ router.get('/api/users', async (req, res) => {
   User.find({})
     .exec()
     .then(data => {
-      // res.status(200).send(data);
-      req.session.user.role = "user"
-      res.status(200).json(req.session);
+      res.status(200).send(data);
     })
 })
 
@@ -22,7 +20,6 @@ router.get('/api/users', async (req, res) => {
 */
 router.get('/api/user/:id', async (req, res) => {
   try {
-    console.log(req.session.user.role)
     if (req.session.user._id === req.params.id || req.session.user.role === 'admin') {
       let user = await User.findById(req.params.id).populate("relations")
       res.json(user)
@@ -101,7 +98,6 @@ router.put('/api/user/edit/:id', async (req, res) => {
   user.role = req.body.role;
   user.save(function (err) {
     if (err) {
-      console.log(err)
       next(err)
     } else {
       res.status(200).send()
@@ -142,7 +138,6 @@ router.post('/api/user', async (req, res) => {
   res.json(result || error);
   if (!error) {
     activate(save)
-    console.log(save)
   }
 })
 
