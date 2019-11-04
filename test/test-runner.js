@@ -124,7 +124,7 @@ async function run() {
   }
   fs.writeFileSync(fileName, displayTemplate(niceDate, all), 'utf-8');
   fs.writeFileSync(jsonFileName, JSON.stringify(all, '', '  '), 'utf-8');
-  open(fileName, { app: ['google chrome'] });
+  open(fileName);
 }
 
 // A basic display template
