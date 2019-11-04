@@ -1,3 +1,4 @@
+// THIS FILE should be ignored by each contributor after they put their name in
 // Add your DB name here so you can have your tests for your self (and dont have to see everyone elses tests!)
 const tester = 'hamid';
 
