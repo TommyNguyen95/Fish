@@ -2,7 +2,7 @@ module.exports = ({ expect, assert, response }) => ({
   path: 'user',
   method: 'post',
   body: {
-    "username": "kimsBigP",
+    "username": "kim.johnsson@telia.com",
     "password": "noccoLover4Lajf"
   },
   test() {
