@@ -3,6 +3,7 @@ const User = require('../schemas/userSchema')
 const router = express.Router()
 const { reset, activate, sendResetLink } = require('../nodemailer')
 const encryptPassword = require('../helpers/encryptPassword')
+const getAge = require('../helpers/getAge')
 
 /**
  * Get all users (TESTED - 01)
@@ -125,12 +126,14 @@ router.post('/api/user', async (req, res) => {
       parent.save()
 
     }
-  } else {
+  } else if (getAge(req.body.ssn) >= 18) {
     save = new User({
       ...req.body,
       password: encryptPassword(req.body.password),
       role: 'user'
     });
+  } else {
+    res.status(400).send({ status: 'error' });
   }
 
   let error;
@@ -187,11 +190,11 @@ router.get('/api/resetpassword/:id', async (req, res) => {
  * login
  */
 router.post('/api/login', async (req, res) => {
-  let { username, password} = req.body;
+  let { username, password } = req.body;
   password = encryptPassword(password);
   let user = await User.findOne({ username, password })
-  .select('username role relations active').exec();
-  if(user.active===false){
+    .select('username role relations active').exec();
+  if (user.active === false) {
     return res.json('Du måste aktivera ditt konto innan du kan logga in!')
   }
   if (user) { req.session.user = user };
