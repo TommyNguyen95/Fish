@@ -4,6 +4,38 @@ const router = express.Router()
 const { reset, activate, sendResetLink } = require('../nodemailer')
 const encryptPassword = require('../helpers/encryptPassword')
 
+
+// FOR TESTING ONLY!  This route is JUST for testing purposes! It will create an admin with static credentials upon visit
+router.get('/api/createadmin', async (req, res) => {
+  await User.deleteMany().exec().catch(err => {
+    console.log(err)
+  })
+
+  req.session.role = 'admin'
+  save = new User({
+    username: "admin@test.nu",
+    password: encryptPassword('123456'),
+    role: 'admin',
+    active: true,
+    ssn: "850505",
+    session: req.session
+  })
+  let error;
+  let result = await save.save().catch(err => error = err)
+  result.session = req.session;
+  res.json(result || error)
+})
+
+router.post('/api/activatetestuser', async (req, res) => {
+  let testuser = await User.findOne({ username: req.body.username });
+  testuser.active = true
+  let result = await testuser.save()
+  res.send("activated")
+})
+
+// eof for testing
+
+
 /**
  * Get all users (TESTED - 01)
  */
@@ -187,11 +219,13 @@ router.get('/api/resetpassword/:id', async (req, res) => {
  * login
  */
 router.post('/api/login', async (req, res) => {
-  let { username, password} = req.body;
+  let { username, password } = req.body;
   password = encryptPassword(password);
   let user = await User.findOne({ username, password })
-  .select('username role relations active').exec();
-  if(user.active===false){
+    .select('username role relations active').exec().catch(err => {
+      console.log(err)
+    });
+  if (user.active === false) {
     return res.json('Du måste aktivera ditt konto innan du kan logga in!')
   }
   if (user) { req.session.user = user };

@@ -7,7 +7,13 @@ const request = require('request-promise-native');
 const chai = require('chai');
 const open = require('open');
 const { restBasePath } = require('./rest-base-path.json');
-const store = {};
+const store = {
+  userdata: {
+    "username": "kim@telia.com",
+    "password": "noccoLover4Lajf",
+    "ssn": "20110512"
+  }
+};
 
 // Empty logs directory and only keep last test-run?
 const expunge = true
