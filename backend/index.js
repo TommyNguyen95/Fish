@@ -1,7 +1,9 @@
+// Make this bad boy global so we don't have to import it everywhere
+const config = require('./config/config')
+global.config = config;
 const express = require('express');
 const bodyParser = require('body-parser');
 const connectToDb = require('./config/db');
-const config = require('./config/config');
 const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -14,21 +16,26 @@ const fishRules = require('./acl/fish-rules.json')
 // Initial connection to DB
 connectToDb()
 const app = express();
-
-app.use(dbtoggler())
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use(dbtoggler())
 app.use(session({
-  secret: config.salt,
+  secret: global.config.salt,
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({
-    mongooseConnection: global.db
+    mongooseConnection: global.db,
+    collection: 's',
+    ttl: 14 * 24 * 60 * 60 //14 dagar
   })
-}));
+})
+)
 
-app.get('/', (req, res) => res.send('Välkommen till Fi$h super server'));
+app.get('/', (req, res) => {
+  res.send('Välkommen till Fi$h super server')
+});
 app.use(acl(fishRules));
 app.use(userRoutes);
 app.use(transactionsRoutes);
-app.listen(config.PORT, () => console.log(`Gulligagruppens server is on port ${config.PORT}`));
+app.listen(global.config.PORT, () => console.log(`Gulligagruppens server is on port ${global.config.PORT}`));

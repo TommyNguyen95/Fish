@@ -31,7 +31,7 @@ async function activationMail(user) {
     html: `<a href="http://localhost:3001/api/activate/${id}">KLICKA HÄR FÖR ATT AKTIVERA DITT KONTO</a>`
   });
 
-  console.log('Message sent: %s', info.messageId);
+  // console.log('Message sent: %s', info.messageId);
 
 }
 
