@@ -1,24 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useReducer } from 'react';
+import reducer from './test1/reducer';
+import initialState from './test1/initialState';
+
 import './App.css';
 
 function App() {
+
+  const [ state, dispatch ] = useReducer(reducer, initialState);
+  console.log(state, 'ursprungliga statet!')
+
+  const theBiceps = (e) => {
+    dispatch({ type: "NAME_UPDATE", fest: e.target.value})
+    console.log(state)
+  };
+
+  const whatIsTommy = e => {
+    dispatch({ type: "TOMMY_UPDATE", value: e.target.value})
+    console.log(state)
+  }
+
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>SÅ HÄR FUNKAR DET TILL EXEMPEL PÅ EN INPUT</h1>
+      <p>Input 1</p>
+      <input onChange={theBiceps}></input>
+      <p>Input 2</p>
+      <input onChange={whatIsTommy}></input>
     </div>
   );
 }
