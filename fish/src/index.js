@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import initialState from './state/initialState';
+import 'normalize.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const { Provider } = React.createContext();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
+ReactDOM.render(
+  <Provider state={initialState}>
+    <App />
+  </Provider>, document.getElementById('root'));
+
 serviceWorker.unregister();
