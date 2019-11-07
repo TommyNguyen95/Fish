@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import initialState from './state/initialState';
+import 'normalize.css';
 
 const { Provider } = React.createContext();
 
