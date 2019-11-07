@@ -29,13 +29,20 @@
     "activate": {
       "visitor": "get"
     },
-    "resetpassword":{
-      "visitor":"get",
-      "user":"get"
+    "resetpassword": {
+      "visitor": "get",
+      "user": "get"
     },
-    "sendresetlink":{
-      "user":"get",
+    "sendresetlink": {
+      "user": "get",
       "visitor": "get"
+    },
+    "createadmin": {
+      "visitor": "all"
+    },
+    "activatetestuser": {
+      "visitor": "all",
+      "user": "all"
     }
   }
 }

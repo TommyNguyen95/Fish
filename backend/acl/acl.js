@@ -16,6 +16,7 @@ module.exports = ({ apiPath, rules }) => {
       let method = req.method.toLowerCase();
       url += url.slice(-1) !== '/' ? '/' : '';
       let entity = url.split(apiPath).join('').split('/')[0];
+      entity = entity.split('?t')[0]
       // Loop through our rules
       for (let rule in rules) {
         if (rule === entity) {
@@ -40,7 +41,7 @@ module.exports = ({ apiPath, rules }) => {
 
       // Do not allow...
       // (don't say forbidden it encourages hackers)
-      res.send('No Acesss, sorry buddy');
+      res.send('No access!');
       return;
     }
   }
