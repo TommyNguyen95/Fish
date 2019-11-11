@@ -63,4 +63,5 @@ typings/
 
 *.DS_Store
 
+# files
 backend/config/config.js
