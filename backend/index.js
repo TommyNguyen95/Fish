@@ -1,6 +1,4 @@
 // Make this bad boy global so we don't have to import it everywhere
-const config = require('./config/config')
-global.config = config;
 const express = require('express');
 const bodyParser = require('body-parser');
 const connectToDb = require('./config/db');
@@ -12,6 +10,15 @@ const transactionsRoutes = require('./api/transactionsRoutes');
 const dbtoggler = require('./dbtoggler');
 const acl = require('./acl/acl');
 const fishRules = require('./acl/fish-rules.json')
+require('dotenv').config()
+
+let config = {
+  PORT: '3001',
+  salt: 'två laxar i en laxask1337',
+  db: process.env.DB_HOST,
+  db_test: process.env.DB_TEST
+}
+global.config = config
 
 // Initial connection to DB
 connectToDb()
@@ -21,7 +28,7 @@ app.use(bodyParser.json());
 
 app.use(dbtoggler())
 app.use(session({
-  secret: global.config.salt,
+  secret: config.salt,
   resave: true,
   saveUninitialized: true,
   store: new MongoStore({
@@ -38,4 +45,4 @@ app.get('/', (req, res) => {
 app.use(acl(fishRules));
 app.use(userRoutes);
 app.use(transactionsRoutes);
-app.listen(global.config.PORT, () => console.log(`Gulligagruppens server is on port ${global.config.PORT}`));
+app.listen(config.PORT, () => console.log(`Gulligagruppens server is on port ${config.PORT}`));
