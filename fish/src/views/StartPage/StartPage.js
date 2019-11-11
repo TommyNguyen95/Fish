@@ -17,7 +17,7 @@ const Startpage = () => {
   const [state, dispatch ] = useReducer(reducer, initialState)
 
   const simon = () => {
-    console.log(state.fish.loginState.name)
+    
     console.log(state)
   }
 

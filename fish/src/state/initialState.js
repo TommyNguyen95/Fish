@@ -7,5 +7,9 @@ export default {
       children: false,
     },  
 
+    joelSimonState: {
+      name: "kung"
+    }
+
   }
 }
