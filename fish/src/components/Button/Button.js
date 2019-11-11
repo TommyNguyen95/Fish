@@ -1,8 +1,14 @@
 import React from 'react';
+import {StyledButton} from "./StyledButton"
 
-const Button = () => {
+
+const Button = (props) => {
+
+
   return(
-    <React.fragment></React.fragment>
+    <StyledButton text={props.text} fontSize={props.fontsize} width={props.width} height={props.height}>
+      {props.text}
+      </StyledButton>
   )
 }
 
