@@ -3,6 +3,7 @@ const User = require('../schemas/userSchema')
 const router = express.Router()
 const { reset, activate, sendResetLink } = require('../nodemailer')
 const encryptPassword = require('../helpers/encryptPassword')
+const getAge = require('../helpers/getAge')
 
 
 // FOR TESTING ONLY!  This route is JUST for testing purposes! It will create an admin with static credentials upon visit
@@ -157,19 +158,23 @@ router.post('/api/user', async (req, res) => {
       parent.save()
 
     }
-  } else {
+  } else if (getAge(req.body.ssn) >= 18) {
     save = new User({
       ...req.body,
       password: encryptPassword(req.body.password),
       role: 'user'
     });
+  } else {
+    res.status(400).send({ status: 'error' });
   }
 
-  let error;
-  let result = await save.save().catch(err => error = err);
-  res.json(result || error);
-  if (!error) {
-    activate(save)
+  if(save){
+    let error;
+    let result = await save.save().catch(err => error = err);
+    res.json(result || error);
+    if (!error) {
+      activate(save)
+    }
   }
 })
 

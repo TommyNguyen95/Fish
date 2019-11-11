@@ -4,13 +4,13 @@ const Schema = mongoose.Schema;
 let userSchema = new Schema({
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  role: { type: String, required: true },
+  role: { type: String, default: 'user' },
   balance: Number,
   relations: [{type: Schema.Types.ObjectId, ref: 'User'}],
   parent: String,
   transactions: Array,
   created: { type: Date, default: Date.now },
-  ssn: { type: String, required: true },
+  ssn: { type: Date, required: true },
   active: { type: Boolean, default: false}
 });
 
