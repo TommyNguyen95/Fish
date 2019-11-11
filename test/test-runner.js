@@ -11,7 +11,7 @@ const store = {
   userdata: {
     "username": "kim@telia.com",
     "password": "noccoLover4Lajf",
-    "ssn": "20110512"
+    "ssn": "1998-10-03"
   }
 };
 
@@ -130,7 +130,7 @@ async function run() {
   }
   fs.writeFileSync(fileName, displayTemplate(niceDate, all), 'utf-8');
   fs.writeFileSync(jsonFileName, JSON.stringify(all, '', '  '), 'utf-8');
-  open(fileName, { app: ['google chrome'] });
+  open(fileName);
 }
 
 // A basic display template
