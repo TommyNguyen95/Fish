@@ -6,6 +6,7 @@ import {
   Switch
 } from 'react-router-dom';
 import StartPage from './views/StartPage';
+import UserPage from './views/UserPage'
 import VerifyPage from './views/VerifyPage';
 
 const App = props => {
@@ -14,6 +15,7 @@ const App = props => {
       <Switch>
         <Route exact path="/" component={StartPage} />
         <Route exact path="/verify" component={VerifyPage} />
+        <Route exact path="/userpage" component={UserPage} />
       </Switch>
     </Router>
   )
