@@ -6,14 +6,17 @@ import {
   Switch
 } from 'react-router-dom';
 import StartPage from './views/StartPage';
+import Store from '../src/state/store';
 
 const App = props => {
   return (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={StartPage} />
-      </Switch>
-    </Router>
+    <Store>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={StartPage} />
+        </Switch>
+      </Router>
+    </Store>
   )
 }
 
