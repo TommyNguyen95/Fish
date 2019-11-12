@@ -6,6 +6,7 @@ import {
   Switch
 } from 'react-router-dom';
 import StartPage from './views/StartPage';
+import UserPage from './views/UserPage'
 import Store from '../src/state/store';
 
 const App = props => {
