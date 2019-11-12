@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import StartPage from './views/StartPage';
 import Store from '../src/state/store';
+import UserPage from './views/UserPage'
 
 const App = props => {
   return (
@@ -17,6 +18,7 @@ const App = props => {
         </Switch>
       </Router>
     </Store>
+        <Route exact path="/userpage" component={UserPage} />
   )
 }
 
