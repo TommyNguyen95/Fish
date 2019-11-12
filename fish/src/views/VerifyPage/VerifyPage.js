@@ -1,10 +1,18 @@
-import React from 'react'
+import React from 'react';
+import Logo from "../../components/Logo/Logo"
+import {
+  StyledContainer,
+  StyledVerifyMessage
+} from './StyledVerifyPage';
 
-export const VerifyPage = () => {
+const VerifyPage = () => {
   return (
-    <div>
-      <h1>HEJ</h1>
-    </div>
+    <StyledContainer>
+      <Logo />
+      <StyledVerifyMessage>
+        Bekräfta din epost genom länken i mejlet skickat till dig!
+      </StyledVerifyMessage>
+    </StyledContainer>
   )
 }
 

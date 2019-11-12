@@ -8,8 +8,6 @@ import {
   StyledTextarea,
   StyledBackArrow
 } from './StyledPaymentPage';
-import { ArrowLeft } from 'react-feather';
-
 
 // TODO: Remove StyledInput and StyledButton.
 // should be it's own component to import
