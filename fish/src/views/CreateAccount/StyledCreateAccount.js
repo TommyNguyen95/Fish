@@ -34,6 +34,10 @@ const StyledInput = styled.input`
   border-radius: 3px;
 `;
 
+const NameInput = styled(StyledInput)`
+  text-transform: capitalize;
+`;
+
 const StyledButton = styled.button`
   background-color: #FDD100;
   font-family: 'Josefin Sans', sans-serif;
@@ -63,5 +67,6 @@ export {
   StyledForm,
   StyledInput,
   StyledButton,
-  StyledBackArrow
+  StyledBackArrow,
+  NameInput
 }

@@ -5,7 +5,8 @@ import {
   StyledForm,
   StyledInput,
   StyledButton,
-  StyledBackArrow
+  StyledBackArrow,
+  NameInput
 } from './StyledCreateAccount';
 import {
   Link,
@@ -17,10 +18,12 @@ const CreateAccount = () => {
       <Link to="/"><StyledBackArrow size='50' color='#fff' /></Link>
       <StyledForm>
         <StyledLogo src="/images/fishlogo.svg" alt="Fish logo" />
-        <StyledInput type="text" placeholder="E-post" />
+        <NameInput type="text" name="firstname" placeholder="Namn" />
+        <NameInput type="text" name="lastname" placeholder="Efternamn" />
+        <StyledInput type="text" name="email" placeholder="E-post" />
         <StyledInput type="password" placeholder="Lösenord" />
         <StyledInput type="password" placeholder="Bekräfta lösenord" />
-        <StyledInput type="text" placeholder="Personnummer (ååååmmddcccc)" />
+        <StyledInput type="text" placeholder="Personnummer (ååååmmddxxxx)" />
         <StyledButton>
           Skapa konto
         </StyledButton>
