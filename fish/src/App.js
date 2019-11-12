@@ -8,6 +8,7 @@ import {
 import StartPage from './views/StartPage';
 import Store from '../src/state/store';
 import UserPage from './views/UserPage'
+import ProfilePage from './views/ProfilePage';
 
 const App = props => {
   return (
@@ -16,6 +17,7 @@ const App = props => {
         <Switch>
           <Route exact path="/" component={StartPage} />
           <Route exact path="/userpage" component={UserPage} />
+          <Route path="/profile" component={ProfilePage} />
         </Switch>
       </Router>
     </Store>
