@@ -1,15 +1,5 @@
 export default {
-  fish: {
-
-    loginState: {
-      name: "simon",
-      password: "",
-      children: false,
-    },  
-
-    joelSimonState: {
-      name: "kung"
-    }
-
-  }
+  username: 'FRÅN BÖRJAN',
+  password: '',
+  isLoggedIn: false,
 }
