@@ -44,3 +44,10 @@ export const LoginCol = styled(Col)`
   flex-direction: column;
   align-items: center;
 `
+export const LoginForm = styled.form`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+`

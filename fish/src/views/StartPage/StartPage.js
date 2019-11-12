@@ -6,11 +6,10 @@ import {
   LogoImage,
   HeaderText,
   LoginRow,
-  LoginCol
+  LoginCol,
+  LoginForm
 } from './StyledStartPage';
 import { FishContext } from '../../state/store';
-
-import Test from '../../components/TestComponent.js/Test';
 import Input from '../../components/Input/Input';
 
 
@@ -32,9 +31,10 @@ const Startpage = () => {
       <LoginRow>
         <LoginCol xs="12" md="12" lg="12">
           <HeaderText>När du vill skicka en lax eller två</HeaderText>
-          <Input onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
-          <Input onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
-          <Test />
+          <LoginForm>
+            <Input onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
+            <Input type="password" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
+          </LoginForm>
         </LoginCol>
       </LoginRow>
     </StartPageContainer>
