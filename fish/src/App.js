@@ -15,7 +15,7 @@ const App = props => {
       <Switch>
         <Route exact path="/" component={StartPage} />
         <Route exact path="/pay" component={PaymentPage} />
-        <Route exact path="/create-account" component={CreateAccount} />
+        <Route exact path="/skapa-konto" component={CreateAccount} />
       </Switch>
     </Router>
   )
