@@ -8,6 +8,7 @@ import {
 import StartPage from './views/StartPage';
 import UserPage from './views/UserPage'
 import VerifyPage from './views/VerifyPage';
+import PaymentPage from './views/PaymentPage';
 
 const App = props => {
   return (
@@ -16,6 +17,7 @@ const App = props => {
         <Route exact path="/" component={StartPage} />
         <Route exact path="/verify" component={VerifyPage} />
         <Route exact path="/userpage" component={UserPage} />
+        <Route exact path="/pay" component={PaymentPage} />
       </Switch>
     </Router>
   )
