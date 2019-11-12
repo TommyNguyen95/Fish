@@ -6,6 +6,7 @@ import {
   Switch
 } from 'react-router-dom';
 import StartPage from './views/StartPage';
+import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 
 const App = props => {
@@ -13,6 +14,7 @@ const App = props => {
     <Router>
       <Switch>
         <Route exact path="/" component={StartPage} />
+        <Route exact path="/pay" component={PaymentPage} />
         <Route exact path="/create-account" component={CreateAccount} />
       </Switch>
     </Router>
