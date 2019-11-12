@@ -15,10 +15,10 @@ const App = props => {
       <Router>
         <Switch>
           <Route exact path="/" component={StartPage} />
+          <Route exact path="/userpage" component={UserPage} />
         </Switch>
       </Router>
     </Store>
-        <Route exact path="/userpage" component={UserPage} />
   )
 }
 

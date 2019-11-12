@@ -1,7 +1,5 @@
 
 import React, { useReducer } from 'react';
-import initialState from '../../state/initialState';
-import reducer from '../../state/login/loginReducer';
 import { StyledUserPageContainer, StyledUserBox,StyledUserIconDiv ,StyledUserIcon , StyledText} from "./StyledUserPage"
 import Logo from "../../components/Logo/Logo"
 import Button from '../../components/Button'
@@ -9,12 +7,6 @@ import Button from '../../components/Button'
 
 
 const UserPage = () => {
-
-  const [state, dispatch] = useReducer(reducer, initialState)
-
-
-
-
   return (<div>
         <StyledUserIconDiv>
        <StyledText>BALANS: 500 SEK</StyledText>
