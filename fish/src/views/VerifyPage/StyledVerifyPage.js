@@ -16,14 +16,20 @@ const StyledVerifyMessage = styled.div`
   margin-top:70px;
   background-color:none;
   width:90%;
-  height:300px;
+  height:100px;
   display:flex;
   justify-content:space-around;
   align-items:center;
   flex-direction:column;
 `;
 
+const StyledText = styled.h3`
+  color: white;
+  font-size: 25px;
+`;
+
 export {
   StyledContainer,
-  StyledVerifyMessage
+  StyledVerifyMessage,
+  StyledText
 }

@@ -1,16 +1,21 @@
 import React from 'react';
-import Logo from "../../components/Logo/Logo"
+import Logo from "../../components/Logo"
+import BackButton from '../../components/BackButton';
 import {
   StyledContainer,
-  StyledVerifyMessage
+  StyledVerifyMessage,
+  StyledText
 } from './StyledVerifyPage';
 
 const VerifyPage = () => {
   return (
     <StyledContainer>
+      <BackButton to="/"/>
       <Logo />
       <StyledVerifyMessage>
-        Bekräfta din epost genom länken i mejlet skickat till dig!
+        <StyledText>
+          Bekräfta din epost genom länken i mejlet skickat till dig!
+        </StyledText>
       </StyledVerifyMessage>
     </StyledContainer>
   )
