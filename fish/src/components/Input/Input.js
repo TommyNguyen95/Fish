@@ -5,9 +5,9 @@ import {
 
 const Input = ({ val, type, placeholder, keyValue, onChange }) => {
 
-  const _onChange = () => {
+  /*const _onChange = () => {
     console.log('funktion, callback')
-  }
+  }*/
 
   return (
     <StyledInput
