@@ -5,6 +5,6 @@ export default {
     isLoggedIn: false
   },
   hamidState: {
-    
+    isDead: false,
   }
 }
