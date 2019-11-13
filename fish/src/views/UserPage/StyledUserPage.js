@@ -5,11 +5,12 @@ export const StyledUserPageContainer  = styled(Container)`
 background-color:#0058A3;
 max-width:100%;
 width:100vw;
-height:90vh;
+height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
+position:relative;
 `
 
 
@@ -31,6 +32,9 @@ justify-content:flex-end;
 max-width:100%;
 background-color:#0058A3;
 padding-top:20px;
+position:absolute;
+top:0;
+right:0;
 `
 
 export const StyledUserIcon  = styled.img`

@@ -9,19 +9,18 @@ const UserPage = () => {
 
 
 
-  return (<div>
-        <StyledUserIconDiv>
+  return (
+    <StyledUserPageContainer>
+    <StyledUserIconDiv>
        <StyledText>BALANS: 500 SEK</StyledText>
       <StyledUserIcon src="/images/usericon.svg"/>
       </StyledUserIconDiv>
-    <StyledUserPageContainer>
-
       <Logo />
       <StyledUserBox>
         <Button text='Betala' fontsize='2rem'/>
         <Button text='Betalningshistorik' fontsize="1.3rem" height="60px"/></StyledUserBox>
     </StyledUserPageContainer>
-    </div>
+   
   )
 }
 
