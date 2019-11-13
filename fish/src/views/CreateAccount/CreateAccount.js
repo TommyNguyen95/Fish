@@ -32,8 +32,8 @@ const CreateAccount = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(createAccountDetails)
       })
-      .then(function (res) { console.log(res) })
-      .catch(function (res) { console.log(res) })
+      .then(res => { console.log(res) })
+      .catch(res => { console.log(res) })
   }
 
   const handleInputs = (e) => {
