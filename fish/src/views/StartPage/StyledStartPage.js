@@ -23,7 +23,7 @@ export const LogoCol = styled(Col)`
 `
 
 export const LogoImage = styled.img`
-  width: 150px;
+  width: 200px;
   padding: 10px;
 `
 export const HeaderText = styled.h1`
