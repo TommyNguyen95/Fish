@@ -1,5 +1,10 @@
 export default {
-  username: 'FRÅN BÖRJAN',
-  password: '',
-  isLoggedIn: false,
+  loginState: {
+    username: '',
+    password: '',
+    isLoggedIn: false
+  },
+  hamidState: {
+    
+  }
 }
