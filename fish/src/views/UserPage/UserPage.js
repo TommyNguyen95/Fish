@@ -11,7 +11,7 @@ const UserPage = () => {
   return (<div>
     <StyledUserIconDiv>
       <StyledText>BALANS: 500 SEK</StyledText>
-      <Link to="/profile">
+      <Link to="/profil">
         <StyledUserIcon src="/images/usericon.svg" />
       </Link>
     </StyledUserIconDiv>

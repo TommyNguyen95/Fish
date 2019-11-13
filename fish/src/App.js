@@ -17,7 +17,7 @@ const App = props => {
         <Switch>
           <Route exact path="/" component={StartPage} />
           <Route exact path="/userpage" component={UserPage} />
-          <Route path="/profile" component={ProfilePage} />
+          <Route path="/profil" component={ProfilePage} />
         </Switch>
       </Router>
     </Store>
