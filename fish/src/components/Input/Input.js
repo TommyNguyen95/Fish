@@ -3,7 +3,7 @@ import {
   StyledInput
 } from './StyledInput';
 
-const Input = ({ val, type, keyValue, onChange }) => {
+const Input = ({ val, placeholder, type, keyValue, onChange }) => {
 
   /*const _onChange = () => {
     console.log('funktion, callback')
@@ -15,6 +15,7 @@ const Input = ({ val, type, keyValue, onChange }) => {
       onChange={onChange}
       type={type}
       key={keyValue}
+      placeholder={placeholder}
     />
   )
 }

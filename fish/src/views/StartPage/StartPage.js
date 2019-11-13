@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React from 'react';
+import useSubContext from '../../state/useSubContext';
 import {
   StartPageContainer,
   LogoRow,
@@ -7,33 +8,35 @@ import {
   HeaderText,
   LoginRow,
   LoginCol,
-  LoginForm
+  LoginForm,
+  LoginButton,
+  TextLink,
+  TextWrapper
 } from './StyledStartPage';
-import { FishContext } from '../../state/store';
 import Input from '../../components/Input/Input';
-
 
 const Startpage = () => {
 
-  const [state, dispatch] = useContext(FishContext)
-
-  const della = () => {
-    console.log(state)
-  }
+  const dispatch = useSubContext('loginState')[1];
 
   return (
     <StartPageContainer>
       <LogoRow>
         <LogoCol xs="12" md="12" lg="12">
-          <LogoImage onClick={della} src="/images/fishlogo.svg"></LogoImage>
+          <LogoImage src="/images/fishlogo.svg"></LogoImage>
         </LogoCol>
       </LogoRow>
       <LoginRow>
         <LoginCol xs="12" md="12" lg="12">
           <HeaderText>När du vill skicka en lax eller två</HeaderText>
           <LoginForm>
-            <Input onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
-            <Input type="password" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
+            <Input placeholder="Användarnamn" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
+            <Input type="password" placeholder="Lösenord" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
+            <LoginButton text="Logga In" width="50%" height="30px" fontsize="14px"></LoginButton>
+            <TextWrapper>
+              <TextLink to={"/"}>Skapa konto</TextLink>
+              <TextLink to={"/"}>Glömt lösenord</TextLink>
+            </TextWrapper>
           </LoginForm>
         </LoginCol>
       </LoginRow>
