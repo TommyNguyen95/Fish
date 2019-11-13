@@ -6,7 +6,6 @@ import {
   Switch
 } from 'react-router-dom';
 import StartPage from './views/StartPage';
-<<<<<<<<< Temporary merge branch 1
 import UserPage from './views/UserPage'
 import VerifyPage from './views/VerifyPage';
 import PaymentPage from './views/PaymentPage';
@@ -17,14 +16,13 @@ const App = props => {
     <Store>
     <Router>
       <Switch>
-        <Route exact path="/startpage" component={StartPage} />
+        <Route exact path="/" component={StartPage} />
         <Route exact path="/verify" component={VerifyPage} />
         <Route exact path="/userpage" component={UserPage} />
         <Route exact path="/pay" component={PaymentPage} />
       </Switch>
     </Router>
     </Store>
->>>>>>>>> Temporary merge branch 2
   )
 }
 
