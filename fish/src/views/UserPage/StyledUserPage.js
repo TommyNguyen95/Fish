@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 export const StyledUserPageContainer  = styled(Container)`
 background-color:#0058A3;
+max-width:100%;
 width:100vw;
 height:100vh;
 display:flex;
