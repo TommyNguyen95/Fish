@@ -3,9 +3,9 @@ import styled from 'styled-components';
 export const StyledInput = styled.input`
   height: 30px;
   font-family: 'Josefin Sans', sans-serif;
-  width: 55%;
-  border-radius: 3px;
+  font-size: 1.1rem;
+  min-width: 100%;
   border: none;
-  margin-bottom: 10px;
-  max-width: 300px;
+  padding: 0.75rem 1rem;
+  border-radius: 3px;
 `
