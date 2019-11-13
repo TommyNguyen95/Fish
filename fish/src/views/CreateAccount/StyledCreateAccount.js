@@ -3,6 +3,7 @@ import { ArrowLeft } from 'react-feather';
 
 const StyledContainer = styled.div`
   background-color: #0058A3;
+  padding-bottom: 50px;
   min-height: 100vh;
   min-width: 100vw;
 `;
@@ -35,10 +36,6 @@ const StyledInput = styled.input`
   text-transform: ${({ capitalize }) => capitalize ? 'capitalize' : 'none' };
 `;
 
-const NameInput = styled(StyledInput)`
-  text-transform: capitalize;
-`;
-
 const StyledButton = styled.button`
   background-color: #FDD100;
   font-family: 'Josefin Sans', sans-serif;
@@ -57,7 +54,7 @@ const StyledButton = styled.button`
 `;
 
 const StyledBackArrow = styled(ArrowLeft)`
-  position: fixed;
+  position: absolute;
   top: 1rem;
   left: 1rem;
 `;
@@ -68,6 +65,5 @@ export {
   StyledForm,
   StyledInput,
   StyledButton,
-  StyledBackArrow,
-  NameInput
+  StyledBackArrow
 }
