@@ -16,7 +16,7 @@ const App = props => {
     <Store>
     <Router>
       <Switch>
-        <Route exact path="/startpage" component={StartPage} />
+        <Route exact path="/" component={StartPage} />
         <Route exact path="/verify" component={VerifyPage} />
         <Route exact path="/userpage" component={UserPage} />
         <Route exact path="/pay" component={PaymentPage} />
