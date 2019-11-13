@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom';
 import StartPage from './views/StartPage';
 import Store from '../src/state/store';
+import UserPage from './views/UserPage'
 
 const App = props => {
   return (
@@ -14,9 +15,11 @@ const App = props => {
       <Router>
         <Switch>
           <Route exact path="/" component={StartPage} />
+          <Route exact path="/userpage" component={UserPage} />
         </Switch>
       </Router>
     </Store>
+        
   )
 }
 
