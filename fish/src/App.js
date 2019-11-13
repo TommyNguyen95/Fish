@@ -16,15 +16,15 @@ import Store from '../src/state/store';
 const App = props => {
   return (
     <Store>
-    <Router>
-      <Switch>
-        <Route exact path="/" component={StartPage} />
-        <Route exact path="/verify" component={VerifyPage} />
-        <Route exact path="/userpage" component={UserPage} />
-      </Switch>
-    </Router>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={StartPage} />
+          <Route exact path="/verify" component={VerifyPage} />
+          <Route exact path="/userpage" component={UserPage} />
           <Route exact path="/skapa-konto" component={CreateAccount} />
           <Route exact path="/betala" component={PaymentPage} />
+        </Switch>
+      </Router>
     </Store>
   )
 }
