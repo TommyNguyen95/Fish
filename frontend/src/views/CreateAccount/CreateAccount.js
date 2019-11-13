@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import useSubContext from '../../state/useSubContext';
 import {
   StyledContainer,
   StyledLogo,
@@ -15,6 +16,7 @@ import useFetch from '../../helpers/fetch'
 
 const CreateAccount = () => {
   const [createAccountDetails, setCreateAccountDetails] = useState([]);
+  const state = useSubContext('loginState')[0];
 
   const renderInputs = () => createAccountFieldsData.map(({ id, name, type, placeholder, capitalize }) => {
     if (name === 'confirmPassword') {
@@ -26,7 +28,7 @@ const CreateAccount = () => {
 
   const createAccount = async (e) => {
     e.preventDefault()
-    await fetch("http://localhost:3001/api/user",
+    await fetch(`${state.apiEndpoint}/api/user`,
       {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },

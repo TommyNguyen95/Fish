@@ -13,7 +13,7 @@ const fishRules = require('./acl/fish-rules.json')
 require('dotenv').config()
 
 let config = {
-  PORT: '3001',
+  PORT: (process.env.NODE_ENV == 'production' ? 3020 : 3001),
   salt: 'två laxar i en laxask1337',
   db: process.env.DB_HOST,
   db_test: process.env.DB_TEST

@@ -17,8 +17,9 @@ import Input from '../../components/Input/Input';
 
 const Startpage = () => {
 
-  const dispatch = useSubContext('loginState')[1];
+  const [state, dispatch] = useSubContext('loginState');
 
+  console.log(state)
   return (
     <StartPageContainer>
       <LogoRow>
@@ -34,7 +35,7 @@ const Startpage = () => {
             <Input type="password" placeholder="Lösenord" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
             <LoginButton text="Logga In" width="50%" height="30px" fontsize="14px"></LoginButton>
             <TextWrapper>
-              <TextLink to={"/"}>Skapa konto</TextLink>
+              <TextLink to={"skapa-konto"}>Skapa konto</TextLink>
               <TextLink to={"/"}>Glömt lösenord</TextLink>
             </TextWrapper>
           </LoginForm>

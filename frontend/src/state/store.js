@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from 'react';
-import initialState from '../state/initialState';
+import initialState from './initialState';
 import rootReducer from './rootReducer';
 
 

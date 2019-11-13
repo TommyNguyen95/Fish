@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 
 export const StartPageContainer = styled(Container)`
-  background-color: #0058a3;
   width: 100vw;
   height: 100vh;
 
