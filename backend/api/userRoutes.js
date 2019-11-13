@@ -168,7 +168,7 @@ router.post('/api/user', async (req, res) => {
     res.status(400).send({ status: 'error' });
   }
 
-  if(save){
+  if (save) {
     let error;
     let result = await save.save().catch(err => error = err);
     res.json(result || error);

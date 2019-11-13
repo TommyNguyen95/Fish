@@ -15,7 +15,7 @@ export const createAccountFieldsData = [
     },
     {
         id: 2,
-        name: 'email',
+        name: 'username',
         type: 'email',
         placeholder: 'E-post',
         capitalize: false
