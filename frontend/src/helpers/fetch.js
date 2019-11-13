@@ -24,7 +24,7 @@ const UseFetch = ({ url, recieveResponse }) => {
       }
     };
     fetchData();
-  }, [url]);
+  }, [url, recieveResponse]);
   return { loading, error };
 }
 export default UseFetch;

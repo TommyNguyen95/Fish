@@ -12,7 +12,7 @@ import {
   Link,
 } from 'react-router-dom';
 import { createAccountFieldsData } from '../../staticData';
-import useFetch from '../../helpers/fetch'
+// import useFetch from '../../helpers/fetch'
 
 const CreateAccount = () => {
   const [createAccountDetails, setCreateAccountDetails] = useState([]);
