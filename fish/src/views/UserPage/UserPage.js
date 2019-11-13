@@ -17,8 +17,8 @@ const UserPage = () => {
       </StyledUserIconDiv>
       <Logo />
       <StyledUserBox>
-        <Button text='Betala' fontsize='2rem'/>
-        <Button text='Betalningshistorik' fontsize="1.3rem" height="60px"/></StyledUserBox>
+        <Button text='Betala' fontsize='2rem' />
+        <Button text='Betalningshistorik' fontsize="1.3rem" height="60px" /></StyledUserBox>
     </StyledUserPageContainer>
    
   )

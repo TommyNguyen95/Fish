@@ -165,10 +165,10 @@ router.post('/api/user', async (req, res) => {
       role: 'user'
     });
   } else {
-    res.status(400).send({ status: 'error' });
+    res.status(400).send({ status: 'Du kan bara skapa ett konto om du är över 18år!' });
   }
 
-  if(save){
+  if (save) {
     let error;
     let result = await save.save().catch(err => error = err);
     res.json(result || error);

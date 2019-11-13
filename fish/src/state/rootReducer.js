@@ -1,14 +1,18 @@
-import { NAME_UPDATE, PASSWORD_UPDATE } from '../state/login/loginActions';
 import initialState from './initialState';
+import loginReducer from './login/loginReducer';
 
-export default (state = initialState.fish, action) => {
-  console.log(state)
-  switch (action.type) {
-    case NAME_UPDATE:
-      return { ...state, username: action.value};
-    case PASSWORD_UPDATE:
-      return { ...state, password: action.value}
-    default:
-      return state;
-  }
+/**
+ * Vår reducermap för rootReducern här lägger ni ert state och er reducer till det statet.
+ */
+let reducerMap = {
+  loginState: loginReducer,
+};
+
+export default (state = initialState, action) => {
+  let { subContext } = action;
+  delete action.subContext;
+  let subState = state[subContext];
+  let newState = { ...state };
+  newState[subContext] = reducerMap[subContext](subState, action);
+  return newState;
 };
