@@ -11,7 +11,6 @@ import VerifyPage from './views/VerifyPage';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import Store from '../src/state/store';
-import Store from '../src/state/store';
 
 const App = props => {
   return (
