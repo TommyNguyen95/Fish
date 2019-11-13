@@ -5,7 +5,7 @@ export const StyledUserPageContainer  = styled(Container)`
 background-color:#0058A3;
 max-width:100%;
 width:100vw;
-height:100vh;
+height:90vh;
 display:flex;
 justify-content:center;
 align-items:center;
