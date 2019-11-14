@@ -14,11 +14,13 @@ router.get('/api/createadmin', async (req, res) => {
 
   req.session.role = 'admin'
   save = new User({
+    firstname: 'Super',
+    lastname: 'Admin',
     username: "admin@test.nu",
     password: encryptPassword('123456'),
     role: 'admin',
     active: true,
-    ssn: "850505",
+    ssn: "19850505",
     session: req.session
   })
   let error;
