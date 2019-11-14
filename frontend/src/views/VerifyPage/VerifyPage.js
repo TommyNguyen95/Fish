@@ -6,7 +6,7 @@ import {
 
 const VerifyPage = () => {
   return (
-    <div className="mt-5">
+    <div>
       <BackButton to="/" />
       <StyledText>
         Bekräfta din epost genom länken i mejlet skickat till dig!
