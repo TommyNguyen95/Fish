@@ -6,13 +6,7 @@ import Button from '../../components/Button'
 import {
   StyledContainer,
   StyledForm,
-  StyledInput,
-  StyledButton,
-  StyledBackArrow
 } from './StyledCreateAccount';
-import {
-  Link,
-} from 'react-router-dom';
 import { createAccountFieldsData } from '../../staticData';
 // import useFetch from '../../helpers/fetch'
 
