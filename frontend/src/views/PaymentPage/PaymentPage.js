@@ -9,13 +9,13 @@ import {
 
 const PaymentPage = () => {
   return (
-    <div className="mt-5">
+    <div>
       <BackButton to="/användare" />
       <StyledForm>
         <Input type="text" placeholder="Mottagare" />
         <Input type="number" placeholder="Belopp" />
         <StyledTextarea placeholder="Meddelande" />
-        <Button width="100%" text="Betala" />
+        <Button text="Betala" />
       </StyledForm>
     </div>
   );
