@@ -23,7 +23,7 @@ const Startpage = () => {
           <LoginForm>
             <Input placeholder="Användarnamn" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
             <Input type="password" placeholder="Lösenord" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
-            <LoginButton text="Logga In" width="50%" height="30px" fontsize="14px"></LoginButton>
+            <LoginButton text="Logga In"></LoginButton>
             <TextWrapper>
               <TextLink to={"skapa-konto"}>Skapa konto</TextLink>
               <TextLink to={"/"}>Glömt lösenord</TextLink>
