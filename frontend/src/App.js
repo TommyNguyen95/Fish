@@ -37,15 +37,14 @@ const App = props => {
           <Container>
             <Switch>
               <Route exact path="/" component={StartPage} />
-              <Route exact path="/verify" component={VerifyPage} />
-              <Route exact path="/userpage" component={UserPage} />
+              <Route exact path="/bekrafta" component={VerifyPage} />
+              <Route exact path="/anvandare" component={UserPage} />
               <Route exact path="/skapa-konto" component={CreateAccount} />
               <Route exact path="/betala" component={PaymentPage} />
               <Route exact path="/profil" component={ProfilePage} />
 
             </Switch>
           </Container>
-          <Footer />
         </Router>
       </main>
     </Store>
