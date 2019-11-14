@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import useSubContext from '../../state/useSubContext';
-import Input from '../../components/Input/Input'
+import Input from '../../components/Input'
+import BackButton from '../../components/BackButton'
 import {
   StyledContainer,
   StyledForm,
@@ -55,7 +56,7 @@ const CreateAccount = () => {
 
   return (
     <StyledContainer>
-      <Link to="/"><StyledBackArrow size='50' color='#fff' /></Link>
+      <BackButton to="/" />
       <StyledForm>
         {renderInputs()}
         <StyledButton onClick={createAccount}>

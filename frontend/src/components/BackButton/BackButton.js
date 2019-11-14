@@ -7,7 +7,7 @@ import {
 const BackButton = (props) => {
   return (
     <Link to={props.to}>
-      <StyledBackButton/>
+      <StyledBackButton size='50px' />
     </Link>
   )
 }
