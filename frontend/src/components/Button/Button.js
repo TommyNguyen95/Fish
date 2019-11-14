@@ -1,15 +1,15 @@
 import React from 'react';
-import {StyledButton} from "./StyledButton"
+import { StyledButton } from "./StyledButton"
 
 
 
 const Button = (props) => {
 
 
-  return(
-    <StyledButton text={props.text} fontSize={props.fontsize} width={props.width} height={props.height} onClick={props.onClick} className={props.className}>
+  return (
+    <StyledButton text={props.text} onClick={props.onClick} >
       {props.text}
-      </StyledButton>
+    </StyledButton>
   )
 }
 

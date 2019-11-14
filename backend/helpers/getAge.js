@@ -1,4 +1,7 @@
 function getAge(dateString) {
+    if (!dateString) {
+        return false
+    }
     let year = dateString.slice(0, 4)
     let month = dateString.slice(4, 6)
     let day = dateString.slice(6, 8)
