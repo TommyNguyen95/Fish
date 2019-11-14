@@ -3,4 +3,26 @@
 #root {
   // PUT ALL STYLES HERE!
   background: #0058a3;
+
+  .wrapper {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+  .logo {
+    img {
+      max-width: 250px;
+      margin-top: 20px;
+      margin: 0 auto;
+      display: block;
+    }
+    p {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
 }

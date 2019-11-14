@@ -2,17 +2,8 @@ import styled from 'styled-components';
 import { ArrowLeft } from 'react-feather';
 
 const StyledContainer = styled.div`
-  background-color: #0058A3;
-  padding-bottom: 50px;
-  min-height: 100vh;
-  min-width: 100vw;
 `;
 
-const StyledLogo = styled.img`
-  margin-top: 5rem !important;
-  width: 200px;
-  padding: 15px;
-`;
 
 const StyledForm = styled.form`
   display: flex;
@@ -33,7 +24,7 @@ const StyledInput = styled.input`
   border: none;
   padding: 0.75rem 1rem;
   border-radius: 3px;
-  text-transform: ${({ capitalize }) => capitalize ? 'capitalize' : 'none' };
+  text-transform: ${({ capitalize }) => capitalize ? 'capitalize' : 'none'};
 `;
 
 const StyledButton = styled.button`
@@ -61,7 +52,6 @@ const StyledBackArrow = styled(ArrowLeft)`
 
 export {
   StyledContainer,
-  StyledLogo,
   StyledForm,
   StyledInput,
   StyledButton,

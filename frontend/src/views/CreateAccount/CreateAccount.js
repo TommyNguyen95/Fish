@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import useSubContext from '../../state/useSubContext';
 import {
   StyledContainer,
-  StyledLogo,
   StyledForm,
   StyledInput,
   StyledButton,
@@ -57,7 +56,6 @@ const CreateAccount = () => {
     <StyledContainer>
       <Link to="/"><StyledBackArrow size='50' color='#fff' /></Link>
       <StyledForm>
-        <StyledLogo src="/images/fishlogo.svg" alt="Fish logo" />
         {renderInputs()}
         <StyledButton onClick={createAccount}>
           Skapa konto

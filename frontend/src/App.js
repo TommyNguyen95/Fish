@@ -6,19 +6,43 @@ import VerifyPage from './views/VerifyPage';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import Store from '../src/state/store';
+import { Container } from 'reactstrap';
+
+
+// These can stay here, no need to import files
+const Logo = () => {
+  return (
+    <Container className="logo">
+      <img src="/images/fishlogo.svg" />
+      <p className="text-center">När du vill skicka en lax eller en röding</p>
+    </Container>
+  )
+}
+const Footer = () => {
+  return (
+    <Container>
+      <p className="text-center">Optional footer</p>
+    </Container>
+  )
+}
+// end of inline components
 
 const App = props => {
   return (
     <Store>
-      <Router>
-        <Switch>
-          <Route exact path="/" component={StartPage} />
-          <Route exact path="/verify" component={VerifyPage} />
-          <Route exact path="/userpage" component={UserPage} />
-          <Route exact path="/skapa-konto" component={CreateAccount} />
-          <Route exact path="/betala" component={PaymentPage} />
-        </Switch>
-      </Router>
+      <main className="wrapper">
+        <Router>
+          <Logo />
+          <Switch>
+            <Route exact path="/" component={StartPage} />
+            <Route exact path="/verify" component={VerifyPage} />
+            <Route exact path="/userpage" component={UserPage} />
+            <Route exact path="/skapa-konto" component={CreateAccount} />
+            <Route exact path="/betala" component={PaymentPage} />
+          </Switch>
+          <Footer />
+        </Router>
+      </main>
     </Store>
   )
 }
