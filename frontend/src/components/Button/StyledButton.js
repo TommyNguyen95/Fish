@@ -1,9 +1,8 @@
 import styled from "styled-components"
-
 export const StyledButton = styled.button`
   background-color: #FDD100;
   font-family: 'Josefin Sans', sans-serif;
-  font-size: 1.6rem;
+  font-size: ${props => props.fontsize ? props.fontsize : "1.6rem"};
   min-width: 100%;
   border: none;
   padding: 1rem 0;

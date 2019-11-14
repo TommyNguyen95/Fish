@@ -7,7 +7,7 @@ const Button = (props) => {
 
 
   return (
-    <StyledButton text={props.text} onClick={props.onClick} >
+    <StyledButton text={props.text} onClick={props.onClick} className={props.className} fontsize={props.fontsize}>
       {props.text}
     </StyledButton>
   )
