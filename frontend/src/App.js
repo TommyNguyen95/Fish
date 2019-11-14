@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import StartPage from './views/StartPage';
 import UserPage from './views/UserPage'
 import VerifyPage from './views/VerifyPage';
+import ApprovedPage from './views/ApprovedPage';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import Store from '../src/state/store';
@@ -36,8 +37,9 @@ const App = props => {
           <Container>
             <Switch>
               <Route exact path="/" component={StartPage} />
-              <Route exact path="/bekrafta" component={VerifyPage} />
               <Route exact path="/anvandare" component={UserPage} />
+              <Route exact path="/bekrafta" component={VerifyPage} />
+              <Route exact path="/godkant" component={ApprovedPage} />
               <Route exact path="/skapa-konto" component={CreateAccount} />
               <Route exact path="/betala" component={PaymentPage} />
             </Switch>
