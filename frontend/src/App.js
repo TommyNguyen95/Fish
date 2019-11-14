@@ -42,7 +42,6 @@ const App = props => {
               <Route exact path="/betala" component={PaymentPage} />
             </Switch>
           </Container>
-          <Footer />
         </Router>
       </main>
     </Store>
