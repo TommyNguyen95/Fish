@@ -1,0 +1,25 @@
+.profile-page{
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+  .remove-account{
+    text-decoration: underline;
+    text-align:center;
+    margin-top: 45px;
+    cursor: pointer;
+  }
+  .main-profile{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+  h2{
+    text-align:center;
+    color: #fff;
+    margin-top: 55px;
+  }
+}
