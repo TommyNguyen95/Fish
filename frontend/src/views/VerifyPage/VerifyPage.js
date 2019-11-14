@@ -1,16 +1,17 @@
 import React from 'react';
 import BackButton from '../../components/BackButton';
 import {
-    StyledText
+  StyledText
 } from './StyledVerifyPage';
+
 const VerifyPage = () => {
-    return (
-        <div>
-            <BackButton to="/" />
-            <StyledText>
-                Bekräfta din epost genom länken i mejlet skickat till dig!
+  return (
+    <div>
+      <BackButton to="/" />
+      <StyledText>
+        Bekräfta din epost genom länken i mejlet skickat till dig!
        </StyledText>
-        </div>
-    )
+    </div>
+  )
 }
 export default VerifyPage;
