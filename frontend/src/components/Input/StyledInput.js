@@ -7,7 +7,7 @@ export const StyledInput = styled.input`
   border-radius: 3px;
   border: none;
   margin-bottom: 10px;
-  max-width: 300px;
+  max-width: 350px;
 
   @media (max-width: 576px){
     width: 100%;
