@@ -9,9 +9,11 @@ const open = require('open');
 const { restBasePath } = require('./rest-base-path.json');
 const store = {
   userdata: {
+    "firstname": "Kim",
+    "lastname": "Johnsson",
     "username": "kim@telia.com",
     "password": "noccoLover4Lajf",
-    "ssn": "1998-10-03"
+    "ssn": "19981003"
   }
 };
 
@@ -130,7 +132,7 @@ async function run() {
   }
   fs.writeFileSync(fileName, displayTemplate(niceDate, all), 'utf-8');
   fs.writeFileSync(jsonFileName, JSON.stringify(all, '', '  '), 'utf-8');
-  open(fileName, {app: ['google chrome']});
+  open(fileName);
 }
 
 // A basic display template
