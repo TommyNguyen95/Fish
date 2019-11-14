@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useSubContext from '../../state/useSubContext';
+import Input from '../../components/Input/Input'
 import {
   StyledContainer,
   StyledForm,
@@ -19,9 +20,9 @@ const CreateAccount = () => {
 
   const renderInputs = () => createAccountFieldsData.map(({ id, name, type, placeholder, capitalize }) => {
     if (name === 'confirmPassword') {
-      return <StyledInput key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={checkPassword} />
+      return <Input key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={checkPassword} />
     } else {
-      return <StyledInput key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={handleInputs} />
+      return <Input key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={handleInputs} />
     }
   });
 
