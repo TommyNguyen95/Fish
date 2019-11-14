@@ -1,4 +1,5 @@
 import styled from "styled-components"
+
 export const StyledButton = styled.button`
   background-color: #FDD100;
   font-family: 'Josefin Sans', sans-serif;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton } from "./StyledUserPage"
+import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage"
 
 
 const UserPage = () => {
@@ -13,7 +13,7 @@ const UserPage = () => {
         <StyledUserIcon src="/images/usericon.svg" />
       </StyledUserIconDiv>
       <StyledUserBox>
-        <StyledButton text='Betala' />
+        <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>
         <StyledButton text='Betalningshistorik' fontsize="1.3rem" /></StyledUserBox>
     </div>
 
