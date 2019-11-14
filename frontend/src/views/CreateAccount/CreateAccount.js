@@ -3,10 +3,6 @@ import useSubContext from '../../state/useSubContext';
 import Input from '../../components/Input'
 import BackButton from '../../components/BackButton'
 import Button from '../../components/Button'
-import {
-  StyledContainer,
-  StyledForm,
-} from './StyledCreateAccount';
 import { createAccountFieldsData } from '../../staticData';
 // import useFetch from '../../helpers/fetch'
 
@@ -50,13 +46,13 @@ const CreateAccount = () => {
   }
 
   return (
-    <StyledContainer>
+    <div>
       <BackButton to="/" />
-      <StyledForm>
+      <form>
         {renderInputs()}
         <Button text="Skapa konto" onClick={createAccount} />
-      </StyledForm>
-    </StyledContainer>
+      </form>
+    </div>
   )
 }
 
