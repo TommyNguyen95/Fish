@@ -36,8 +36,8 @@ const App = props => {
           <Container>
             <Switch>
               <Route exact path="/" component={StartPage} />
-              <Route exact path="/verify" component={VerifyPage} />
-              <Route exact path="/userpage" component={UserPage} />
+              <Route exact path="/bekräfta" component={VerifyPage} />
+              <Route exact path="/användare" component={UserPage} />
               <Route exact path="/skapa-konto" component={CreateAccount} />
               <Route exact path="/betala" component={PaymentPage} />
             </Switch>
