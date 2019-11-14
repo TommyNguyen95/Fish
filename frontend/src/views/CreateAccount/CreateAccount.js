@@ -1,15 +1,8 @@
 import React, { useState } from 'react';
 import useSubContext from '../../state/useSubContext';
-import {
-  StyledContainer,
-  StyledForm,
-  StyledInput,
-  StyledButton,
-  StyledBackArrow
-} from './StyledCreateAccount';
-import {
-  Link,
-} from 'react-router-dom';
+import Input from '../../components/Input'
+import BackButton from '../../components/BackButton'
+import Button from '../../components/Button'
 import { createAccountFieldsData } from '../../staticData';
 // import useFetch from '../../helpers/fetch'
 
@@ -19,9 +12,9 @@ const CreateAccount = () => {
 
   const renderInputs = () => createAccountFieldsData.map(({ id, name, type, placeholder, capitalize }) => {
     if (name === 'confirmPassword') {
-      return <StyledInput key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={checkPassword} />
+      return <Input key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={checkPassword} />
     } else {
-      return <StyledInput key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={handleInputs} />
+      return <Input key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={handleInputs} />
     }
   });
 
@@ -53,15 +46,13 @@ const CreateAccount = () => {
   }
 
   return (
-    <StyledContainer>
-      <Link to="/"><StyledBackArrow size='50' color='#fff' /></Link>
-      <StyledForm>
+    <div>
+      <BackButton to="/" />
+      <form>
         {renderInputs()}
-        <StyledButton onClick={createAccount}>
-          Skapa konto
-        </StyledButton>
-      </StyledForm>
-    </StyledContainer>
+        <Button text="Skapa konto" onClick={createAccount} />
+      </form>
+    </div>
   )
 }
 
