@@ -31,7 +31,6 @@ router.get('/api/createadmin', async (req, res) => {
 
 router.post('/api/activatetestuser', async (req, res) => {
   let testuser = await User.findOne({ username: req.body.username });
-  console.log(testuser)
   testuser.active = true
   let result = await testuser.save()
   res.send("activated")
