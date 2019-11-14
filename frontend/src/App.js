@@ -20,7 +20,7 @@ const Logo = () => {
 }
 const Footer = () => {
   return (
-    <Container>
+    <Container className="footer">
       <p className="text-center">Optional footer</p>
     </Container>
   )
@@ -33,13 +33,15 @@ const App = props => {
       <main className="wrapper">
         <Router>
           <Logo />
-          <Switch>
-            <Route exact path="/" component={StartPage} />
-            <Route exact path="/verify" component={VerifyPage} />
-            <Route exact path="/userpage" component={UserPage} />
-            <Route exact path="/skapa-konto" component={CreateAccount} />
-            <Route exact path="/betala" component={PaymentPage} />
-          </Switch>
+          <Container>
+            <Switch>
+              <Route exact path="/" component={StartPage} />
+              <Route exact path="/verify" component={VerifyPage} />
+              <Route exact path="/userpage" component={UserPage} />
+              <Route exact path="/skapa-konto" component={CreateAccount} />
+              <Route exact path="/betala" component={PaymentPage} />
+            </Switch>
+          </Container>
           <Footer />
         </Router>
       </main>

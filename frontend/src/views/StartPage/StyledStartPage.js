@@ -4,8 +4,7 @@ import Button from '../../components/Button';
 import { Link } from 'react-router-dom';
 
 
-export const StartPageContainer = styled(Container)`
-
+export const StartPageContainer = styled.div`
 
 `
 
