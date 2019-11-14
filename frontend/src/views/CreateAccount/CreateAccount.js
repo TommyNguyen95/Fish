@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useSubContext from '../../state/useSubContext';
 import Input from '../../components/Input'
 import BackButton from '../../components/BackButton'
+import Button from '../../components/Button'
 import {
   StyledContainer,
   StyledForm,
@@ -59,9 +60,7 @@ const CreateAccount = () => {
       <BackButton to="/" />
       <StyledForm>
         {renderInputs()}
-        <StyledButton onClick={createAccount}>
-          Skapa konto
-        </StyledButton>
+        <Button text="Skapa konto" onClick={createAccount} />
       </StyledForm>
     </StyledContainer>
   )
