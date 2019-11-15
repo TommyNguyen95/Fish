@@ -5,7 +5,12 @@ export default {
     password: '',
     isLoggedIn: false
   },
-  hamidState: {
-    isDead: false,
+  userState: {
+    firstname: '',
+    lastname: '',
+    relations: [],
+    role: '',
+    active: false,
+    balance: 200,
   }
 }

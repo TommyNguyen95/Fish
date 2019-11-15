@@ -20,18 +20,25 @@ export const TextLinkAccount = styled(Link)`
   color: white;
   align-content: flex-start;
   flex: 1;
+  &:hover {
+    color: #FDD100;
+    cursor: pointer;
+    text-decoration: none;
+  }
 `
 export const TextLinkPassword = styled(Link)`
   color: white;
+  &:hover {
+    color: #FDD100;
+    cursor: pointer;
+    text-decoration: none;
+  }
 `
 
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 50%
+  width: 100%
   margin-bottom: 30px;
   max-width: 350px;
-  @media (max-width: 576px){
-    width: 100%;
-  }
 `

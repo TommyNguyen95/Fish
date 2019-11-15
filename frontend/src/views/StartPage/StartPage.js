@@ -1,5 +1,6 @@
 import React from 'react';
 import useSubContext from '../../state/useSubContext';
+import axios from 'axios';
 import { Row, Col } from 'reactstrap';
 import {
   TextLinkAccount,
@@ -10,7 +11,7 @@ import {
 } from './StyledStartPage';
 import Input from '../../components/Input/Input';
 
-const Startpage = () => {
+const Startpage = props => {
 
   /**
    * Getting our state and dispatch and also pointing to what state we want to update.
@@ -18,13 +19,39 @@ const Startpage = () => {
    */
   const [state, dispatch] = useSubContext('loginState');
 
+  /**
+   * Function that makes a post to the backend to both login the user
+   * and check if the user is valid.
+   */
+  const loginRequest = (e) => {
+    e.preventDefault();
+    axios({
+      method: 'post',
+      url: `${state.apiEndpoint}/api/login`,
+      data: {
+        username: state.loginState.username,
+        password: state.loginState.password,
+      }
+    }).then(response => {
+      state.loginState.isLoggedIn = true;
+      state.userState.firstname = response.data.firstname;
+      state.userState.lastname = response.data.lastname;
+      state.userState.relations = response.data.relations;
+      state.userState.role = response.data.role;
+      props.history.push('/anvandare')
+
+    }).catch(response => {
+      // Här ska kod komma som gör inputsen röda
+    })
+  }
+
   return (
     <Row>
       <Col xs="12" md="12" lg="12">
         <LoginForm>
           <Input placeholder="Användarnamn" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
-          <Input type="password" placeholder="Lösenord" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
-          <LoginButton text="Logga In" width="50%" height="30px" fontsize="14px"></LoginButton>
+          <Input type="password" placeholder="Lösenord" id="Popover1" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
+          <LoginButton onClick={loginRequest} text="Logga In" width="50%" height="30px" fontsize="14px"></LoginButton>
           <TextWrapper>
             <TextLinkAccount to={"skapa-konto"}>Skapa konto</TextLinkAccount>
             <TextLinkPassword to={"/"}>Glömt lösenord</TextLinkPassword>
