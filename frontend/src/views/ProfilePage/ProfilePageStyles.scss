@@ -1,10 +1,11 @@
 .profile-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-  max-width: 400px;
-  margin: 0 auto;
+ flex-direction: column;
+ align-items: center;
+ width: 80%;
+ max-width: 400px;
+ margin: 0 auto;
+ color:#fff;
  * {
    margin: 0.5rem 0;
  }
@@ -12,14 +13,20 @@
   .remove-account{
     text-decoration: underline;
     text-align:center;
-    margin-top: 45px;
+    margin-top: 15px;
     cursor: pointer;
   }
 
   .added-accounts-h2{
     text-align:center;
     color: #fff;
-    margin-top: 55px;
-    margin-bottom: 25px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  .h3-without-state{
+    margin-bottom: 55px;
+  }
+  a{
+    width: 100%;
   }
 }

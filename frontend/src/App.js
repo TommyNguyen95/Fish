@@ -6,6 +6,7 @@ import VerifyPage from './views/VerifyPage';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import ProfilePage from './views/ProfilePage/ProfilePage';
+import ChildPage from './views/ChildPage/ChildPage'
 import Store from '../src/state/store';
 import { Container } from 'reactstrap';
 
@@ -42,7 +43,7 @@ const App = props => {
               <Route exact path="/skapa-konto" component={CreateAccount} />
               <Route exact path="/betala" component={PaymentPage} />
               <Route exact path="/profil" component={ProfilePage} />
-
+              <Route exact path="/barn-profil" component={ChildPage} />
             </Switch>
           </Container>
         </Router>
