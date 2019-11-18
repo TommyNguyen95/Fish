@@ -1,17 +1,27 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
 import Button from '../../components/Button/Button'
 import RelationList from '../../components/RelationList/RelationList'
 import Text from '../../components/Text'
+import { Link } from 'react-router-dom'
 import useSubContext from '../../state/useSubContext';
+import axios from 'axios'
 import './ProfilePageStyles.scss'
+
 
 
 const ProfilePage = () => {
   const [state, dispatch] = useSubContext('userState');
+  const [data, setData] = useState([])
+  console.log(state)
   let relations = state.userState.relations
 
+  axios
+    .get(`${state.apiEndpoint}/api/user/${state.userState._id}`)
+    .then(response => {
+      console.log(response)
+    })
 
+  console.log(data)
   return (
     <div className="profile-container">
       <Text text={state.userState.firstname} textInput={state.userState.lastname}></Text>
