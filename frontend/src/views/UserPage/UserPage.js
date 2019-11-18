@@ -1,19 +1,18 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
-import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage"
-
+import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage";
+import useSubContext from '../../state/useSubContext';
 
 const UserPage = () => {
 
-
+  const [state, dispatch] = useSubContext('loginState');
 
   return (
     <div>
       <StyledUserIconDiv>
-        <StyledText>BALANS: 500 SEK</StyledText>
-        <Link to="/profil">
+        <StyledLink to="/profil">
+          <StyledText>SALDO: {state.userState.balance}</StyledText>
           <StyledUserIcon src="/images/usericon.svg" />
-        </Link>
+        </StyledLink>
       </StyledUserIconDiv>
       <StyledUserBox>
         <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>

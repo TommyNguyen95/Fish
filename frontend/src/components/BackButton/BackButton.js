@@ -1,14 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import {
   StyledBackButton
 } from './StyledBackButton';
 
 const BackButton = (props) => {
+  const back = () => {
+    if (props.back) {
+      props.back.history.goBack()
+    } else {
+      props.props.history.push(props.to)
+    }
+
+  }
+
   return (
-    <Link to={props.to}>
-      <StyledBackButton size='50px' />
-    </Link>
+    <StyledBackButton onClick={back} size='50px' />
   )
 }
 

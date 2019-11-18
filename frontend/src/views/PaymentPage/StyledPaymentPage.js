@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+import { Link } from "react-router-dom"
+
+const StyledLink = styled(Link)`
+width:100%;
+`
 
 const StyledTextarea = styled.textarea`
   font-family: 'Josefin Sans', sans-serif;
@@ -12,4 +17,5 @@ const StyledTextarea = styled.textarea`
 
 export {
   StyledTextarea,
+  StyledLink
 }
