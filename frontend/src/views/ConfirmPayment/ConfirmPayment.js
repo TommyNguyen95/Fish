@@ -3,7 +3,8 @@ import Text from '../../components/Text';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import {
-  StyledConfirm
+  StyledConfirm,
+  StyledLink
 } from './StyledConfirmPayment';
 
 const ConfirmPayment = () => {
@@ -13,9 +14,13 @@ const ConfirmPayment = () => {
         <Text text='Mottagare:' />
         <Text text='Belopp:' />
         <Text text='Meddelande:' />
-        <Input placeholder="Fyll i ditt lösenord"/>
-        <Button text="Skicka betalning" />
-        <Button text="Avbryt betalning" />
+        <Input placeholder="Fyll i ditt lösenord" />
+        <StyledLink to={'/bekraftat'}>
+          <Button text="Skicka betalning" />
+        </StyledLink>
+        <StyledLink to={'/betala'}>
+          <Button text="Avbryt betalning" />
+        </StyledLink>
       </StyledConfirm>
     </div>
   )

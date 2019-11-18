@@ -1,26 +1,24 @@
 import React from 'react';
-import { StyledUserPageContainer, StyledUserBox,StyledUserIconDiv ,StyledUserIcon , StyledText} from "./StyledUserPage"
-import Logo from "../../components/Logo/Logo"
-import Button from '../../components/Button'
-
-
+import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage";
+import useSubContext from '../../state/useSubContext';
 
 const UserPage = () => {
 
-
+  const [state, dispatch] = useSubContext('loginState');
 
   return (
-    <StyledUserPageContainer>
-    <StyledUserIconDiv>
-       <StyledText>BALANS: 500 SEK</StyledText>
-      <StyledUserIcon src="/images/usericon.svg"/>
+    <div>
+      <StyledUserIconDiv>
+        <StyledLink to="/profil">
+          <StyledText>SALDO: {state.userState.balance}</StyledText>
+          <StyledUserIcon src="/images/usericon.svg" />
+        </StyledLink>
       </StyledUserIconDiv>
-      <Logo />
       <StyledUserBox>
-        <Button text='Betala' fontsize='2rem' />
-        <Button text='Betalningshistorik' fontsize="1.3rem" height="60px" /></StyledUserBox>
-    </StyledUserPageContainer>
-   
+        <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>
+        <StyledButton text='Betalningshistorik' fontsize="1.3rem" /></StyledUserBox>
+    </div>
+
   )
 }
 
