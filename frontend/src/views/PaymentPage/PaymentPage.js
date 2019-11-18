@@ -4,17 +4,20 @@ import Input from '../../components/Input';
 import BackButton from '../../components/BackButton';
 import {
   StyledTextarea,
+  StyledLink
 } from './StyledPaymentPage';
 
-const PaymentPage = () => {
+const PaymentPage = (props) => {
   return (
     <div>
-      <BackButton to="/användare" />
+      <BackButton back={props} />
       <form>
         <Input type="text" placeholder="Mottagare" />
         <Input type="number" placeholder="Belopp" />
         <StyledTextarea placeholder="Meddelande" />
-        <Button text="Betala" />
+        <StyledLink to={'/bekrafta'}>
+          <Button text="Betala" />
+        </StyledLink>
       </form>
     </div>
   );

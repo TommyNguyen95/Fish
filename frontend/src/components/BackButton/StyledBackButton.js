@@ -6,6 +6,7 @@ const StyledBackButton = styled(ArrowLeft)`
   top: 1rem;
   left: 1rem;
   color: #fff;
+  cursor: pointer;
 `;
 
 export {
