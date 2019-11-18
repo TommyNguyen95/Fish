@@ -1,13 +1,15 @@
 import React from 'react'
 import {
-  StyledText
+  StyledText,
+  TextContainer
 } from './StyledText'
 
-const Text = (props) => {
+const Text = ({ text, textInput }) => {
   return (
-    <StyledText text={props.text}>
-      {props.text}
-    </StyledText>
+    <TextContainer>
+      <StyledText> {text} </StyledText>
+      <StyledText> {textInput} </StyledText>
+    </TextContainer>
   )
 }
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage"
 
 
@@ -10,7 +11,9 @@ const UserPage = () => {
     <div>
       <StyledUserIconDiv>
         <StyledText>BALANS: 500 SEK</StyledText>
-        <StyledUserIcon src="/images/usericon.svg" />
+        <Link to="/profil">
+          <StyledUserIcon src="/images/usericon.svg" />
+        </Link>
       </StyledUserIconDiv>
       <StyledUserBox>
         <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>
