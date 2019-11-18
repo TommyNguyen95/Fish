@@ -15,7 +15,7 @@ const ConfirmPayment = () => {
         <Text text='Belopp:' />
         <Text text='Meddelande:' />
         <Input placeholder="Fyll i ditt lösenord" />
-        <StyledLink to={'/bekraftat'}>
+        <StyledLink to={'/godkant'}>
           <Button text="Skicka betalning" />
         </StyledLink>
         <StyledLink to={'/betala'}>
