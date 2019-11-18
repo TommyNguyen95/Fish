@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage";
 import useSubContext from '../../state/useSubContext';
+import { Link } from 'react-router-dom';
 
 
 const UserPage = () => {
@@ -11,7 +12,9 @@ const UserPage = () => {
     <div>
       <StyledUserIconDiv>
         <StyledText>SALDO: {state.userState.balance}</StyledText>
-        <StyledUserIcon src="/images/usericon.svg" />
+        <Link to="/profil">
+          <StyledUserIcon src="/images/usericon.svg" />
+        </Link>
       </StyledUserIconDiv>
       <StyledUserBox>
         <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>
