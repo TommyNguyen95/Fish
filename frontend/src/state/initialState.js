@@ -12,5 +12,9 @@ export default {
     role: '',
     active: false,
     balance: 0,
+  },
+  transactionState: {
+    amount: 0,
+    message: '',
   }
 }
