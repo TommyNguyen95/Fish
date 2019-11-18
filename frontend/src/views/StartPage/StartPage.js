@@ -43,6 +43,7 @@ const Startpage = props => {
       state.userState.relations = response.data.relations;
       state.userState.role = response.data.role;
       state.userState.balance = response.data.balance;
+      state.userState._id = response.data._id
       props.history.push('/anvandare')
 
     }).catch(response => {

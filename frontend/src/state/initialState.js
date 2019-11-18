@@ -12,5 +12,6 @@ export default {
     role: '',
     active: false,
     balance: 0,
+    _id: ''
   }
 }
