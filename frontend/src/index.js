@@ -5,9 +5,9 @@ import './App.scss';
 import '../src/views/ApprovedPage/style.scss'
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Store from '../src/state/store';
 
 ReactDOM.render(
-  <App />, document.getElementById('root'));
+  <Store><App /></Store>, document.getElementById('root'));
 
 serviceWorker.unregister();
