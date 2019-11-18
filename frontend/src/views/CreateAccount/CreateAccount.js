@@ -72,7 +72,7 @@ const CreateAccount = (props) => {
 
   return (
     <div>
-      <BackButton to="/" />
+      <BackButton back={props} />
       <form>
         {renderInputs()}
         <Button text="Skapa konto" onClick={createAccount} />
