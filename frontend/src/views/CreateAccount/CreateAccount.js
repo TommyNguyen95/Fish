@@ -8,11 +8,12 @@ import { createAccountFieldsData } from '../../staticData';
 
 const CreateAccount = () => {
   const [createAccountDetails, setCreateAccountDetails] = useState([]);
+  const [kimError, setKimError] = useState(false)
   const state = useSubContext('loginState')[0];
 
   const renderInputs = () => createAccountFieldsData.map(({ id, name, type, placeholder, capitalize }) => {
     if (name === 'confirmPassword') {
-      return <Input key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={checkPassword} />
+      return kimError ? <Input bg={"#f8d7da"} key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={checkPassword} /> : <Input key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={checkPassword} />
     } else {
       return <Input key={id} name={name} type={type} placeholder={placeholder} capitalize={capitalize} onChange={handleInputs} />
     }
@@ -20,14 +21,18 @@ const CreateAccount = () => {
 
   const createAccount = async (e) => {
     e.preventDefault()
-    await fetch(`${state.apiEndpoint}/api/user`,
-      {
-        method: "POST",
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(createAccountDetails)
-      })
-      .then(res => { console.log(res) })
-      .catch(res => { console.log(res) })
+    if (createAccountDetails.password === createAccountDetails.confirmPassword && createAccountDetails.confirmPassword) {
+      await fetch(`${state.apiEndpoint}/api/user`,
+        {
+          method: "POST",
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(createAccountDetails)
+        })
+        .then(res => { console.log(res) })
+        .catch(res => { console.log(res) })
+    } else if (!createAccountDetails.confirmPassword || createAccountDetails.confirmPassword !== createAccountDetails.password) {
+      setKimError(true)
+    }
   }
 
   const handleInputs = (e) => {
@@ -35,6 +40,8 @@ const CreateAccount = () => {
   }
 
   const checkPassword = (e) => {
+
+    setCreateAccountDetails({ ...createAccountDetails, [e.target.getAttribute('name')]: e.target.value })
 
     if (e.target.value !== createAccountDetails.password) {
       e.target.style.backgroundColor = '#f8d7da'
