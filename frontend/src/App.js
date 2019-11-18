@@ -17,7 +17,7 @@ import { Container } from 'reactstrap';
 const Logo = () => {
   return (
     <Container className="logo">
-      <img src="/images/fishlogo.svg" />
+      <img src="/images/fishlogo.svg" alt="" />
       <p className="text-center">När du vill skicka en lax eller en röding</p>
     </Container>
   )

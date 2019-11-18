@@ -36,10 +36,15 @@
       max-width: 250px;
       margin: 0 auto;
       display: block;
+      margin-bottom: 20px;
     }
     p {
       font-size: 20px;
       font-weight: bold;
+      color: #FDD100;
+      @media (max-width: 576px){
+        font-size: 16px;
+      }
     }
   }
 }
