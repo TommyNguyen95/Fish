@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 import StartPage from './views/StartPage';
 import UserPage from './views/UserPage'
 import VerifyPage from './views/VerifyPage';
@@ -9,16 +9,28 @@ import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import ProfilePage from './views/ProfilePage/ProfilePage';
 import ChildPage from './views/ChildPage/ChildPage'
-import Store from '../src/state/store';
 import { Container } from 'reactstrap';
+import useSubContext from './state/useSubContext';
+import axios from 'axios';
 
+axios.interceptors.request.use(
+  function (config) {
+    config.withCredentials = true
+    return config
+  },
+  function error() {
+    return Promise.reject(error)
+  }
+)
 
 // These can stay here, no need to import files
 const Logo = () => {
   return (
     <Container className="logo">
-      <img src="/images/fishlogo.svg" alt="" />
-      <p className="text-center">När du vill skicka en lax eller en röding</p>
+      <Link to="/">
+        <img src="/images/fishlogo.svg" alt="" />
+        <p className="text-center">När du vill skicka en lax eller en röding</p>
+      </Link>
     </Container>
   )
 }
@@ -32,27 +44,44 @@ const Footer = () => {
 // end of inline components
 
 const App = props => {
+  const [state, dispatch] = useSubContext('loginState');
+  useEffect(() => {
+    async function checkStatus() {
+      axios({
+        method: 'get',
+        url: `${state.apiEndpoint}/api/login`
+      }).then(response => {
+        if (!response.data._id) return;
+        state.loginState.isLoggedIn = true;
+        state.userState = { ...response.data }
+        dispatch({ type: "RESET_STATE", value: state })
+      }).catch(response => {
+        console.log("error", response)
+      })
+    }
+    checkStatus()
+  }, [])
+
   return (
-    <Store>
-      <main className="wrapper">
-        <Router>
-          <Logo />
-          <Container>
-            <Switch>
-              <Route exact path="/" component={StartPage} />
-              <Route exact path="/anvandare" component={UserPage} />
-              <Route exact path="/bekraftat" component={VerifyPage} />
-              <Route exact path="/bekrafta" component={ConfirmPayment} />
-              <Route exact path="/godkant" component={ApprovedPage} />
-              <Route exact path="/skapa-konto" component={CreateAccount} />
-              <Route exact path="/betala" component={PaymentPage} />
-              <Route exact path="/profil" component={ProfilePage} />
-              <Route exact path="/barn-profil" component={ChildPage} />
-            </Switch>
-          </Container>
-        </Router>
-      </main>
-    </Store>
+    <main className="wrapper">
+      <Router>
+        <Logo />
+        <Container>
+          <Switch>
+            <Route exact path="/" component={StartPage} />
+            <Route exact path="/anvandare" component={UserPage} />
+            <Route exact path="/bekraftat" component={VerifyPage} />
+            <Route exact path="/bekrafta" component={ConfirmPayment} />
+            <Route exact path="/godkant" component={ApprovedPage} />
+            <Route exact path="/skapa-konto" component={CreateAccount} />
+            <Route exact path="/betala" component={PaymentPage} />
+            <Route exact path="/profil" component={ProfilePage} />
+            <Route exact path="/barn-profil" component={ChildPage} />
+          </Switch>
+        </Container>
+        {state.userState._id && <Redirect to="/anvandare" />}
+      </Router>
+    </main>
   )
 }
 

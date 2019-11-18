@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import useSubContext from '../../state/useSubContext';
 import axios from 'axios';
 import { Row, Col } from 'reactstrap';
@@ -53,6 +54,7 @@ const Startpage = props => {
 
   return (
     <Row>
+      {state.userState._id && <Redirect to="/anvandare" />}
       <Col xs="12" md="12" lg="12">
         <LoginForm>
           <Input bg={validColor} placeholder="Användarnamn" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
