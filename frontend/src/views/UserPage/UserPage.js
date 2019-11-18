@@ -1,15 +1,16 @@
 import React from 'react';
-import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage"
+import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage";
+import useSubContext from '../../state/useSubContext';
 
 
 const UserPage = () => {
 
-
+  const [state, dispatch] = useSubContext('loginState');
 
   return (
     <div>
       <StyledUserIconDiv>
-        <StyledText>BALANS: 500 SEK</StyledText>
+        <StyledText>SALDO: {state.userState.balance}</StyledText>
         <StyledUserIcon src="/images/usericon.svg" />
       </StyledUserIconDiv>
       <StyledUserBox>
