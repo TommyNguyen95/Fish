@@ -1,9 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom'
-import { StyledUserPageContainer, StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText } from "./StyledUserPage"
-import Logo from "../../components/Logo/Logo"
-import Button from '../../components/Button'
-
+import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage"
 
 
 const UserPage = () => {
@@ -11,18 +8,17 @@ const UserPage = () => {
 
 
   return (
-    <StyledUserPageContainer>
+        <Link to="/profil">
+        </Link>
+    <div>
       <StyledUserIconDiv>
         <StyledText>BALANS: 500 SEK</StyledText>
-        <Link to="/profil">
-          <StyledUserIcon src="/images/usericon.svg" />
-        </Link>
+        <StyledUserIcon src="/images/usericon.svg" />
       </StyledUserIconDiv>
-      <Logo />
       <StyledUserBox>
-        <Button text='Betala' fontsize='2rem' />
-        <Button text='Betalningshistorik' fontsize="1.3rem" height="60px" /></StyledUserBox>
-    </StyledUserPageContainer>
+        <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>
+        <StyledButton text='Betalningshistorik' fontsize="1.3rem" /></StyledUserBox>
+    </div>
 
   )
 }
