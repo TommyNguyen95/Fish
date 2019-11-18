@@ -7,6 +7,12 @@
   justify-content:space-between;
   margin-bottom: 15px;
   padding: 8px;
+  &:hover{
+    .email-text{
+    text-decoration: underline;
+    text-decoration-color: black;
+    }
+  }
 
   .email-text{
     color: black;
