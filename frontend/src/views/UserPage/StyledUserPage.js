@@ -4,7 +4,13 @@ import Button from "../../components/Button/Button"
 import { Link } from "react-router-dom"
 
 export const StyledLink = styled(Link)`
-width:100%;
+  width:100%;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  &:hover {
+    text-decoration: none;
+  }
 `
 
 
