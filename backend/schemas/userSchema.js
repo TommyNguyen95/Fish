@@ -7,7 +7,7 @@ let userSchema = new Schema({
   lastname: { type: String, required: true },
   password: { type: String, required: true },
   role: { type: String, default: 'user' },
-  balance: Number,
+  balance: { type: Number, default: 1000 },
   relations: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   parent: String,
   transactions: Array,
