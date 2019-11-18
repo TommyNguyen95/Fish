@@ -11,6 +11,6 @@ export default {
     relations: [],
     role: '',
     active: false,
-    balance: 200,
+    balance: 0,
   }
 }

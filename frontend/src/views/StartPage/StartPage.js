@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useSubContext from '../../state/useSubContext';
 import axios from 'axios';
 import { Row, Col } from 'reactstrap';
@@ -18,6 +18,7 @@ const Startpage = props => {
    * Which in this case would be our loginState.
    */
   const [state, dispatch] = useSubContext('loginState');
+  const [validColor, setValidColor] = useState('');
 
   /**
    * Function that makes a post to the backend to both login the user
@@ -38,10 +39,11 @@ const Startpage = props => {
       state.userState.lastname = response.data.lastname;
       state.userState.relations = response.data.relations;
       state.userState.role = response.data.role;
+      state.userState.balance = response.data.balance;
       props.history.push('/anvandare')
 
     }).catch(response => {
-      // Här ska kod komma som gör inputsen röda
+      setValidColor('#f8d7da');
     })
   }
 
@@ -49,8 +51,8 @@ const Startpage = props => {
     <Row>
       <Col xs="12" md="12" lg="12">
         <LoginForm>
-          <Input placeholder="Användarnamn" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
-          <Input type="password" placeholder="Lösenord" id="Popover1" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
+          <Input bg={validColor} placeholder="Användarnamn" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
+          <Input bg={validColor} type="password" placeholder="Lösenord" id="Popover1" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
           <LoginButton onClick={loginRequest} text="Logga In" width="50%" height="30px" fontsize="14px"></LoginButton>
           <TextWrapper>
             <TextLinkAccount to={"skapa-konto"}>Skapa konto</TextLinkAccount>
