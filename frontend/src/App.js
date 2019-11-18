@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import StartPage from './views/StartPage';
 import UserPage from './views/UserPage'
 import VerifyPage from './views/VerifyPage';
+import ApprovedPage from './views/ApprovedPage';
+import ConfirmPayment from './views/ConfirmPayment';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import Store from '../src/state/store';
@@ -13,7 +15,7 @@ import { Container } from 'reactstrap';
 const Logo = () => {
   return (
     <Container className="logo">
-      <img src="/images/fishlogo.svg" />
+      <img src="/images/fishlogo.svg" alt="" />
       <p className="text-center">När du vill skicka en lax eller en röding</p>
     </Container>
   )
@@ -36,8 +38,10 @@ const App = props => {
           <Container>
             <Switch>
               <Route exact path="/" component={StartPage} />
-              <Route exact path="/bekrafta" component={VerifyPage} />
               <Route exact path="/anvandare" component={UserPage} />
+              <Route exact path="/bekraftat" component={VerifyPage} />
+              <Route exact path="/bekrafta" component={ConfirmPayment} />
+              <Route exact path="/godkant" component={ApprovedPage} />
               <Route exact path="/skapa-konto" component={CreateAccount} />
               <Route exact path="/betala" component={PaymentPage} />
             </Switch>

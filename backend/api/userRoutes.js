@@ -175,7 +175,8 @@ router.post('/api/user', async (req, res) => {
     let result = await save.save().catch(err => error = err);
     res.json(result || error);
     if (!error) {
-      activate(save)
+      // Let's remove this for now since it is using the credits we have from the free mailing program
+      // activate(save)
     }
   }
 })
@@ -229,9 +230,12 @@ router.post('/api/login', async (req, res) => {
   let { username, password } = req.body;
   password = encryptPassword(password);
   let user = await User.findOne({ username, password })
-    .select('username role relations active').exec().catch(err => {
+    .select('username role relations active firstname lastname balance').exec().catch(err => {
       console.log(err)
     });
+  if (user === null) {
+    return res.status(401).send({ status: 'Du måste ha ett konto för att logga in !' });
+  }
   if (user.active === false) {
     return res.json('Du måste aktivera ditt konto innan du kan logga in!')
   }

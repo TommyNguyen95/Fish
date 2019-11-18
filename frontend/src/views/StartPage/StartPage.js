@@ -1,37 +1,66 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useSubContext from '../../state/useSubContext';
+import axios from 'axios';
+import { Row, Col } from 'reactstrap';
 import {
-  StartPageContainer,
-  LoginRow,
-  LoginCol,
+  TextLinkAccount,
+  TextLinkPassword,
   LoginForm,
   LoginButton,
-  TextLink,
   TextWrapper
 } from './StyledStartPage';
 import Input from '../../components/Input/Input';
 
-const Startpage = () => {
+const Startpage = props => {
 
+  /**
+   * Getting our state and dispatch and also pointing to what state we want to update.
+   * Which in this case would be our loginState.
+   */
   const [state, dispatch] = useSubContext('loginState');
+  const [validColor, setValidColor] = useState('');
 
-  console.log(state)
+  /**
+   * Function that makes a post to the backend to both login the user
+   * and check if the user is valid.
+   */
+  const loginRequest = (e) => {
+    e.preventDefault();
+    axios({
+      method: 'post',
+      url: `${state.apiEndpoint}/api/login`,
+      data: {
+        username: state.loginState.username,
+        password: state.loginState.password,
+      }
+    }).then(response => {
+      state.loginState.isLoggedIn = true;
+      state.userState.firstname = response.data.firstname;
+      state.userState.lastname = response.data.lastname;
+      state.userState.relations = response.data.relations;
+      state.userState.role = response.data.role;
+      state.userState.balance = response.data.balance;
+      props.history.push('/anvandare')
+
+    }).catch(response => {
+      setValidColor('#f8d7da');
+    })
+  }
+
   return (
-    <StartPageContainer>
-      <LoginRow>
-        <LoginCol xs="12" md="12" lg="12">
-          <LoginForm>
-            <Input placeholder="Användarnamn" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
-            <Input type="password" placeholder="Lösenord" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
-            <LoginButton text="Logga In"></LoginButton>
-            <TextWrapper>
-              <TextLink to={"skapa-konto"}>Skapa konto</TextLink>
-              <TextLink to={"/"}>Glömt lösenord</TextLink>
-            </TextWrapper>
-          </LoginForm>
-        </LoginCol>
-      </LoginRow>
-    </StartPageContainer>
+    <Row>
+      <Col xs="12" md="12" lg="12">
+        <LoginForm>
+          <Input bg={validColor} placeholder="Användarnamn" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
+          <Input bg={validColor} type="password" placeholder="Lösenord" id="Popover1" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
+          <LoginButton onClick={loginRequest} text="Logga In" width="50%" height="30px" fontsize="14px"></LoginButton>
+          <TextWrapper>
+            <TextLinkAccount to={"skapa-konto"}>Skapa konto</TextLinkAccount>
+            <TextLinkPassword to={"/"}>Glömt lösenord</TextLinkPassword>
+          </TextWrapper>
+        </LoginForm>
+      </Col>
+    </Row>
   )
 }
 
