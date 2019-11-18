@@ -8,12 +8,12 @@ const UserPage = () => {
 
 
   return (
-        <Link to="/profil">
-        </Link>
     <div>
       <StyledUserIconDiv>
         <StyledText>BALANS: 500 SEK</StyledText>
-        <StyledUserIcon src="/images/usericon.svg" />
+        <Link to="/profil">
+          <StyledUserIcon src="/images/usericon.svg" />
+        </Link>
       </StyledUserIconDiv>
       <StyledUserBox>
         <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>
