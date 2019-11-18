@@ -20,6 +20,9 @@ const Startpage = props => {
   const [state, dispatch] = useSubContext('loginState');
   const [validColor, setValidColor] = useState('');
 
+  if (state.loginState.isLoggedIn === true) {
+    props.history.push("/anvandare")
+  }
   /**
    * Function that makes a post to the backend to both login the user
    * and check if the user is valid.

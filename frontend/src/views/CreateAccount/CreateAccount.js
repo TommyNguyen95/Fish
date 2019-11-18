@@ -38,7 +38,7 @@ const CreateAccount = (props) => {
         })
         .then(res => { console.log(res) })
         .catch(res => { console.log(res) })
-      props.history.goBack()
+      props.history.push("/bekraftat")
     } if (!createAccountDetails.ssn) {
       setvalidateError({ ...validateError, ssn: "#f8d7da" })
     } if (!createAccountDetails.confirmPassword || createAccountDetails.confirmPassword !== createAccountDetails.password) {
@@ -66,8 +66,6 @@ const CreateAccount = (props) => {
     } else {
       e.target.style.backgroundColor = '#fff'
     }
-
-    console.log(createAccountDetails)
   }
 
   return (
