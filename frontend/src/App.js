@@ -1,14 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import StartPage from './views/StartPage';
-import UserPage from './views/UserPage'
-import VerifyPage from './views/VerifyPage';
+import UserPage from './views/UserPage';
 import ApprovedPage from './views/ApprovedPage';
 import ConfirmPayment from './views/ConfirmPayment';
 import PaymentPage from './views/PaymentPage';
-import CreateAccount from './views/CreateAccount'
+import CreateAccount from './views/CreateAccount';
 import ProfilePage from './views/ProfilePage/ProfilePage';
-import ChildPage from './views/ChildPage/ChildPage'
+import ChildPage from './views/ChildPage/ChildPage';
 import Store from '../src/state/store';
 import { Container } from 'reactstrap';
 
@@ -30,7 +29,6 @@ const Footer = () => {
   )
 }
 // end of inline components
-
 const App = props => {
   return (
     <Store>
@@ -41,7 +39,6 @@ const App = props => {
             <Switch>
               <Route exact path="/" component={StartPage} />
               <Route exact path="/anvandare" component={UserPage} />
-              <Route exact path="/bekraftat" component={VerifyPage} />
               <Route exact path="/bekrafta" component={ConfirmPayment} />
               <Route exact path="/godkant" component={ApprovedPage} />
               <Route exact path="/skapa-konto" component={CreateAccount} />
