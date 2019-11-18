@@ -9,7 +9,7 @@ import {
 const PaymentPage = () => {
   return (
     <div>
-      <BackButton to="/användare" />
+      <BackButton to="/anvandare" />
       <form>
         <Input type="text" placeholder="Mottagare" />
         <Input type="number" placeholder="Belopp" />
