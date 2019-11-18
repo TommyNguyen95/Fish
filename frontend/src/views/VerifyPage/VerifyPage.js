@@ -3,6 +3,7 @@ import BackButton from '../../components/BackButton';
 import {
   StyledText
 } from './StyledVerifyPage';
+
 const VerifyPage = () => {
   return (
     <div>
@@ -13,4 +14,5 @@ const VerifyPage = () => {
     </div>
   )
 }
+
 export default VerifyPage;

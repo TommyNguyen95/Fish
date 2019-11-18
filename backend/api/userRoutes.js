@@ -175,7 +175,8 @@ router.post('/api/user', async (req, res) => {
     let result = await save.save().catch(err => error = err);
     res.json(result || error);
     if (!error) {
-      activate(save)
+      // Let's remove this for now since it is using the credits we have from the free mailing program
+      // activate(save)
     }
   }
 })

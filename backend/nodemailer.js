@@ -28,7 +28,7 @@ async function activationMail(user) {
     to: username, // list of receivers
     subject: 'Welcome to FI$H-APP', // Subject line
     text: "klicka här för att aktivera", // plain text body
-    html: `<a href="${state.apiEndpoint}/api/activate/${id}">KLICKA HÄR FÖR ATT AKTIVERA DITT KONTO</a>`
+    html: `<a href="${process.env.NODE_ENV == 'production' ? 'https://api.getfish.se' : 'http://localhost:3001'}/api/activate/${id}">KLICKA HÄR FÖR ATT AKTIVERA DITT KONTO</a>`
   });
 
   // console.log('Message sent: %s', info.messageId);
@@ -65,7 +65,7 @@ async function sendResetPasswordLink(user) {
     to: username, // list of receivers
     subject: 'Welcome to FI$H-APP', // Subject line
     // text: `Ditt nya lösenord är : ${password}`, // plain text body
-    html: `<a href="${state.apiEndpoint}/api/resetpassword/${id}">KLICKA HÄR FÖR ATT ÅTERSTÄLLA LÖSENORDET</a>`
+    html: `<a href="${process.env.NODE_ENV == 'production' ? 'https://api.getfish.se' : 'http://localhost:3001'}/api/resetpassword/${id}">KLICKA HÄR FÖR ATT ÅTERSTÄLLA LÖSENORDET</a>`
   });
 
   console.log('Message sent: %s', info.messageId);
@@ -102,8 +102,8 @@ async function resetPassword(user) {
     from: '"FI$H" <fishapplication@outlook.com>', // sender address
     to: username, // list of receivers
     subject: 'Welcome to FI$H-APP', // Subject line
-    text: `Ditt nya lösenord är : ${password}`, // plain text body
-    // html: `<a href="http://localhost:3001/api/resetPassword/${id}">KLICKA HÄR FÖR ATT AKTIVERA DITT KONTO</a>`
+    text: `Ditt nya lösenord är: ${password}`, // plain text body
+    // html: `< a href = "http://localhost:3001/api/resetPassword/${id}" > KLICKA HÄR FÖR ATT AKTIVERA DITT KONTO</a > `
   });
 
   console.log('Message sent: %s', info.messageId);
