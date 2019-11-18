@@ -76,7 +76,7 @@ const App = props => {
             <Route exact path="/skapa-konto" component={CreateAccount} />
             <Route exact path="/betala" component={PaymentPage} />
             <Route exact path="/profil" component={ProfilePage} />
-            <Route exact path="/barn-profil" component={ChildPage} />
+            <Route exact path="/barn-profil/:id" component={ChildPage} />
           </Switch>
         </Container>
         {state.userState._id && <Redirect to="/anvandare" />}

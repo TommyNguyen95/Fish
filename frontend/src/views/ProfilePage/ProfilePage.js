@@ -10,39 +10,43 @@ import './ProfilePageStyles.scss'
 
 
 const ProfilePage = () => {
-  const [state, dispatch] = useSubContext('userState');
+  const state = useSubContext('userState')[0];
   const [data, setData] = useState([])
-  console.log(state)
-  let relations = state.userState.relations
+  let relations = data.relations
+  relations = null
 
-  axios
-    .get(`${state.apiEndpoint}/api/user/${state.userState._id}`)
-    .then(response => {
-      console.log(response)
-    })
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        `${state.apiEndpoint}/api/user/${state.userState._id}`
+      );
+      setData(result.data);
+    };
+    fetchData();
+  }, []);
 
-  console.log(data)
   return (
     <div className="profile-container">
-      <Text text={state.userState.firstname} textInput={state.userState.lastname}></Text>
+      <Text text={data.firstname} textInput={data.lastname} />
+      <Text text="E-post:" textInput={data.username} />
       {
         relations ?
           <React.Fragment>
             <h3 className="added-accounts-h3">Tillagda konton:</h3>
-            {relations.map(child => <RelationList firstName={child.firstname} lastName={child.lastname} />)}
-            <Link to="/skapa-konto">
-              <Button text="Skapa barnkonto" />
-            </Link>
-            <p className="remove-account">Ta bort ditt konto</p>
+            {relations.map(child =>
+              <Link to={`/barn-profil/${child._id}`} key={child._id}>
+                <RelationList email={child.username} />
+              </Link>
+            )}
           </React.Fragment>
           :
           <React.Fragment>
-            <Link to="/skapa-konto">
-              <Button text="Skapa barnkonto" />
-            </Link>
-            <p className="remove-account">Ta bort ditt konto</p>
           </React.Fragment>
       }
+      <Link to="/skapa-konto">
+        <Button text="Skapa barnkonto" />
+      </Link>
+      <p className="remove-account">Ta bort ditt konto</p>
     </div>
   )
 }
