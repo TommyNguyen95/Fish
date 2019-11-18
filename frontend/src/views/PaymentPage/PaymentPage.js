@@ -7,10 +7,10 @@ import {
   StyledLink
 } from './StyledPaymentPage';
 
-const PaymentPage = () => {
+const PaymentPage = (props) => {
   return (
     <div>
-      <BackButton to="/anvandare" />
+      <BackButton back={props} />
       <form>
         <Input type="text" placeholder="Mottagare" />
         <Input type="number" placeholder="Belopp" />
