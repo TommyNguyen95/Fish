@@ -6,7 +6,7 @@ export const StyledButton = styled.button`
   font-size: ${props => props.fontsize ? props.fontsize : "1.6rem"};
   min-width: 100%;
   border: none;
-  padding: 1rem 0;
+  padding: 1rem 0 !important;
   border-radius: 3px;
   &:hover {
     cursor: pointer;

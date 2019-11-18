@@ -13,8 +13,8 @@ export const LoginForm = styled.form`
 `
 
 export const LoginButton = styled(Button)`
-  padding: 0 !important;
   color: black !important;
+  font-size: 1.6rem;
 `
 export const TextLinkAccount = styled(Link)`
   color: white;
