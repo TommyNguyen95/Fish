@@ -1,38 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import Button from '../../components/Button/Button'
 import RelationList from '../../components/RelationList/RelationList'
 import Text from '../../components/Text'
 import { Link } from 'react-router-dom'
 import useSubContext from '../../state/useSubContext';
-import axios from 'axios'
 import './ProfilePageStyles.scss'
 
 
 
 const ProfilePage = () => {
-  const state = useSubContext('userState')[0];
-  const [data, setData] = useState([])
-  let relations = data.relations
+  const [state, dispatch] = useSubContext('userState');
+  const userState = state.userState
+  console.log(state)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios(
-        `${state.apiEndpoint}/api/user/${state.userState._id}`
-      );
-      setData(result.data);
-    };
-    fetchData();
-  }, []);
 
-  const renderChildsAccount = () => {
-    if (relations) {
+  const renderChildsAccounts = () => {
+    if (userState.relations) {
       return (
         <React.Fragment>
           <h3 className="added-accounts-h3">Tillagda konton:</h3>
-          {relations.map(child =>
-            <Link to={`/barn-profil/${child._id}`} key={child._id}>
-              <RelationList email={child.username} />
-            </Link>
+          {userState.relations.map(child =>
+            <RelationList email={child.username} key={child._id} id={child._id} />
           )}
         </React.Fragment>
       )
@@ -41,9 +29,9 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-container">
-      <Text text={data.firstname} textInput={data.lastname} />
-      <Text text="E-post:" textInput={data.username} />
-      {renderChildsAccount()}
+      <Text text={userState.firstname} textInput={userState.lastname} />
+      <Text text="E-post:" textInput={userState.username} />
+      {renderChildsAccounts()}
       <Link to="/skapa-konto">
         <Button text="Skapa barnkonto" />
       </Link>
