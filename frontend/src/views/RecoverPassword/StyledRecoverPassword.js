@@ -9,6 +9,4 @@ export const RecoverForm = styled.form`
 `
 
 export const RecoverButton = styled(Button)`
-  padding: 0 !important;
-  color: black !important;
 `

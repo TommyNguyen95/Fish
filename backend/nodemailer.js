@@ -15,7 +15,7 @@ async function activationMail(user) {
     secure: true,
     auth: {
       user: 'apikey',
-      pass: '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'
+      pass: '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'
     },
     tls: {
       rejectUnauthorized: false
@@ -52,7 +52,7 @@ async function sendResetPasswordLink(user) {
     secure: true,
     auth: {
       user: 'apikey',
-      pass: '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'
+      pass: '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'
     },
     tls: {
       rejectUnauthorized: false
@@ -90,7 +90,7 @@ async function resetPassword(user) {
     secure: true,
     auth: {
       user: 'apikey',
-      pass: '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'
+      pass: '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'
     },
     tls: {
       rejectUnauthorized: false
@@ -103,7 +103,7 @@ async function resetPassword(user) {
     to: username, // list of receivers
     subject: 'Welcome to FI$H-APP', // Subject line
     text: `Ditt nya lösenord är: ${password}`, // plain text body
-    // html: `< a href = "http://localhost:3001/api/resetPassword/${id}" > KLICKA HÄR FÖR ATT AKTIVERA DITT KONTO</a > `
+    html: `< a href = "http://localhost:3001/api/resetPassword/${id}" > KLICKA HÄR FÖR ATT AKTIVERA DITT KONTO</a > `
   });
 
   console.log('Message sent: %s', info.messageId);
