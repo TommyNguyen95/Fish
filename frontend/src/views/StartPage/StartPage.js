@@ -39,11 +39,11 @@ const Startpage = props => {
       }
     }).then(response => {
       state.loginState.isLoggedIn = true;
-      state.userState.firstname = response.data.firstname;
-      state.userState.lastname = response.data.lastname;
-      state.userState.relations = response.data.relations;
-      state.userState.role = response.data.role;
-      state.userState.balance = response.data.balance;
+      state.loginState.firstname = response.data.firstname;
+      state.loginState.lastname = response.data.lastname;
+      state.loginState.relations = response.data.relations;
+      state.loginState.role = response.data.role;
+      state.loginState.balance = response.data.balance;
       props.history.push('/anvandare')
 
     }).catch(response => {
@@ -53,7 +53,7 @@ const Startpage = props => {
 
   return (
     <Row>
-      {state.userState._id && <Redirect to="/anvandare" />}
+      {state.loginState._id && <Redirect to="/anvandare" />}
       <Col xs="12" md="12" lg="12">
         <LoginForm>
           <Input bg={validColor} placeholder="Användarnamn" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />

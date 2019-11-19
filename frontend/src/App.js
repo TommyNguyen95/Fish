@@ -52,7 +52,7 @@ const App = props => {
       }).then(response => {
         if (!response.data._id) return;
         state.loginState.isLoggedIn = true;
-        state.userState = { ...response.data }
+        state.loginState = { ...response.data }
         dispatch({ type: "RESET_STATE", value: state })
       }).catch(response => {
         console.log("error", response)
@@ -77,7 +77,7 @@ const App = props => {
             <Route exact path="/barn-profil" component={ChildPage} />
           </Switch>
         </Container>
-        {state.userState._id && <Redirect to="/anvandare" />}
+        {state.loginState._id && <Redirect to="/anvandare" />}
       </Router>
     </main>
   )
