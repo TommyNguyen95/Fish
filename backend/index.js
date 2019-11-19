@@ -2,7 +2,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const connectToDb = require('./config/db');
-const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const userRoutes = require('./api/userRoutes');
@@ -31,6 +30,7 @@ app.use(cors({
 }));
 
 app.use(dbtoggler())
+
 app.use(session({
   secret: config.salt,
   resave: true,
@@ -42,8 +42,6 @@ app.use(session({
   })
 })
 )
-
-
 
 app.get('/', (req, res) => {
   res.send('Välkommen till Fi$h super server')

@@ -4,7 +4,6 @@ import StartPage from './views/StartPage';
 import UserPage from './views/UserPage'
 import VerifyPage from './views/VerifyPage';
 import ApprovedPage from './views/ApprovedPage';
-import ConfirmPayment from './views/ConfirmPayment';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import ProfilePage from './views/ProfilePage/ProfilePage';
@@ -71,7 +70,6 @@ const App = props => {
             <Route exact path="/" component={StartPage} />
             <Route exact path="/anvandare" component={UserPage} />
             <Route exact path="/bekraftat" component={VerifyPage} />
-            <Route exact path="/bekrafta" component={ConfirmPayment} />
             <Route exact path="/godkant" component={ApprovedPage} />
             <Route exact path="/skapa-konto" component={CreateAccount} />
             <Route exact path="/betala" component={PaymentPage} />
