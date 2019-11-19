@@ -23,28 +23,30 @@ axios.interceptors.request.use(
   }
 )
 
-// These can stay here, no need to import files
-const Logo = () => {
-  return (
-    <Container className="logo">
-      <Link to="/">
-        <img src="/images/fishlogo.svg" alt="" />
-        <p className="text-center">När du vill skicka en lax eller en röding</p>
-      </Link>
-    </Container>
-  )
-}
-const Footer = () => {
-  return (
-    <Container className="footer">
-      <p className="text-center">Optional footer</p>
-    </Container>
-  )
-}
-// end of inline components
 
 const App = props => {
   const [state, dispatch] = useSubContext('loginState');
+  const Logo = () => {
+    return (
+      <React.Fragment>
+        {state.loginState.showLogo &&
+          <Container className="logo">
+            <Link to="/">
+              <img src="/images/fishlogo.svg" alt="" />
+              <p className="text-center">När du vill skicka en lax eller en röding</p>
+            </Link>
+          </Container>
+        }
+      </React.Fragment>
+    )
+  }
+  const Footer = () => {
+    return (
+      <Container className="footer">
+        <p className="text-center">Optional footer</p>
+      </Container>
+    )
+  }
   useEffect(() => {
     async function checkStatus() {
       axios({

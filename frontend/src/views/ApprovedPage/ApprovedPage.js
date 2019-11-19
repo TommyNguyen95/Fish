@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import BackButton from '../../components/BackButton';
+import useSubContext from '../../state/useSubContext';
 import {
   StyledText
 } from './StyledApprovedPage';
 
-const ApprovedPage = () => {
+const ApprovedPage = (props) => {
+  const [state, dispatch] = useSubContext('loginState');
+
+  console.log("RENDERING APP")
+  useEffect(() => {
+    dispatch({ type: "SET_LOGO", value: false })
+    console.log(state)
+    return function cleanup() {
+      dispatch({ type: "SET_LOGO", value: true })
+    }
+  }, [])
   return (
     <div>
-      <BackButton to="anvandare" />
+      <BackButton props={props.props} to="/anvandare" />
       <div className="success-checkmark">
         <div className="check-icon">
           <span className="icon-line line-tip"></span>

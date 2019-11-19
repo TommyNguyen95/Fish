@@ -5,3 +5,4 @@
 export const NAME_UPDATE = 'NAME_UPDATE';
 export const PASSWORD_UPDATE = 'PASSWORD_UPDATE';
 export const RESET_STATE = 'RESET_STATE';
+export const SET_LOGO = 'SET_LOGO';
