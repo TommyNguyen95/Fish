@@ -9,7 +9,7 @@ import './ProfilePageStyles.scss'
 
 
 const ProfilePage = () => {
-  const [state, dispatch] = useSubContext('userState');
+  const [state, dispatch] = useSubContext('loginState');
   const userState = state.userState
   console.log(state)
 

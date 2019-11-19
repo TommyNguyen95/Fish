@@ -6,7 +6,7 @@ import './RelationListStyles.scss'
 
 
 const RelationList = ({ email, id }) => {
-  const [state, dispatch] = useSubContext('userState');
+  const [state, dispatch] = useSubContext('loginState');
 
   const deleteChildOnClick = () => {
     axios.delete(`${state.apiEndpoint}/api/user/${id}`)
