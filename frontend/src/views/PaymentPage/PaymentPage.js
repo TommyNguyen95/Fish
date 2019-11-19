@@ -12,11 +12,14 @@ const PaymentPage = (props) => {
 
   const [state, dispatch] = useSubContext('transactionState');
   const [transactionInfo, setTransactionInfo] = useState(false);
+  console.log(state)
 
   const getInfoForTransaction = (e) => {
     e.preventDefault();
-    if (state.userState.balance <= state.transactionState.amount) {
+    if (state.userState.balance >= state.transactionState.amount) {
       console.log('test')
+    } else {
+      console.log('inte tillräckligt med pengar')
     }
     setTransactionInfo(true)
   }
@@ -26,7 +29,7 @@ const PaymentPage = (props) => {
       <BackButton to="/anvandare" />
       {transactionInfo ? <ConfirmPayment /> : <form>
         <Input onChange={(e) => dispatch({ type: 'TRANSACTION_EMAIL', value: e.target.value })} type="text" placeholder="Mottagarens Email" />
-        <Input onChange={(e) => dispatch({ type: 'TRANSACTION_AMOUNT', value: e.target.value })} type="number" placeholder="Belopp" />
+        <Input onChange={(e) => dispatch({ type: 'TRANSACTION_AMOUNT', value: parseInt(e.target.value) })} type="number" placeholder="Belopp" />
         <StyledTextarea onChange={(e) => dispatch({ type: 'TRANSACTION_MESSAGE', value: e.target.value })} placeholder="Meddelande" />
         <Button onClick={getInfoForTransaction} text="Betala" />
       </form>}
