@@ -4,14 +4,18 @@ export default {
     showLogo: true,
     username: '',
     password: '',
-    isLoggedIn: false
-  },
-  userState: {
+    isLoggedIn: false,
     firstname: '',
     lastname: '',
     relations: [],
     role: '',
     active: false,
     balance: 0,
+  },
+  transactionState: {
+    amount: 0,
+    message: '',
+    email: '',
+    checkPassword: '',
   }
 }
