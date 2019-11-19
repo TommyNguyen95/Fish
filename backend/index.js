@@ -22,6 +22,15 @@ global.config = config
 // Initial connection to DB
 connectToDb()
 const app = express();
+app.use(bodyParser.json())
+
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
+
+app.use(dbtoggler())
+
 app.use(session({
   secret: config.salt,
   resave: true,
@@ -33,10 +42,6 @@ app.use(session({
   })
 })
 )
-
-app.use(bodyParser.json());
-
-app.use(dbtoggler())
 
 app.get('/', (req, res) => {
   res.send('Välkommen till Fi$h super server')
