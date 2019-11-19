@@ -9,6 +9,7 @@ import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import ProfilePage from './views/ProfilePage/ProfilePage';
 import ChildPage from './views/ChildPage/ChildPage'
+import AdminPage from './views/AdminPage';
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
 import axios from 'axios';
@@ -77,6 +78,7 @@ const App = props => {
             <Route exact path="/betala" component={PaymentPage} />
             <Route exact path="/profil" component={ProfilePage} />
             <Route exact path="/barn-profil" component={ChildPage} />
+            <Route exact path="/transaktioner" component={AdminPage} />
           </Switch>
         </Container>
         {state.userState._id && <Redirect to="/anvandare" />}

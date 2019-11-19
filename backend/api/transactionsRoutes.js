@@ -6,11 +6,14 @@ const router = express.Router();
  * Get all transactions
  */
 router.get('/api/transactions', async (req, res) => {
+  if (req.session.user.role !== 'admin') {
+    res.status(403).send();
+  }
   await Transactions.find({})
     .exec().then(data => {
       // console.log("GET", data)
       // res.status(200).send(data);
-      res.status(200).json(req.session);
+      res.send(data);
     })
 })
 

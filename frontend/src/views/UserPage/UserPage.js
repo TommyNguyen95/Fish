@@ -16,6 +16,7 @@ const UserPage = () => {
       </StyledUserIconDiv>
       <StyledUserBox>
         <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>
+        {state.userState.role === 'admin' ? <StyledLink to={'/transaktioner'}> <StyledButton text='Alla transaktioner' /></StyledLink> : ''}
         <StyledButton text='Betalningshistorik' fontsize="1.3rem" /></StyledUserBox>
     </div>
 
