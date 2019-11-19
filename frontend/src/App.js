@@ -77,7 +77,7 @@ const App = props => {
             <Route exact path="/barn-profil" component={ChildPage} />
           </Switch>
         </Container>
-        {state.userState._id && <Redirect to="/anvandare" />}
+        {state.loginState._id && <Redirect to="/anvandare" />}
       </Router>
     </main>
   )
