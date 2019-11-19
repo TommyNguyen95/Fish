@@ -53,7 +53,7 @@ const App = props => {
         if (!response.data._id) return;
         state.loginState.isLoggedIn = true;
         state.loginState = { ...response.data }
-        dispatch({ type: "RESET_STATE", value: state })
+        dispatch({ type: "RESET_STATE", value: state.loginState })
       }).catch(response => {
         console.log("error", response)
       })
