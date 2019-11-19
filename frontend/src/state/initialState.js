@@ -1,5 +1,5 @@
 export default {
-  apiEndpoint: (process.env.NODE_ENV === 'production' ? 'https://api.getfish.se' : 'http://localhost:3001'),
+  apiEndpoint: '',
   loginState: {
     username: '',
     password: '',
@@ -16,5 +16,7 @@ export default {
   transactionState: {
     amount: 0,
     message: '',
+    email: '',
+    checkPassword: '',
   }
 }
