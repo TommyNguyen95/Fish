@@ -61,7 +61,7 @@ async function run() {
         i: run
       });
       let req = {
-        uri: restBasePath + q.path + '?t=1',
+        uri: restBasePath + q.path + '?tr=1',
         method: q.method,
         'content-type': 'application/json',
         json: q.body,
