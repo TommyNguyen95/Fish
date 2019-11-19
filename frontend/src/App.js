@@ -9,6 +9,7 @@ import CreateAccount from './views/CreateAccount';
 import ProfilePage from './views/ProfilePage/ProfilePage';
 import ChildPage from './views/ChildPage/ChildPage';
 import Store from '../src/state/store';
+import RecoverPassword from './views/RecoverPassword';
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
 import axios from 'axios';
@@ -74,6 +75,7 @@ const App = props => {
               <Route exact path="/godkant" component={ApprovedPage} />
               <Route exact path="/skapa-konto" component={CreateAccount} />
               <Route exact path="/betala" component={PaymentPage} />
+              <Route exact path="/aterstallning" component={RecoverPassword} />
               <Route exact path="/profil" component={ProfilePage} />
               <Route exact path="/barn-profil" component={ChildPage} />
             </Switch>
