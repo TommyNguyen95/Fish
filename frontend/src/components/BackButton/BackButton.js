@@ -8,8 +8,6 @@ const BackButton = (props) => {
     if (props.back) {
       props.back.history.goBack()
     } else {
-      console.log(props.props)
-
       props.props.history.push(props.to)
     }
 
