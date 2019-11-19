@@ -6,7 +6,6 @@ import useSubContext from '../../state/useSubContext';
 import ConfirmPayment from '../ConfirmPayment';
 import {
   StyledTextarea,
-  StyledLink
 } from './StyledPaymentPage';
 
 const PaymentPage = (props) => {
@@ -16,6 +15,9 @@ const PaymentPage = (props) => {
 
   const getInfoForTransaction = (e) => {
     e.preventDefault();
+    if (state.userState.balance <= state.transactionState.amount) {
+      console.log('test')
+    }
     setTransactionInfo(true)
   }
 
