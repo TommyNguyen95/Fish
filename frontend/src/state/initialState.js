@@ -3,9 +3,7 @@ export default {
   loginState: {
     username: '',
     password: '',
-    isLoggedIn: false
-  },
-  userState: {
+    isLoggedIn: false,
     firstname: '',
     lastname: '',
     relations: [],

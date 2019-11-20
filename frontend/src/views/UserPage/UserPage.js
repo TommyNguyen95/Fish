@@ -10,7 +10,7 @@ const UserPage = () => {
     <div>
       <StyledUserIconDiv>
         <StyledLink to="/profil">
-          <StyledText>SALDO: {state.userState.balance}</StyledText>
+          <StyledText>SALDO: {state.loginState.balance}</StyledText>
           <StyledUserIcon src="/images/usericon.svg" />
         </StyledLink>
       </StyledUserIconDiv>

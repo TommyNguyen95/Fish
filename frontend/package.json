@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "easy-server-sent-events": "^1.0.8",
+    "moment": "^2.24.0",
     "normalize.css": "^8.0.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",

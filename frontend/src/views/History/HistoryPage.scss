@@ -1,16 +1,43 @@
+.single-wrapper {
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  flex-wrap: wrap;
+  font-family: "Josefin Sans", sans-serif;
+}
+
 .single-trans-wrap {
   display: flex;
+  flex-direction: column;
+  margin: 0 !important;
+
+  small {
+    text-align: center;
+    margin: 0 !important;
+    background-color: #fed100;
+  }
+}
+
+.amount-div {
+  background-color: #fff;
+  margin: 0 !important;
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  p {
+    font-size: 1.2rem;
+  }
 }
 
 .single-trans-box {
-  font-family: "Josefin Sans", sans-serif;
   display: flex;
   width: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   background-color: #fed100;
-
+  margin: 0 !important;
   p {
     margin-left: 10px !important;
   }
@@ -19,7 +46,7 @@
 .msg-wrap {
   margin: 0 !important;
   background-color: #fff;
-  height: 100px;
+  max-width: 300px;
   width: 100% !important;
   padding: 10px;
 }
