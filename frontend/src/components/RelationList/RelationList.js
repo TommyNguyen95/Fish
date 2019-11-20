@@ -11,8 +11,15 @@ const RelationList = ({ email, id }) => {
   const deleteChildOnClick = () => {
     axios.delete(`${state.apiEndpoint}/api/user/${id}`)
       .then(response => {
-        console.log(response);
-        console.log(response.data);
+        let childToRemove
+        state.loginState.relations.filter((item, index) => {
+          if (item._id === response.data._id) {
+            childToRemove = index
+            return true
+          }
+        })
+        state.loginState.relations.splice(childToRemove, 1)
+        dispatch({ type: "RESET_STATE", value: state.loginState })
       })
   }
 
