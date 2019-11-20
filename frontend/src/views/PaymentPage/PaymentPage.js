@@ -12,11 +12,10 @@ const PaymentPage = (props) => {
 
   const [state, dispatch] = useSubContext('transactionState');
   const [transactionInfo, setTransactionInfo] = useState(false);
-  console.log(state)
 
   const getInfoForTransaction = (e) => {
     e.preventDefault();
-    if (state.userState.balance >= state.transactionState.amount) {
+    if (state.loginState.balance >= state.transactionState.amount) {
       console.log('test')
     } else {
       console.log('inte tillräckligt med pengar')
