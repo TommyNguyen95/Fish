@@ -12,5 +12,12 @@ export default {
     role: '',
     active: false,
     balance: 0,
+    transactions: [],
+  },
+  transactionState: {
+    amount: 0,
+    message: '',
+    email: '',
+    checkPassword: '',
   }
 }

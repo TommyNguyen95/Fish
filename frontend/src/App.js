@@ -9,7 +9,7 @@ import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import ProfilePage from './views/ProfilePage/ProfilePage';
 import ChildPage from './views/ChildPage/ChildPage'
-import Store from '../src/state/store';
+import History from './views/History/HistoryPage'
 import { Container } from 'reactstrap';
 
 
