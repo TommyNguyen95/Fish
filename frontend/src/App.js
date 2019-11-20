@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import StartPage from './views/StartPage';
 import UserPage from './views/UserPage'
 import VerifyPage from './views/VerifyPage';
@@ -77,7 +77,6 @@ const App = props => {
             <Route exact path="/barn-profil/:id" component={ChildPage} />
           </Switch>
         </Container>
-        {state.loginState._id && <Redirect to="/anvandare" />}
       </Router>
     </main>
   )
