@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import useSubContext from '../../state/useSubContext';
 import Input from '../../components/Input';
 import BackButton from '../../components/BackButton';
-import VerifyEmail from '../VerifyEmail';
+import VerifyPage from '../VerifyPage';
 import Button from '../../components/Button';
 import { createAccountFieldsData } from '../../staticData';
 
@@ -73,7 +73,7 @@ const CreateAccount = (props) => {
   return (
     <div>
       <BackButton back={props} />
-      {verifyEmail ? <VerifyEmail /> :
+      {verifyEmail ? <VerifyPage /> :
         <form>
           {renderInputs()}
           <Button text="Skapa konto" onClick={createAccount} />

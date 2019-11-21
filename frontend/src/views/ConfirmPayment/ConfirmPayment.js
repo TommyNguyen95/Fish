@@ -10,7 +10,7 @@ import {
   StyledLink
 } from './StyledConfirmPayment';
 
-const ConfirmPayment = () => {
+const ConfirmPayment = (props) => {
 
   const [state, dispatch] = useSubContext('transactionState');
   const [validColor, setValidColor] = useState('');
@@ -42,7 +42,7 @@ const ConfirmPayment = () => {
 
   return (
     <div>
-      {ApprovedPayment ? <ApprovedPage /> :
+      {ApprovedPayment ? <ApprovedPage props={props} /> :
         <StyledConfirm>
           <Text text='Mottagare:' textInput={state.transactionState.email} />
           <Text text='Belopp:' textInput={state.transactionState.amount} />
