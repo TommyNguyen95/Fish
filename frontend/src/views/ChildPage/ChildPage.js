@@ -10,11 +10,16 @@ const ChildPage = (props) => {
 
   const [state, dispatch] = useSubContext('loginState');
 
-  const Barnen = () => {
+  const Child = () => {
     return (
-      state.loginState.relations.map((x, i) => {
-        if (x._id == props.match.params.id) {
-          return <div key={i}>{x._id}</div>
+      state.loginState.relations.map((child, i) => {
+        if (child._id == props.match.params.id) {
+          return <div key={i} className="child-page-main">
+            <div className="main-container">
+              <Text text="E-post" textInput={child.username}></Text>
+              <Text text="Belopp" textInput={child.balance}></Text>
+            </div>
+          </div>
         }
       })
     )
@@ -22,12 +27,8 @@ const ChildPage = (props) => {
 
   return (
     <div className="child-page-container">
-      <div className="child-page-main">
-        <Text text="E-post" textInput={'britt'}></Text>
-        <Text text="Belopp" textInput="1337kr"></Text>
-      </div>
-      <Barnen />
-      <Link to="/transaktioner">
+      <Child />
+      <Link to="/historik">
         <Button text="Betalnings Historik" />
       </Link>
     </div>
