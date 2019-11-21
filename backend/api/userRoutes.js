@@ -218,7 +218,6 @@ router.get('/api/resetpassword/:id', async (req, res) => {
     reset(user)
     user.password = encryptPassword(newPassword);
     let result = await user.save().catch(err => error = err);
-    sendNewPassword(newPassword)
     return res.json(`Ditt lösenord är återställt. Lösenord: ${newPassword}` || error);
   }
 
