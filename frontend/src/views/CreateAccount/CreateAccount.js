@@ -5,7 +5,6 @@ import BackButton from '../../components/BackButton';
 import VerifyPage from '../VerifyPage';
 import Button from '../../components/Button';
 import { createAccountFieldsData } from '../../staticData';
-// import useFetch from '../../helpers/fetch'
 
 const CreateAccount = (props) => {
   const [createAccountDetails, setCreateAccountDetails] = useState([]);
