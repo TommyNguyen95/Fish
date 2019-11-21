@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-ro
 import StartPage from './views/StartPage';
 import UserPage from './views/UserPage';
 import ApprovedPage from './views/ApprovedPage';
-import ConfirmPayment from './views/ConfirmPayment';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount';
 import ProfilePage from './views/ProfilePage/ProfilePage';
@@ -53,8 +52,8 @@ const App = props => {
       }).then(response => {
         if (!response.data._id) return;
         state.loginState.isLoggedIn = true;
-        state.userState = { ...response.data }
-        dispatch({ type: "RESET_STATE", value: state })
+        state.loginState = { ...response.data }
+        dispatch({ type: "RESET_STATE", value: state.loginState })
       }).catch(response => {
         console.log("error", response)
       })
@@ -63,26 +62,24 @@ const App = props => {
   }, [])
 
   return (
-    <Store>
-      <main className="wrapper">
-        <Router>
-          <Logo />
-          <Container>
-            <Switch>
-              <Route exact path="/" component={StartPage} />
-              <Route exact path="/anvandare" component={UserPage} />
-              <Route exact path="/bekrafta" component={ConfirmPayment} />
-              <Route exact path="/godkant" component={ApprovedPage} />
-              <Route exact path="/skapa-konto" component={CreateAccount} />
-              <Route exact path="/betala" component={PaymentPage} />
-              <Route exact path="/aterstallning" component={RecoverPassword} />
-              <Route exact path="/profil" component={ProfilePage} />
-              <Route exact path="/barn-profil" component={ChildPage} />
-            </Switch>
-          </Container>
-        </Router>
-      </main>
-    </Store>
+    <main className="wrapper">
+      <Router>
+        <Logo />
+        <Container>
+          <Switch>
+            <Route exact path="/" component={StartPage} />
+            <Route exact path="/anvandare" component={UserPage} />
+            <Route exact path="/bekraftat" component={VerifyPage} />
+            <Route exact path="/godkant" component={ApprovedPage} />
+            <Route exact path="/skapa-konto" component={CreateAccount} />
+            <Route exact path="/betala" component={PaymentPage} />
+            <Route exact path="/profil" component={ProfilePage} />
+            <Route exact path="/barn-profil" component={ChildPage} />
+          </Switch>
+        </Container>
+        {state.loginState._id && <Redirect to="/anvandare" />}
+      </Router>
+    </main>
   )
 }
 
