@@ -19,7 +19,7 @@ const ProfilePage = () => {
         <React.Fragment>
           <h3 className="added-accounts-h3">Tillagda konton:</h3>
           {userState.relations.map((child, i) =>
-            <RelationList email={child.username} key={i} id={child._id} />
+            <RelationList userData={child} key={i} />
           )}
         </React.Fragment>
       )
