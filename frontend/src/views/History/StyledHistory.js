@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 
 export const StyledP = styled.p`
-color:${props => props.textstyle ? 'red' : 'green'};
+color:${props => props.textstyle ? 'red' : 'lightgreen'};
 
 
 &:before {

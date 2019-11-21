@@ -1,9 +1,13 @@
 .single-wrapper {
   display: flex;
-  align-items: stretch;
   width: 100%;
   flex-wrap: wrap;
   font-family: "Josefin Sans", sans-serif;
+  background-color: rgba(0, 0, 0, 0.6);
+  flex-direction: column;
+  text-align: center;
+  border-radius: 10px;
+  padding: 9px;
 }
 
 .single-trans-wrap {
@@ -14,12 +18,11 @@
   small {
     text-align: center;
     margin: 0 !important;
-    background-color: #fed100;
+    color: grey;
   }
 }
 
 .amount-div {
-  background-color: #fff;
   margin: 0 !important;
   display: flex;
   flex: 1;
@@ -35,32 +38,17 @@
   width: 100%;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  background-color: #fed100;
+  color: grey;
   margin: 0 !important;
+  border-bottom: 1px solid grey;
   p {
     margin-left: 10px !important;
+    color: white;
   }
 }
 
 .msg-wrap {
   margin: 0 !important;
-  background-color: #fff;
-  max-width: 300px;
-  width: 100% !important;
+  color: white;
   padding: 10px;
-}
-
-.type-transaction {
-  width: 100px;
-  background-color: #fff;
-  border-right: 1px solid grey;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.trans-type-icon {
-  font-size: 100px;
-  color: green;
 }

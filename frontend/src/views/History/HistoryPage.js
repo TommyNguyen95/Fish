@@ -14,6 +14,7 @@ const HistoryPage = (props) => {
 
     let { transactions, _id } = state.loginState
 
+    if (!transactions) { return null }
     let singleTrans = transactions.map(i => {
         return <div className="single-wrapper">
             <div className="single-trans-wrap">
