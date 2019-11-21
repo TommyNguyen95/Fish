@@ -8,6 +8,7 @@ import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import ProfilePage from './views/ProfilePage/ProfilePage';
 import ChildPage from './views/ChildPage/ChildPage'
+import History from "./views/History/HistoryPage"
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
 import axios from 'axios';
@@ -74,6 +75,7 @@ const App = props => {
             <Route exact path="/skapa-konto" component={CreateAccount} />
             <Route exact path="/betala" component={PaymentPage} />
             <Route exact path="/profil" component={ProfilePage} />
+            <Route exact path="/historik" component={History} />
             <Route exact path="/barn-profil/:id" component={ChildPage} />
           </Switch>
         </Container>

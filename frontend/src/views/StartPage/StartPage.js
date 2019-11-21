@@ -40,7 +40,9 @@ const Startpage = props => {
       state.loginState.relations = response.data.relations;
       state.loginState.role = response.data.role;
       state.loginState.balance = response.data.balance;
+      state.loginState.transactions = response.data.transactions;
       props.history.push('/anvandare')
+
 
     }).catch(response => {
       setValidColor('#f8d7da');
