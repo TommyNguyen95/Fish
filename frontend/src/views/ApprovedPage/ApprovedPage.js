@@ -7,18 +7,15 @@ import {
 
 const ApprovedPage = (props) => {
   const [state, dispatch] = useSubContext('loginState');
-
-  console.log("RENDERING APP")
   useEffect(() => {
     dispatch({ type: "SET_LOGO", value: false })
-    console.log(state)
     return function cleanup() {
       dispatch({ type: "SET_LOGO", value: true })
     }
   }, [])
   return (
     <div>
-      <BackButton props={props.props} to="/anvandare" />
+      <BackButton back={props.props} to="/anvandare" />
       <div className="success-checkmark">
         <div className="check-icon">
           <span className="icon-line line-tip"></span>
