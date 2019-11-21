@@ -57,17 +57,26 @@ router.get('/api/users', async (req, res) => {
  * To be used by admin. Searches for a user by email (must be exact) and returns user as well as transactions
  */
 router.post('/api/users', async (req, res) => {
-  if (req.session.user.role !== 'admin') {
-    res.status(403).send();
-  }
+  if (req.session.user.role !== 'admin') { res.status(403).send() }
   const username = req.body.email;
   const fields = {
+    username: 'username',
     firstname: 'firstname',
     lastname: 'lastname',
-    transactions: 'transactions'
+    transactions: 'transactions',
+    created: 'created'
   }
   const user = await User.findOne({ username }).select(fields);
-  const transactions = await Transaction.find({ $or: [{ to: user._id }, { from: user._id }] }).populate('to from').exec();
+  if (!user) { return res.status(404).send() }
+  const transactions = await Transaction.find({
+    $or: [{
+      to: user._id
+    }, {
+      from: user._id
+    }]
+  })
+    .populate('to from', 'username firstname lastname')
+    .exec();
   user.transactions = transactions;
   res.send(user);
 })
