@@ -20,7 +20,6 @@ const Startpage = props => {
    */
   const [state, dispatch] = useSubContext('loginState');
   const [validColor, setValidColor] = useState('');
-  console.log(state)
   /**
    * Function that makes a post to the backend to both login the user
    * and check if the user is valid.
