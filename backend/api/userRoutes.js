@@ -259,7 +259,7 @@ router.post('/api/login', async (req, res) => {
 router.get('/api/login', async (req, res) => {
   if (req.session.user) {
     let user = await User.findOne({ username: req.session.user.username }).populate('relations')
-      .select('username role relations active firstname lastname balance').exec().catch(err => {
+      .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
         console.log(err)
       });
     req.session.user = user;
