@@ -9,18 +9,16 @@ import useSubContext from '../../state/useSubContext';
 const ChildPage = (props) => {
 
   const [state, dispatch] = useSubContext('loginState');
-  const [selectedChild, setSelectedChild] = useState()
 
-  useEffect(() => {
-    function test() {
-      for (let child of state.loginState.relations) {
-        console.log(child)
-      }
-    }
-    test()
-  }, [])
-
-
+  const Barnen = () => {
+    return (
+      state.loginState.relations.map((x, i) => {
+        if (x._id == props.match.params.id) {
+          return <div key={i}>{x._id}</div>
+        }
+      })
+    )
+  }
 
   return (
     <div className="child-page-container">
@@ -28,6 +26,7 @@ const ChildPage = (props) => {
         <Text text="E-post" textInput={'britt'}></Text>
         <Text text="Belopp" textInput="1337kr"></Text>
       </div>
+      <Barnen />
       <Link to="/transaktioner">
         <Button text="Betalnings Historik" />
       </Link>
