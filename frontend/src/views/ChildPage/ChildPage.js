@@ -1,11 +1,17 @@
-import React from 'react'
-import './ChildPageStyles.scss'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
+import { Link, useRouteMatch } from 'react-router-dom'
 import Text from '../../components/Text/Text'
-import { Link } from 'react-router-dom'
 import Button from '../../components/Button/Button'
-
+import './ChildPageStyles.scss'
 
 const ChildPage = () => {
+
+  let match = useRouteMatch("barn-profil/:id")
+  // axios.get
+
+
+
   return (
     <div className="child-page-container">
       <div className="child-page-main">
