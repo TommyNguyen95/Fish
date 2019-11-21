@@ -38,8 +38,6 @@ const CreateAccount = (props) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(createAccountDetails)
         })
-        .then(res => { console.log(res) })
-        .catch(res => { console.log(res) })
       setAccountDone(true);
     } if (!createAccountDetails.ssn) {
       setvalidateError({ ...validateError, ssn: "#f8d7da" })

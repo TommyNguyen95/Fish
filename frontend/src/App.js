@@ -69,11 +69,11 @@ const App = props => {
           <Switch>
             <Route exact path="/" component={StartPage} />
             <Route exact path="/anvandare" component={UserPage} />
-            <Route exact path="/bekraftat" component={VerifyPage} />
             <Route exact path="/godkant" component={ApprovedPage} />
             <Route exact path="/skapa-konto" component={CreateAccount} />
             <Route exact path="/betala" component={PaymentPage} />
             <Route exact path="/profil" component={ProfilePage} />
+            <Route exact path="/aterstallning" component={RecoverPassword} />
             <Route exact path="/barn-profil" component={ChildPage} />
           </Switch>
         </Container>

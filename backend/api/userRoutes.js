@@ -191,7 +191,7 @@ router.get('/api/activate/:id', async (req, res) => {
   res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}` || error);
 
 })
-router.get('/api/sendresetlink/:email', async (req, res) => {
+router.post('/api/sendresetlink/:email', async (req, res) => {
 
 
   let user = await User.findOne({ username: req.params.email })
