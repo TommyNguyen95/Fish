@@ -34,8 +34,8 @@ const ProfilePage = () => {
 
   return (
     <div className="profile-container">
-      <Text text={userState.firstname} textInput={userState.lastname} />
-      <Text text="E-post:" textInput={userState.username} />
+      <Text text={userState.firstname + " " + userState.lastname} />
+      <Text text={`Epost: ${userState.username}`} />
       {renderChildsAccounts()}
       <Link to="/skapa-konto">
         <Button text="Skapa barnkonto" />
