@@ -33,13 +33,13 @@ const Logo = () => {
     </Container>
   )
 }
-const Footer = () => {
+/* const Footer = () => {
   return (
     <Container className="footer">
       <p className="text-center">Optional footer</p>
     </Container>
   )
-}
+} */
 // end of inline components
 
 const App = props => {

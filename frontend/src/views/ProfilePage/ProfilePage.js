@@ -5,7 +5,7 @@ import RelationList from '../../components/RelationList/RelationList'
 import Text from '../../components/Text'
 import './ProfilePageStyles.scss'
 function ProfilePage() {
-  const [userData, setUserData] = useState(true)
+  const [userData] = useState(true)
   return (
     <div className="profile-container">
       <Text text="E-post:" textInput="janne"></Text>
