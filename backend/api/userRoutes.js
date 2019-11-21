@@ -96,7 +96,7 @@ router.delete('/api/user/:id', async (req, res) => {
           parent.save()
           // Re-fetch new and populated data and send back to frontend for state update
           let updatedParent = await User.findOne({ _id: parentID }).populate('relations')
-            .select('username role relations active firstname lastname balance').exec().catch(err => {
+            .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
               console.log(err)
             });
           req.session.user = updatedParent
