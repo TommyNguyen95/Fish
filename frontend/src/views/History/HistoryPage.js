@@ -33,9 +33,10 @@ const HistoryPage = (props) => {
 
     }
 
+
     const ParentTrans = () => {
 
-        if (!transactions) { return <p>No transactions</p> }
+        if (transactions.length === 0) { return <p className="no-transaction-text"> Inga transaktioner :(</p> }
         else {
             return transactions.map((i, index) => {
                 return <div className="single-wrapper" key={index}>
@@ -61,7 +62,9 @@ const HistoryPage = (props) => {
 
 
         return relations.map((i, index) => {
+
             if (i._id === props.location.state.child) {
+                if (i.transactions.length === 0) { return <p className="no-transaction-text" key={index}> Inga transaktioner :(</p> }
                 return i.transactions.map(k => {
 
                     return (< div className="single-wrapper" key={index} >
