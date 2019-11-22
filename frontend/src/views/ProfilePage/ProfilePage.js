@@ -10,8 +10,11 @@ import './ProfilePageStyles.scss'
 
 
 
-const ProfilePage = () => {
+
+
+const ProfilePage = (props) => {
   const [state, dispatch] = useSubContext('loginState');
+  const { isShowing, toggle } = useModal();
   const userState = state.loginState
 
   const renderChildsAccounts = () => {
@@ -31,8 +34,18 @@ const ProfilePage = () => {
     Axios.get(`${state.apiEndpoint}/api/login`).then(res => {
       dispatch({ type: "RESET_STATE", value: res.data })
     })
-  }, [])
+  }, [dispatch, state.apiEndpoint])
 
+
+  const deleteUser = () => {
+    if (window.confirm('Are you sure you want to delete you profile?')) {
+      Axios.delete(`${state.apiEndpoint}/api/user/${userState._id}`)
+        .then(response => {
+          dispatch({ type: "RESET_STATE", value: response.data })
+          props.history.push("/")
+        })
+    }
+  }
 
   return (
     <div className="profile-container">
@@ -43,7 +56,7 @@ const ProfilePage = () => {
       <Link to="/skapa-konto">
         <Button text="Skapa barnkonto" />
       </Link>
-      <p className="remove-account">Ta bort ditt konto</p>
+      <p className="remove-account" onClick={deleteUser}>Ta bort ditt konto</p>
     </div>
   )
 }
