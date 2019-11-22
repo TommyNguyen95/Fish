@@ -26,7 +26,7 @@ const ChildPage = (props) => {
 
   return (
     <div className="child-page-container">
-      <BackButton to="anvandare" />
+      <BackButton back={props} />
       <Child />
       <Link to={{ pathname: '/historik', state: { child: props.match.params.id, url: 'barn' } }} >
         <Button text="Betalnings Historik" />

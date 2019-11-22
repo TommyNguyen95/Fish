@@ -48,7 +48,7 @@ const ProfilePage = (props) => {
 
   return (
     <div className="profile-container">
-      <BackButton to="anvandare" />
+      <BackButton back={props} />
       <Text text={userState.firstname + " " + userState.lastname} />
       <Text text={`Epost: ${userState.username}`} />
       {renderChildsAccounts()}
