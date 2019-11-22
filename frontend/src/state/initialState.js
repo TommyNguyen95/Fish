@@ -17,6 +17,6 @@ export default {
     amount: 0,
     message: '',
     email: '',
-    checkPassword: '',
+    checkEmail: '',
   }
 }
