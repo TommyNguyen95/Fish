@@ -36,14 +36,24 @@ const ProfilePage = (props) => {
   }, [dispatch, state.apiEndpoint])
 
 
-  const deleteUser = () => {
+  const deleteUser = async () => {
     if (window.confirm('Are you sure you want to delete you profile?')) {
-      Axios.delete(`${state.apiEndpoint}/api/user/${userState._id}`)
+      await Axios.delete(`${state.apiEndpoint}/api/user/${userState._id}`)
         .then(response => {
           dispatch({ type: "RESET_STATE", value: response.data })
           props.history.push("/")
+          dispatch({ type: "RESET_STATE", value: response.data })
+
         })
     }
+  }
+
+  const logOut = async () => {
+    await Axios.delete(`${state.apiEndpoint}/api/login`)
+      .then(res => {
+        dispatch({ type: "RESET_STATE", value: res.data })
+        props.history.push("/")
+      })
   }
 
   return (
@@ -55,6 +65,7 @@ const ProfilePage = (props) => {
       <Link to="/skapa-konto">
         <Button text="Skapa barnkonto" />
       </Link>
+      <Button text="Logga ut" onClick={logOut} />
       <p className="remove-account" onClick={deleteUser}>Ta bort ditt konto</p>
     </div>
   )
