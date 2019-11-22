@@ -96,7 +96,7 @@ router.delete('/api/user/:id', async (req, res) => {
           parent.save()
           // Re-fetch new and populated data and send back to frontend for state update
           let updatedParent = await User.findOne({ _id: parentID }).populate('relations')
-            .select('username role relations active firstname lastname balance').exec().catch(err => {
+            .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
               console.log(err)
             });
           req.session.user = updatedParent
@@ -240,8 +240,8 @@ router.get('/api/resetpassword/:id', async (req, res) => {
 router.post('/api/login', async (req, res) => {
   let { username, password } = req.body;
   password = encryptPassword(password);
-  let user = await User.findOne({ username, password }).populate('relations')
-    .select('username role relations active firstname lastname balance').exec().catch(err => {
+  let user = await User.findOne({ username, password })
+    .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
       console.log(err)
     });
   if (user === null) {
@@ -259,7 +259,7 @@ router.post('/api/login', async (req, res) => {
 router.get('/api/login', async (req, res) => {
   if (req.session.user) {
     let user = await User.findOne({ username: req.session.user.username }).populate('relations')
-      .select('username role relations active firstname lastname balance').exec().catch(err => {
+      .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
         console.log(err)
       });
     req.session.user = user;

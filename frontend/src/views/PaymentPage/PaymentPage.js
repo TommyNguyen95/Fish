@@ -25,8 +25,8 @@ const PaymentPage = (props) => {
 
   return (
     <div>
-      <BackButton to="/anvandare" />
-      {transactionInfo ? <ConfirmPayment /> : <form>
+      <BackButton props={props} to="/anvandare" />
+      {transactionInfo ? <ConfirmPayment props={props} /> : <form>
         <Input onChange={(e) => dispatch({ type: 'TRANSACTION_EMAIL', value: e.target.value })} type="text" placeholder="Mottagarens Email" />
         <Input onChange={(e) => dispatch({ type: 'TRANSACTION_AMOUNT', value: parseInt(e.target.value) })} type="number" placeholder="Belopp" />
         <StyledTextarea onChange={(e) => dispatch({ type: 'TRANSACTION_MESSAGE', value: e.target.value })} placeholder="Meddelande" />

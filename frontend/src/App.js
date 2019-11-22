@@ -6,8 +6,7 @@ import ApprovedPage from './views/ApprovedPage';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount';
 import ProfilePage from './views/ProfilePage/ProfilePage';
-import ChildPage from './views/ChildPage/ChildPage';
-import Store from '../src/state/store';
+import History from "./views/History/HistoryPage"
 import RecoverPassword from './views/RecoverPassword';
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
@@ -23,27 +22,30 @@ axios.interceptors.request.use(
   }
 )
 
-// These can stay here, no need to import files
-const Logo = () => {
-  return (
-    <Container className="logo">
-      <Link to="/">
-        <img src="/images/fishlogo.svg" alt="" />
-        <p className="text-center">När du vill skicka en lax eller en röding</p>
-      </Link>
-    </Container>
-  )
-}
-const Footer = () => {
-  return (
-    <Container className="footer">
-      <p className="text-center">Optional footer</p>
-    </Container>
-  )
-}
-// end of inline components
+
 const App = props => {
   const [state, dispatch] = useSubContext('loginState');
+  const Logo = () => {
+    return (
+      <React.Fragment>
+        {state.loginState.showLogo &&
+          <Container className="logo">
+            <Link to="/">
+              <img src="/images/fishlogo.svg" alt="" />
+              <p className="text-center">När du vill skicka en lax eller en röding</p>
+            </Link>
+          </Container>
+        }
+      </React.Fragment>
+    )
+  }
+  const Footer = () => {
+    return (
+      <Container className="footer">
+        <p className="text-center">Optional footer</p>
+      </Container>
+    )
+  }
   useEffect(() => {
     async function checkStatus() {
       axios({
@@ -73,6 +75,7 @@ const App = props => {
             <Route exact path="/skapa-konto" component={CreateAccount} />
             <Route exact path="/betala" component={PaymentPage} />
             <Route exact path="/profil" component={ProfilePage} />
+            <Route exact path="/historik" component={History} />
             <Route exact path="/barn-profil/:id" component={ChildPage} />
             <Route exact path="/aterstallning" component={RecoverPassword} />
           </Switch>

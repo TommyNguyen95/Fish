@@ -9,6 +9,7 @@ import { createAccountFieldsData } from '../../staticData';
 const CreateAccount = (props) => {
   const [createAccountDetails, setCreateAccountDetails] = useState([]);
   const [validateError, setvalidateError] = useState([]);
+  const [verifyEmail, setVerifyEmail] = useState(false);
   const state = useSubContext('loginState')[0];
   const [accountDone, setAccountDone] = useState(false);
 
@@ -49,6 +50,7 @@ const CreateAccount = (props) => {
     } if (!createAccountDetails.firstname) {
       setvalidateError({ ...validateError, firstname: "#f8d7da" })
     }
+    setVerifyEmail(true)
   }
 
   const handleInputs = (e) => {

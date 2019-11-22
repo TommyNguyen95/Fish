@@ -3,16 +3,19 @@ import Text from '../../components/Text';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import useSubContext from '../../state/useSubContext';
+import ApprovedPage from '../ApprovedPage';
 import axios from 'axios';
 import {
   StyledConfirm,
   StyledLink
 } from './StyledConfirmPayment';
 
-const ConfirmPayment = () => {
+const ConfirmPayment = (props) => {
 
   const [state, dispatch] = useSubContext('transactionState');
   const [validColor, setValidColor] = useState('');
+  const [ApprovedPayment, setApprovedPayment] = useState(false);
+
 
   const sendTransaction = (e) => {
     e.preventDefault();
@@ -34,20 +37,23 @@ const ConfirmPayment = () => {
     } else {
       setValidColor('#f8d7da');
     }
+    setApprovedPayment(true)
   }
 
   return (
     <div>
-      <StyledConfirm>
-        <Text text='Mottagare:' textInput={state.transactionState.email} />
-        <Text text='Belopp:' textInput={state.transactionState.amount} />
-        <Text text='Meddelande:' textInput={state.transactionState.message} />
-        <Input type="password" bg={validColor} onChange={(e) => dispatch({ type: 'TRANSACTION_PASSWORDCHECK', value: e.target.value })} placeholder="Fyll i ditt lösenord för att verifiera betalning" />
-        <Button onClick={checkValidationForTransaction} text="Skicka betalning" />
-        <StyledLink to={'/betala'}>
-          <Button text="Avbryt betalning" />
-        </StyledLink>
-      </StyledConfirm>
+      {ApprovedPayment ? <ApprovedPage props={props} /> :
+        <StyledConfirm>
+          <Text text='Mottagare:' textInput={state.transactionState.email} />
+          <Text text='Belopp:' textInput={state.transactionState.amount} />
+          <Text text='Meddelande:' textInput={state.transactionState.message} />
+          <Input type="password" bg={validColor} onChange={(e) => dispatch({ type: 'TRANSACTION_PASSWORDCHECK', value: e.target.value })} placeholder="Fyll i ditt lösenord för att verifiera betalning" />
+          <Button onClick={checkValidationForTransaction} text="Skicka betalning" />
+          <StyledLink to={'/betala'}>
+            <Button text="Avbryt betalning" />
+          </StyledLink>
+        </StyledConfirm>
+      }
     </div>
   )
 }

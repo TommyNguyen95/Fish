@@ -16,7 +16,8 @@ const UserPage = () => {
       </StyledUserIconDiv>
       <StyledUserBox>
         <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>
-        <StyledButton text='Betalningshistorik' fontsize="1.3rem" /></StyledUserBox>
+        <StyledLink to={'/historik'}> <StyledButton text='Betalningshistorik' fontsize="1.3rem" /></StyledLink>
+      </StyledUserBox>
     </div>
 
   )
