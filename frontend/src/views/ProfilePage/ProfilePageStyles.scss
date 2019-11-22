@@ -1,11 +1,16 @@
 .profile-container {
   display: flex;
- flex-direction: column;
- align-items: center;
- width: 80%;
- max-width: 400px;
- margin: 0 auto;
- color:#fff;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  margin: 0 auto;
+  color:#fff;
+  background-color: #0000008a;
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 1px 1px 4px 2px black;
+
  * {
    margin: 0.5rem 0;
  }
@@ -28,5 +33,8 @@
   }
   a{
     width: 100%;
+    &:hover{
+      text-decoration: none;
+    }
   }
 }

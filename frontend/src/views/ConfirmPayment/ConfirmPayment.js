@@ -10,12 +10,12 @@ import {
   StyledLink
 } from './StyledConfirmPayment';
 
-const ConfirmPayment = () => {
+const ConfirmPayment = (props) => {
 
   const [state, dispatch] = useSubContext('transactionState');
   const [validColor, setValidColor] = useState('');
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
-
+  
   /**
    * Function that sends an api call to the backend
    * creating a transaction with the correct message and amount
@@ -50,7 +50,7 @@ const ConfirmPayment = () => {
 
   return (
     <div>
-      {paymentConfirmed ? <ApprovedPage /> : <StyledConfirm>
+      {paymentConfirmed ? <ApprovedPage props={props} /> : <StyledConfirm>
         <Text text='Mottagare:' textInput={state.transactionState.email} />
         <Text text='Belopp:' textInput={state.transactionState.amount} />
         <Text text='Meddelande:' textInput={state.transactionState.message} />

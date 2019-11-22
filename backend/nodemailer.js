@@ -103,7 +103,7 @@ async function resetPassword(user) {
     to: username, // list of receivers
     subject: 'Welcome to FI$H-APP', // Subject line
     text: `Ditt nya lösenord är: ${password}`, // plain text body
-    // html: `< a href = "http://localhost:3001/api/resetPassword/${id}" > KLICKA HÄR FÖR ATT AKTIVERA DITT KONTO</a > `
+    html: `< a href = "http://localhost:3001/api/resetPassword/${id}" > KLICKA HÄR FÖR ATT AKTIVERA DITT KONTO</a > `
   });
 
   console.log('Message sent: %s', info.messageId);

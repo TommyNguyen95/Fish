@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import useSubContext from '../../state/useSubContext';
-import Input from '../../components/Input'
-import BackButton from '../../components/BackButton'
-import Button from '../../components/Button'
+import Input from '../../components/Input';
+import BackButton from '../../components/BackButton';
+import VerifyPage from '../VerifyPage';
+import Button from '../../components/Button';
 import { createAccountFieldsData } from '../../staticData';
-// import useFetch from '../../helpers/fetch'
 
 const CreateAccount = (props) => {
   const [createAccountDetails, setCreateAccountDetails] = useState([]);
   const [validateError, setvalidateError] = useState([]);
+  const [verifyEmail, setVerifyEmail] = useState(false);
   const state = useSubContext('loginState')[0];
 
   const renderInputs = () => createAccountFieldsData.map(({ id, name, type, placeholder, capitalize }) => {
@@ -38,7 +39,6 @@ const CreateAccount = (props) => {
         })
         .then(res => { console.log(res) })
         .catch(res => { console.log(res) })
-      props.history.push("/bekraftat")
     } if (!createAccountDetails.ssn) {
       setvalidateError({ ...validateError, ssn: "#f8d7da" })
     } if (!createAccountDetails.confirmPassword || createAccountDetails.confirmPassword !== createAccountDetails.password) {
@@ -50,6 +50,7 @@ const CreateAccount = (props) => {
     } if (!createAccountDetails.firstname) {
       setvalidateError({ ...validateError, firstname: "#f8d7da" })
     }
+    setVerifyEmail(true)
   }
 
   const handleInputs = (e) => {
@@ -71,10 +72,11 @@ const CreateAccount = (props) => {
   return (
     <div>
       <BackButton back={props} />
-      <form>
-        {renderInputs()}
-        <Button text="Skapa konto" onClick={createAccount} />
-      </form>
+      {verifyEmail ? <VerifyPage /> :
+        <form>
+          {renderInputs()}
+          <Button text="Skapa konto" onClick={createAccount} />
+        </form>}
     </div>
   )
 }

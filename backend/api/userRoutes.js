@@ -90,6 +90,10 @@ router.get('/api/user/:id', async (req, res) => {
  * Delete a user (TESTED 03)
  */
 router.delete('/api/user/:id', async (req, res) => {
+
+  // console.log("DELETR");
+  // res.send('')
+
   try {
     if (req.session.user._id === req.params.id) {
       let user = await User.findById(req.session.user._id);
@@ -103,16 +107,24 @@ router.delete('/api/user/:id', async (req, res) => {
       res.send(deletedParent);
     } else {
       let parent = await User.findById(req.session.user._id)
+      let parentID = req.session.user._id;
       parent.relations.forEach(async (child, index) => {
         if (child == req.params.id) {
-          parent.relations.splice(index, 1);
-          const deletedChild = await User.findByIdAndDelete(req.params.id);
-          parent.save();
-          res.send(deletedChild);
+          // Delete the user itself
+          await User.findByIdAndDelete(req.params.id)
+          // Also pop it off parents relations
+          parent.relations.splice(index, 1)
+          parent.save()
+          // Re-fetch new and populated data and send back to frontend for state update
+          let updatedParent = await User.findOne({ _id: parentID }).populate('relations')
+            .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
+              console.log(err)
+            });
+          req.session.user = updatedParent
+          res.json({ updatedParent })
         }
       })
     }
-
     if (req.session.user.role === 'admin') {
       let deleteUser = await User.findById(req.params.id)
       if (deleteUser.parent) {
@@ -136,7 +148,6 @@ router.delete('/api/user/:id', async (req, res) => {
         res.send(deletedParent);
       }
     }
-
   } catch (e) {
     res.status(500).send();
   }
@@ -253,7 +264,7 @@ router.post('/api/login', async (req, res) => {
   let { username, password } = req.body;
   password = encryptPassword(password);
   let user = await User.findOne({ username, password })
-    .select('username role relations active firstname lastname balance').exec().catch(err => {
+    .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
       console.log(err)
     });
   if (user === null) {
@@ -268,13 +279,18 @@ router.post('/api/login', async (req, res) => {
 /**
  * check if/which user that is logged in
  */
-router.get('/api/login', (req, res) => {
-  // req.session.user = {}
-  res.json(req.session.user ?
-    req.session.user :
-    { status: 'not logged in' }
-  );
-});
+router.get('/api/login', async (req, res) => {
+  if (req.session.user) {
+    let user = await User.findOne({ username: req.session.user.username }).populate('relations')
+      .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
+        console.log(err)
+      });
+    req.session.user = user;
+    res.json(req.session.user)
+  } else {
+    res.json({ status: 'not logged in' })
+  }
+})
 /**
  * logout
  */

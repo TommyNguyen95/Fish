@@ -48,7 +48,7 @@ const PaymentPage = (props) => {
 
   return (
     <div>
-      <BackButton to="/anvandare" />
+      <BackButton props={props} to="/anvandare" />
       {transactionInfo ? <ConfirmPayment /> : <form>
         <Input bg={validColor} onChange={(e) => dispatch({ type: 'TRANSACTION_EMAIL', value: e.target.value })} type="text" placeholder="Mottagarens Email" />
         <Input bg={validMoney} onChange={(e) => dispatch({ type: 'TRANSACTION_AMOUNT', value: parseInt(e.target.value) })} type="number" placeholder="Belopp" />
