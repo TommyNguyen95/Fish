@@ -51,6 +51,27 @@ router.get('/api/users', async (req, res) => {
 })
 
 /**
+ * Get user by username
+ */
+router.get('/api/user/:username', async (req, res) => {
+  User.find({})
+    .exec()
+    .then(data => {
+      res.status(200)
+      for (let user of data) {
+        if (user.username === req.params.username) {
+          if (req.session.user.role === 'admin' || 'user') {
+            res.status(200).send(user)
+            break
+          }
+        } else {
+          res.status(401)
+        }
+      }
+    })
+})
+
+/**
 * Get user by ID (TESTED - 02)
 */
 router.get('/api/user/:id', async (req, res) => {
@@ -125,11 +146,13 @@ router.delete('/api/user/:id', async (req, res) => {
  */
 router.put('/api/user/edit/:id', async (req, res) => {
   let user = await User.findById(req.params.id)
+  console.log(req.body)
   user.username = req.body.username;
   user.password = req.body.password;
   user.ssn = req.body.ssn;
   user.relations = req.body.relations;
   user.transactions = req.body.transactions;
+  user.balance = req.body.balance;
   user.role = req.body.role;
   user.save(function (err) {
     if (err) {

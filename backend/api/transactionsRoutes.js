@@ -1,6 +1,7 @@
 const express = require('express');
 const Transactions = require('../schemas/transactionSchema');
 const router = express.Router();
+const User = require('../schemas/userSchema');
 
 /**
  * Get all transactions
@@ -8,8 +9,6 @@ const router = express.Router();
 router.get('/api/transactions', async (req, res) => {
   await Transactions.find({})
     .exec().then(data => {
-      // console.log("GET", data)
-      // res.status(200).send(data);
       res.status(200).json(req.session);
     })
 })
@@ -19,7 +18,13 @@ router.post('/api/transactions', async (req, res) => {
   let result = await trans.save().catch(error => {
     err = error;
   });
-  res.json(result || err)
+  let reciever = await User.findById(req.body.to);
+  reciever.balance = reciever.balance + req.body.amount;
+  let sender = await User.findById(req.body.from)
+  sender.balance = sender.balance - req.body.amount;
+  reciever.save()
+  sender.save()
+  res.json(result || err && reciever && sender)
 })
 
 router.delete('/api/transactions', async (req, res) => {
