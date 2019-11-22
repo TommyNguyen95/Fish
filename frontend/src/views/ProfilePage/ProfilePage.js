@@ -8,10 +8,6 @@ import Text from '../../components/Text'
 import BackButton from '../../components/BackButton';
 import './ProfilePageStyles.scss'
 
-
-
-
-
 const ProfilePage = (props) => {
   const [state, dispatch] = useSubContext('loginState');
   const userState = state.loginState

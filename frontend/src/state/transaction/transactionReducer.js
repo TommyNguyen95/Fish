@@ -2,7 +2,7 @@ import {
   TRANSACTION_AMOUNT,
   TRANSACTION_MESSAGE,
   TRANSACTION_EMAIL,
-  TRANSACTION_PASSWORDCHECK,
+  TRANSACTION_CHECK,
 } from './transactionActions';
 
 export default (state, action) => {
@@ -13,8 +13,8 @@ export default (state, action) => {
       return { ...state, amount: action.value };
     case TRANSACTION_EMAIL:
       return { ...state, email: action.value };
-    case TRANSACTION_PASSWORDCHECK:
-      return { ...state, checkPassword: action.value }
+    case TRANSACTION_CHECK:
+      return { ...state, checkEmail: action.value }
     default:
       return state;
   }
