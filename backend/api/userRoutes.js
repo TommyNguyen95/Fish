@@ -157,7 +157,6 @@ router.delete('/api/user/:id', async (req, res) => {
  */
 router.put('/api/user/edit/:id', async (req, res) => {
   let user = await User.findById(req.params.id)
-  console.log(req.body)
   user.username = req.body.username;
   user.password = req.body.password;
   user.ssn = req.body.ssn;
