@@ -7,6 +7,7 @@ import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount';
 import ProfilePage from './views/ProfilePage/ProfilePage';
 import History from "./views/History/HistoryPage"
+import ChildPage from "./views/ChildPage/ChildPage"
 import RecoverPassword from './views/RecoverPassword';
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
