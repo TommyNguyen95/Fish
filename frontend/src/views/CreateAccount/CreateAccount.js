@@ -51,7 +51,6 @@ const CreateAccount = (props) => {
       setvalidateError({ ...validateError, firstname: "#f8d7da" })
     }
     setVerifyEmail(true)
-    props.history.push("/bekraftat")
   }
 
   const handleInputs = (e) => {
