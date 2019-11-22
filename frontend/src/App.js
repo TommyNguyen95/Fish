@@ -21,7 +21,6 @@ axios.interceptors.request.use(
   }
 )
 
-
 const App = props => {
   const [state, dispatch] = useSubContext('loginState');
   const Logo = () => {
