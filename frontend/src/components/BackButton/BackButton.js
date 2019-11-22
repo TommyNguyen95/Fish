@@ -5,6 +5,7 @@ import {
 
 const BackButton = (props) => {
   const back = () => {
+    console.log(props)
     if (props.back) {
       props.back.history.goBack()
     } else {

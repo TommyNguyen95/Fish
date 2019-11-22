@@ -7,7 +7,7 @@ import {
 const VerifyPage = (props) => {
   return (
     <div>
-      <BackButton props={props} to="/" />
+      <BackButton props={props.props} to="/" />
       <StyledText>
         Bekräfta din epost genom länken i mejlet skickat till dig!
        </StyledText>

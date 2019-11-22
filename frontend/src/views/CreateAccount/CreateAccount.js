@@ -72,7 +72,7 @@ const CreateAccount = (props) => {
   return (
     <div>
       <BackButton back={props} />
-      {verifyEmail ? <VerifyPage /> :
+      {verifyEmail ? <VerifyPage props={props} /> :
         <form>
           {renderInputs()}
           <Button text="Skapa konto" onClick={createAccount} />
