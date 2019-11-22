@@ -20,8 +20,10 @@ router.post('/api/transactions', async (req, res) => {
   });
   let reciever = await User.findById(req.body.to);
   reciever.balance = reciever.balance + req.body.amount;
+  reciever.transactions.push(trans);
   let sender = await User.findById(req.body.from)
   sender.balance = sender.balance - req.body.amount;
+  sender.transactions.push(trans);
   reciever.save()
   sender.save()
   res.json(result || err && reciever && sender)
