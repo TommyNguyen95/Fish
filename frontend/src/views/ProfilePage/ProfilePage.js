@@ -14,7 +14,6 @@ import './ProfilePageStyles.scss'
 
 const ProfilePage = (props) => {
   const [state, dispatch] = useSubContext('loginState');
-  const { isShowing, toggle } = useModal();
   const userState = state.loginState
 
   const renderChildsAccounts = () => {
