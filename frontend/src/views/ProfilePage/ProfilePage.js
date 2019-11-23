@@ -30,11 +30,14 @@ const ProfilePage = (props) => {
   }
 
   useEffect(() => {
-    Axios.get(`${state.apiEndpoint}/api/login`).then(res => {
-      dispatch({ type: "RESET_STATE", value: res.data })
-    })
-  }, [dispatch, state.apiEndpoint])
-
+    const fetchData = async () => {
+      await Axios.get(`${state.apiEndpoint}/api/user/${userState._id}`).then(res => {
+        dispatch({ type: "RESET_STATE", value: res.data })
+      })
+    }
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const deleteUser = async () => {
     if (window.confirm('Are you sure you want to delete you profile?')) {
