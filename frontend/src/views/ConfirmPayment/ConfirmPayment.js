@@ -3,34 +3,46 @@ import Text from '../../components/Text';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import useSubContext from '../../state/useSubContext';
+import ApprovedPage from '../ApprovedPage';
 import axios from 'axios';
 import {
   StyledConfirm,
   StyledLink
 } from './StyledConfirmPayment';
 
-const ConfirmPayment = () => {
+const ConfirmPayment = (props) => {
 
   const [state, dispatch] = useSubContext('transactionState');
   const [validColor, setValidColor] = useState('');
-
-  const sendTransaction = (e) => {
-    e.preventDefault();
+  const [paymentConfirmed, setPaymentConfirmed] = useState(false);
+  
+  /**
+   * Function that sends an api call to the backend
+   * creating a transaction with the correct message and amount
+   * from our state.
+   */
+  const sendTransaction = () => {
     axios.post(`${state.apiEndpoint}/api/transactions`, {
       amount: state.transactionState.amount,
       message: state.transactionState.message,
-      to: '5dd281f3c447334bd82dbe80',
-      from: '5dc02673ca23933504ac3311'
+      to: state.transactionState.receiverId,
+      from: state.loginState._id
     }).then(response => {
-      console.log(response)
     }).catch(response => {
-      console.log(response)
     })
   }
 
+  /**
+   * Checks validation that the email you sent to exists and
+   * also checks for if your usernamer is correct in the verification input
+   * after that it sends the transaction to the backend and does a conditional rendering so that 
+   * you can see that your transaction is sent.
+   */
   const checkValidationForTransaction = () => {
-    if (state.loginState.password === state.transactionState.checkPassword) {
-      alert('KIM HAD HIS FIRST REAL SEX DREAM, AT THE CLASSPARTY IN 69')
+    if (state.transactionState.email.length > 1 && state.loginState.username === state.transactionState.checkEmail) {
+      state.loginState.balance = state.loginState.balance - state.transactionState.amount;
+      sendTransaction();
+      setPaymentConfirmed(true)
     } else {
       setValidColor('#f8d7da');
     }
@@ -38,16 +50,16 @@ const ConfirmPayment = () => {
 
   return (
     <div>
-      <StyledConfirm>
+      {paymentConfirmed ? <ApprovedPage props={props} /> : <StyledConfirm>
         <Text text='Mottagare:' textInput={state.transactionState.email} />
         <Text text='Belopp:' textInput={state.transactionState.amount} />
         <Text text='Meddelande:' textInput={state.transactionState.message} />
-        <Input type="password" bg={validColor} onChange={(e) => dispatch({ type: 'TRANSACTION_PASSWORDCHECK', value: e.target.value })} placeholder="Fyll i ditt lösenord för att verifiera betalning" />
+        <Input type="password" bg={validColor} onChange={(e) => dispatch({ type: 'TRANSACTION_CHECK', value: e.target.value })} placeholder="Fyll i din epost för att verifiera betalning" />
         <Button onClick={checkValidationForTransaction} text="Skicka betalning" />
-        <StyledLink to={'/betala'}>
+        <StyledLink to={'/anvandare'}>
           <Button text="Avbryt betalning" />
         </StyledLink>
-      </StyledConfirm>
+      </StyledConfirm>}
     </div>
   )
 }

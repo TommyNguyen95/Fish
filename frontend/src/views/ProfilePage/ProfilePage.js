@@ -8,10 +8,6 @@ import Text from '../../components/Text'
 import BackButton from '../../components/BackButton';
 import './ProfilePageStyles.scss'
 
-
-
-
-
 const ProfilePage = (props) => {
   const [state, dispatch] = useSubContext('loginState');
   const userState = state.loginState
@@ -61,7 +57,7 @@ const ProfilePage = (props) => {
 
   return (
     <div className="profile-container">
-      <BackButton to="anvandare" />
+      <BackButton back={props} />
       <Text text={userState.firstname + " " + userState.lastname} />
       <Text text={`Epost: ${userState.username}`} />
       {renderChildsAccounts()}

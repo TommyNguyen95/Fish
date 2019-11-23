@@ -38,7 +38,7 @@ export const TextLinkPassword = styled(Link)`
 export const TextWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%
+  width: 100%;
   margin-bottom: 30px;
   max-width: 350px;
 `

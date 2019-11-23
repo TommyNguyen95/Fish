@@ -51,6 +51,27 @@ router.get('/api/users', async (req, res) => {
 })
 
 /**
+ * Get user by username
+ */
+router.get('/api/user/:username', async (req, res) => {
+  User.find({})
+    .exec()
+    .then(data => {
+      res.status(200)
+      for (let user of data) {
+        if (user.username === req.params.username) {
+          if (req.session.user.role === 'admin' || 'user') {
+            res.status(200).send(user)
+            break
+          }
+        } else {
+          res.status(401)
+        }
+      }
+    })
+})
+
+/**
 * Get user by ID (TESTED - 02)
 */
 router.get('/api/user/:id', async (req, res) => {
@@ -96,7 +117,7 @@ router.delete('/api/user/:id', async (req, res) => {
           parent.save()
           // Re-fetch new and populated data and send back to frontend for state update
           let updatedParent = await User.findOne({ _id: parentID }).populate('relations')
-            .select('username role relations active firstname lastname balance').exec().catch(err => {
+            .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
               console.log(err)
             });
           req.session.user = updatedParent
@@ -141,6 +162,7 @@ router.put('/api/user/edit/:id', async (req, res) => {
   user.ssn = req.body.ssn;
   user.relations = req.body.relations;
   user.transactions = req.body.transactions;
+  user.balance = req.body.balance;
   user.role = req.body.role;
   user.save(function (err) {
     if (err) {
@@ -240,8 +262,8 @@ router.get('/api/resetpassword/:id', async (req, res) => {
 router.post('/api/login', async (req, res) => {
   let { username, password } = req.body;
   password = encryptPassword(password);
-  let user = await User.findOne({ username, password }).populate('relations')
-    .select('username role relations active firstname lastname balance').exec().catch(err => {
+  let user = await User.findOne({ username, password })
+    .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
       console.log(err)
     });
   if (user === null) {
@@ -259,7 +281,7 @@ router.post('/api/login', async (req, res) => {
 router.get('/api/login', async (req, res) => {
   if (req.session.user) {
     let user = await User.findOne({ username: req.session.user.username }).populate('relations')
-      .select('username role relations active firstname lastname balance').exec().catch(err => {
+      .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
         console.log(err)
       });
     req.session.user = user;

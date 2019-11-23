@@ -2,12 +2,11 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import StartPage from './views/StartPage';
 import UserPage from './views/UserPage'
-import VerifyPage from './views/VerifyPage';
-import ApprovedPage from './views/ApprovedPage';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount'
 import ProfilePage from './views/ProfilePage/ProfilePage';
 import ChildPage from './views/ChildPage/ChildPage'
+import History from "./views/History/HistoryPage"
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
 import axios from 'axios';
@@ -22,28 +21,29 @@ axios.interceptors.request.use(
   }
 )
 
-// These can stay here, no need to import files
-const Logo = () => {
-  return (
-    <Container className="logo">
-      <Link to="/">
-        <img src="/images/fishlogo.svg" alt="" />
-        <p className="text-center">När du vill skicka en lax eller en röding</p>
-      </Link>
-    </Container>
-  )
-}
-const Footer = () => {
-  return (
-    <Container className="footer">
-      <p className="text-center">Optional footer</p>
-    </Container>
-  )
-}
-// end of inline components
-
 const App = props => {
   const [state, dispatch] = useSubContext('loginState');
+  const Logo = () => {
+    return (
+      <React.Fragment>
+        {state.loginState.showLogo &&
+          <Container className="logo">
+            <Link to="/">
+              <img src="/images/fishlogo.svg" alt="" />
+              <p className="text-center">När du vill skicka en lax eller en röding</p>
+            </Link>
+          </Container>
+        }
+      </React.Fragment>
+    )
+  }
+  const Footer = () => {
+    return (
+      <Container className="footer">
+        <p className="text-center">Optional footer</p>
+      </Container>
+    )
+  }
   useEffect(() => {
     async function checkStatus() {
       axios({
@@ -70,11 +70,10 @@ const App = props => {
           <Switch>
             <Route exact path="/" component={StartPage} />
             <Route exact path="/anvandare" component={UserPage} />
-            <Route exact path="/bekraftat" component={VerifyPage} />
-            <Route exact path="/godkant" component={ApprovedPage} />
             <Route exact path="/skapa-konto" component={CreateAccount} />
             <Route exact path="/betala" component={PaymentPage} />
             <Route exact path="/profil" component={ProfilePage} />
+            <Route exact path="/historik" component={History} />
             <Route exact path="/barn-profil/:id" component={ChildPage} />
           </Switch>
         </Container>
