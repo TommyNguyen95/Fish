@@ -15,7 +15,7 @@ const ConfirmPayment = (props) => {
   const [state, dispatch] = useSubContext('transactionState');
   const [validColor, setValidColor] = useState('');
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
-  
+
   /**
    * Function that sends an api call to the backend
    * creating a transaction with the correct message and amount

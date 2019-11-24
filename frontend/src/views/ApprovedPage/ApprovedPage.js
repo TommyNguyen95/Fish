@@ -6,7 +6,7 @@ import {
 } from './StyledApprovedPage';
 
 const ApprovedPage = (props) => {
-  
+
   const [state, dispatch] = useSubContext('loginState');
   useEffect(() => {
     dispatch({ type: "SET_LOGO", value: false })
