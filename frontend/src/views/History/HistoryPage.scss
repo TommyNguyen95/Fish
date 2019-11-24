@@ -19,10 +19,18 @@
   flex-direction: column;
   margin: 0 !important;
 
+  p {
+    padding-top: 10px;
+    font-size: 18px;
+    text-transform: capitalize !important;
+  }
+
   small {
     text-align: center;
     margin: 0 !important;
     color: grey;
+    font-size: 14px;
+    padding-bottom: 5px;
   }
 }
 

@@ -23,6 +23,8 @@ const HistoryPage = (props) => {
     }, [])
 
 
+    console.log(transactions)
+
 
     if (props.location.state === 'undefined') {
         fromChild = false
@@ -35,22 +37,23 @@ const HistoryPage = (props) => {
 
 
     const ParentTrans = () => {
-
         if (transactions.length === 0) { return <p className="no-transaction-text"> Inga transaktioner :(</p> }
         else {
             return transactions.map((i, index) => {
+                let { firstname, lastname, username } = i.receiver
+
                 return <div className="single-wrapper" key={index}>
                     <div className="single-trans-wrap">
                         <small>{moment(i.date).format('YYYY-MM-DD')}</small>
                         <div className="single-trans-box">
-                            <div className="typeof" />
-                            {_id !== i.From ? (<p> Från: {i.From}</p>) : (<p>Till: {i.To}</p>)}
+                            {_id !== i.from ? (<p className="persontext">{firstname + ' ' + lastname}</p>) : (<p>{firstname + ' ' + lastname}</p>)}
+                            <small>{username}</small>
                         </div>
 
-                        <div className="msg-wrap"> {i.Message}</div>
+                        <div className="msg-wrap"> {i.message}</div>
                     </div>
                     <div className="amount-div">
-                        <StyledP textstyle={_id === i.From ? '-' : ''}> {i.Amount} KR</StyledP>
+                        <StyledP textstyle={_id === i.from ? '-' : ''}> {i.amount} KR</StyledP>
                     </div>
                 </div>
             });
@@ -66,20 +69,22 @@ const HistoryPage = (props) => {
             if (i._id === props.location.state.child) {
                 if (i.transactions.length === 0) { return <p className="no-transaction-text" key={index}> Inga transaktioner :(</p> }
                 return i.transactions.map(k => {
-
-                    return (< div className="single-wrapper" key={index} >
+                    console.log(k)
+                    let { firstname, lastname, username } = k.receiver
+                    return (<div className="single-wrapper" key={index}>
                         <div className="single-trans-wrap">
-                            <small>{moment(k.date).format('YYYY-MM-DD')}</small>
+                            <small>{moment(i.date).format('YYYY-MM-DD')}</small>
                             <div className="single-trans-box">
-                                <div className="typeof" />
-                                {i._id !== k.From ? (<p> Från: {k.From}</p>) : (<p>Till: {k.To}</p>)}
+                                {_id !== i.from ? (<p className="persontext">{firstname + ' ' + lastname}</p>) : (<p>{firstname + ' ' + lastname}</p>)}
+                                <small>{username}</small>
                             </div>
-                            <div className="msg-wrap"> {k.Message}</div>
+
+                            <div className="msg-wrap"> {i.message}</div>
                         </div>
                         <div className="amount-div">
-                            <StyledP textstyle={i._id === k.From ? '-' : ''}> {k.Amount} KR</StyledP>
+                            <StyledP textstyle={_id === i.from ? '-' : ''}> {i.amount} KR</StyledP>
                         </div>
-                    </div >)
+                    </div>)
 
                 })
             }
