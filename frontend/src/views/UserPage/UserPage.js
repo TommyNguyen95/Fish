@@ -2,9 +2,10 @@ import React from 'react';
 import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage";
 import useSubContext from '../../state/useSubContext';
 
-const UserPage = () => {
+const UserPage = (props) => {
 
   const state = useSubContext('loginState')[0];
+
 
   return (
     <div>

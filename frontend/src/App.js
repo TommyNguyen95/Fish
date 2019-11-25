@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 import StartPage from './views/StartPage';
 import UserPage from './views/UserPage';
-import ApprovedPage from './views/ApprovedPage';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount';
 import ProfilePage from './views/ProfilePage/ProfilePage';
@@ -25,6 +24,14 @@ axios.interceptors.request.use(
 
 const App = props => {
   const [state, dispatch] = useSubContext('loginState');
+
+  const redirect = () => {
+    if (state.loginState.active && window.location.pathname === '/') {
+      return <Redirect to="/anvandare" />
+    }
+  }
+
+
   const Logo = () => {
     return (
       <React.Fragment>
@@ -63,17 +70,19 @@ const App = props => {
       <Router>
         <Logo />
         <Container>
-          <Switch>
-            <Route exact path="/" component={StartPage} />
+          {redirect()}
+          {state.loginState.active ? <Switch>
             <Route exact path="/anvandare" component={UserPage} />
-            <Route exact path="/godkant" component={ApprovedPage} />
             <Route exact path="/skapa-konto" component={CreateAccount} />
             <Route exact path="/betala" component={PaymentPage} />
             <Route exact path="/profil" component={ProfilePage} />
             <Route exact path="/historik" component={History} />
             <Route exact path="/barn-profil/:id" component={ChildPage} />
-            <Route exact path="/aterstallning" component={RecoverPassword} />
-          </Switch>
+          </Switch> : <Switch>
+              <Route exact path="/" component={StartPage} />
+              <Route exact path="/skapa-konto" component={CreateAccount} />
+              <Route exact path="/aterstallning" component={RecoverPassword} />
+            </Switch>}
         </Container>
       </Router>
     </main>
