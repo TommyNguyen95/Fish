@@ -42,6 +42,7 @@ const ConfirmPayment = (props) => {
     if (state.transactionState.email.length > 1 && state.loginState.username === state.transactionState.checkEmail) {
       state.loginState.balance = state.loginState.balance - state.transactionState.amount;
       sendTransaction();
+      dispatch({ type: 'SET_LOGO', value: false })
       setPaymentConfirmed(true)
     } else {
       setValidColor('#f8d7da');

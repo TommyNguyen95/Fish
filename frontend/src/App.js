@@ -28,7 +28,7 @@ const App = props => {
   const Logo = () => {
     return (
       <React.Fragment>
-        {state.loginState.showLogo &&
+        {state.transactionState.showLogo &&
           <Container className="logo">
             <Link to="/">
               <img src="/images/fishlogo.svg" alt="" />
