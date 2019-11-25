@@ -39,13 +39,7 @@ const App = props => {
       </React.Fragment>
     )
   }
-  const Footer = () => {
-    return (
-      <Container className="footer">
-        <p className="text-center">Optional footer</p>
-      </Container>
-    )
-  }
+
   useEffect(() => {
     async function checkStatus() {
       axios({
@@ -61,6 +55,7 @@ const App = props => {
       })
     }
     checkStatus()
+    // eslint-disable-next-line
   }, [])
 
   return (
