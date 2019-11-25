@@ -28,7 +28,7 @@ const App = props => {
   const Logo = () => {
     return (
       <React.Fragment>
-        {state.loginState.showLogo &&
+        {state.transactionState.showLogo &&
           <Container className="logo">
             <Link to="/">
               <img src="/images/fishlogo.svg" alt="" />
@@ -39,13 +39,7 @@ const App = props => {
       </React.Fragment>
     )
   }
-  const Footer = () => {
-    return (
-      <Container className="footer">
-        <p className="text-center">Optional footer</p>
-      </Container>
-    )
-  }
+
   useEffect(() => {
     async function checkStatus() {
       axios({
