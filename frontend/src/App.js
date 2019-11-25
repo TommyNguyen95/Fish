@@ -9,6 +9,7 @@ import AdminPage from './views/AdminPage';
 import History from "./views/History/HistoryPage"
 import ChildPage from "./views/ChildPage/ChildPage"
 import RecoverPassword from './views/RecoverPassword';
+import PageNotFound from './views/PageNotFound/PageNotFound';
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
 import axios from 'axios';
@@ -71,7 +72,6 @@ const App = props => {
       <Router>
         <Logo />
         <Container>
-          {redirect()}
           {state.loginState.active ? <Switch>
             <Route exact path="/anvandare" component={UserPage} />
             <Route exact path="/skapa-konto" component={CreateAccount} />
@@ -80,10 +80,15 @@ const App = props => {
             <Route exact path="/transaktioner" component={AdminPage} />
             <Route exact path="/historik" component={History} />
             <Route exact path="/barn-profil/:id" component={ChildPage} />
+            <Route exact path="/404" component={PageNotFound} />
+            {redirect()}
+            <Redirect to="/404" />
           </Switch> : <Switch>
               <Route exact path="/" component={StartPage} />
               <Route exact path="/skapa-konto" component={CreateAccount} />
               <Route exact path="/aterstallning" component={RecoverPassword} />
+              <Route exact path="/404" component={PageNotFound} />
+              <Redirect to="/404" />
             </Switch>}
         </Container>
       </Router>
