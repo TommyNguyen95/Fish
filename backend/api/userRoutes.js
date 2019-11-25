@@ -228,9 +228,13 @@ router.post('/api/sendresetlink/:email', async (req, res) => {
 
 
   let user = await User.findOne({ username: req.params.email })
+  if (user) {
+    sendResetLink(user)
+    res.json({ string: `Klicka på länken i din email för att återställa lösenordet.`, result: true, link: 'Klicka här ifall det tar för lång tid!' } || error);
+  } else {
+    res.json({ string: `Ingen användare med angiven emailadress hittades.`, result: false, link: 'Klicka här ifall det tar för lång tid!' } || error);
+  }
 
-  sendResetLink(user)
-  res.json(`Klicka på länken i din email för att återställa lösenordet.` || error);
 
 })
 router.get('/api/resetpassword/:id', async (req, res) => {
