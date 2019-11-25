@@ -36,7 +36,7 @@ const HistoryPage = (props) => {
 
                 return <div className="single-wrapper" key={index}>
                     <div className="single-trans-wrap">
-                        <small>{moment(i.date).format('YYYY-MM-DD')}</small>
+                        <small className="date">{moment(i.date).format('YYYY-MM-DD')}</small>
                         <div className="single-trans-box">
                             {_id !== i.from ? (<p className="persontext">{i.sender.firstname + ' ' + i.sender.lastname}</p>) : (<p>{firstname + ' ' + lastname}</p>)}
                             <small>{username}</small>
