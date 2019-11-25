@@ -27,7 +27,7 @@ const ProfilePage = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await Axios.get(`${state.apiEndpoint}/api/user/${userState._id}`).then(res => {
+      await Axios.get(`${state.apiEndpoint}/api/login`).then(res => {
         dispatch({ type: "RESET_STATE", value: res.data })
       })
     }
@@ -41,8 +41,6 @@ const ProfilePage = (props) => {
         .then(response => {
           dispatch({ type: "RESET_STATE", value: response.data })
           props.history.push("/")
-          dispatch({ type: "RESET_STATE", value: response.data })
-
         })
     }
   }
