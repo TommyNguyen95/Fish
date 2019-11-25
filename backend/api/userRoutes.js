@@ -262,7 +262,7 @@ router.get('/api/resetpassword/:id', async (req, res) => {
 router.post('/api/login', async (req, res) => {
   let { username, password } = req.body;
   password = encryptPassword(password);
-  let user = await User.findOne({ username, password })
+  let user = await User.findOne({ username, password }).populate('relations')
     .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
       console.log(err)
     });
