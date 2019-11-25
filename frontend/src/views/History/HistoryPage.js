@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import useSubContext from '../../state/useSubContext';
 import './HistoryPage.scss'
 import Backbutton from "../../components/BackButton"

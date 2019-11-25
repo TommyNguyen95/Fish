@@ -37,13 +37,7 @@ const App = props => {
       </React.Fragment>
     )
   }
-  const Footer = () => {
-    return (
-      <Container className="footer">
-        <p className="text-center">Optional footer</p>
-      </Container>
-    )
-  }
+
   useEffect(() => {
     async function checkStatus() {
       axios({
