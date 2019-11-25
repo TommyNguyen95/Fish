@@ -5,6 +5,7 @@ import BackButton from '../../components/BackButton';
 import VerifyPage from '../VerifyPage';
 import Button from '../../components/Button';
 import { createAccountFieldsData } from '../../staticData';
+import axios from 'axios'
 
 const CreateAccount = (props) => {
   const [createAccountDetails, setCreateAccountDetails] = useState([]);
@@ -31,12 +32,11 @@ const CreateAccount = (props) => {
   const createAccount = async (e) => {
     e.preventDefault()
     if (createAccountDetails.password === createAccountDetails.confirmPassword && createAccountDetails.confirmPassword && createAccountDetails.lastname && createAccountDetails.firstname && createAccountDetails.ssn) {
-      await fetch(`${state.apiEndpoint}/api/user`,
-        {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(createAccountDetails)
-        })
+      await axios({
+        method: 'post',
+        url: `${state.apiEndpoint}/api/user`,
+        data: createAccountDetails
+      });
       setAccountDone(true);
     } if (!createAccountDetails.ssn) {
       setvalidateError({ ...validateError, ssn: "#f8d7da" })
