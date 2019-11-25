@@ -26,27 +26,19 @@ const HistoryPage = (props) => {
     console.log(transactions)
 
 
-    if (props.location.state === 'undefined') {
-        fromChild = false
-    }
-
-    if (props.location.state && props.location.state.url === 'barn') {
-        fromChild = true
-
-    }
-
-
     const ParentTrans = () => {
+        if (transactions === undefined) { return <p className="no-transaction-text"> Inga transaktioner :(</p> }
         if (transactions.length === 0) { return <p className="no-transaction-text"> Inga transaktioner :(</p> }
         else {
             return transactions.map((i, index) => {
                 let { firstname, lastname, username } = i.receiver
 
+
                 return <div className="single-wrapper" key={index}>
                     <div className="single-trans-wrap">
                         <small>{moment(i.date).format('YYYY-MM-DD')}</small>
                         <div className="single-trans-box">
-                            {_id !== i.from ? (<p className="persontext">{firstname + ' ' + lastname}</p>) : (<p>{firstname + ' ' + lastname}</p>)}
+                            {_id !== i.from ? (<p className="persontext">{i.sender.firstname + ' ' + i.sender.lastname}</p>) : (<p>{firstname + ' ' + lastname}</p>)}
                             <small>{username}</small>
                         </div>
 
@@ -75,7 +67,7 @@ const HistoryPage = (props) => {
                         <div className="single-trans-wrap">
                             <small>{moment(i.date).format('YYYY-MM-DD')}</small>
                             <div className="single-trans-box">
-                                {_id !== i.from ? (<p className="persontext">{firstname + ' ' + lastname}</p>) : (<p>{firstname + ' ' + lastname}</p>)}
+                                {_id !== i.from ? (<p className="persontext">{k.sender.firstname + ' ' + k.sender.lastname}</p>) : (<p>{firstname + ' ' + lastname}</p>)}
                                 <small>{username}</small>
                             </div>
 
@@ -89,6 +81,15 @@ const HistoryPage = (props) => {
                 })
             }
         })
+    }
+
+    if (props.location.state && props.location.state.url === 'barn') {
+        ChildTrans()
+        fromChild = true
+
+    } else {
+        ParentTrans()
+        fromChild = false
     }
 
 
