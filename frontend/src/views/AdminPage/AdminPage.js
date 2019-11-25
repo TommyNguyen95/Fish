@@ -4,7 +4,6 @@ import './AdminPage.scss';
 import {
   Col,
   Row,
-  ListGroupItem,
   Form,
   Input,
   InputGroup,
@@ -12,7 +11,6 @@ import {
   Card,
   CardHeader,
   CardBody,
-  CardTitle,
   CardText
 } from 'reactstrap';
 import TransactionCard from './components/TransactionCard';
@@ -28,6 +26,11 @@ const AdminPage = () => {
     setUser(res.data)
   }
 
+  const deleteUser = async () => {
+    await axios.delete(`http://localhost:3001/api/user/${user._id}`);
+    setUser(null);
+  }
+
   const renderUserDetails = () => {
     const { username, firstname, lastname, created } = user;
     return (
@@ -37,15 +40,15 @@ const AdminPage = () => {
           <CardText>
             <span className="font-weight-bold">{firstname} {lastname}</span> gick med <span className="font-weight-bold">{created.split("T")[0]}</span> och har e-postadressen <span className="font-weight-bold">{username}</span>
           </CardText>
-          <Button outline color="danger">Ta bort konto</Button>
+          <Button outline color="danger" onClick={deleteUser}>Ta bort konto</Button>
         </CardBody>
       </Card>
     )
   }
 
-  const renderTransactions = () => user.transactions.map(({ _id, to, from, amount, date }) =>
+  const renderTransactions = () => user.transactions.map(({ _id, to, from, amount, date }) => (
     <TransactionCard key={_id} to={to} from={from} amount={amount} date={date} />
-  )
+  ));
 
   const handleInput = e => setSearchQuery(e.target.value);
   console.log(user);
@@ -63,9 +66,9 @@ const AdminPage = () => {
           <Col className="mb-1" xs="12" md="6">
             {user ? renderUserDetails() : null}
           </Col>
-          <Col className="col-trans overflow-auto" xs="12" md="6">{
-            user ? renderTransactions() : null
-          }</Col>
+          <Col className="col-trans overflow-auto" xs="12" md="6">
+            {user ? renderTransactions() : null}
+          </Col>
         </Row>
       </Col>
     </Row >

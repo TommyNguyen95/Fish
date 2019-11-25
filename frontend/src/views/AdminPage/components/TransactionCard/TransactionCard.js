@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Card,
-  Button,
   CardTitle,
   CardText
 } from 'reactstrap';
@@ -13,7 +12,8 @@ const TransactionCard = ({
     lastname: toLastName
   },
   from: {
-    username, firstname,
+    username,
+    firstname,
     lastname
   },
   amount,
@@ -31,7 +31,6 @@ const TransactionCard = ({
       <CardText>Namn: {toFirstName} {toLastName}</CardText>
       <CardText className="font-weight-bold">Summa: {amount} kr</CardText>
       <CardText className="font-weight-bold">Datum: {formatDate()}</CardText>
-      <Button outline color="warning">Ångra betalning</Button>
     </Card>
   );
 }

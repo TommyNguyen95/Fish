@@ -55,6 +55,7 @@ router.get('/api/users', async (req, res) => {
 })
 /**
  * To be used by admin. Searches for a user by email (must be exact) and returns user as well as transactions
+ * with populated "to" and "from" fields
  */
 router.post('/api/users', async (req, res) => {
   if (req.session.user.role !== 'admin') { res.status(403).send() }
