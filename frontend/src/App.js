@@ -61,6 +61,7 @@ const App = props => {
       })
     }
     checkStatus()
+    // eslint-disable-next-line
   }, [])
 
   return (
