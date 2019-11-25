@@ -12,14 +12,14 @@ const ChildPage = (props) => {
 
   const Child = () => {
     return (
-      state.loginState.relations.map((child, i) => {
-        if (child._id === props.match.params.id) {
+      state.loginState.relations
+        .filter(child => child._id === props.match.params.id)
+        .map((child, i) => {
           return <div key={i} className="child-page-main">
             <Text text="E-post" textInput={child.username}></Text>
             <Text text="Belopp" textInput={child.balance}></Text>
           </div>
-        }
-      })
+        })
     )
   }
 
