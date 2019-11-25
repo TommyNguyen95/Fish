@@ -12,7 +12,7 @@ import axios from 'axios';
 const RecoverPassword = (props) => {
 
   const [email, setEmail] = useState([]);
-  const [state, dispatch] = useSubContext('loginState');
+  const state = useSubContext('loginState')[0];
 
   const sendNewPassword = (e) => {
     e.preventDefault()
