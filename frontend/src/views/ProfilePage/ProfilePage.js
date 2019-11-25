@@ -61,9 +61,13 @@ const ProfilePage = (props) => {
       <Text text={userState.firstname + " " + userState.lastname} />
       <Text text={`Epost: ${userState.username}`} />
       {renderChildsAccounts()}
-      <Link to="/skapa-konto">
-        <Button text="Skapa barnkonto" />
-      </Link>
+      {
+        userState.role === 'child' ?
+          null :
+          <Link to="/skapa-konto">
+            <Button text="Skapa barnkonto" />
+          </Link>
+      }
       <Button text="Logga ut" onClick={logOut} />
       <p className="remove-account" onClick={deleteUser}>Ta bort ditt konto</p>
     </div>
