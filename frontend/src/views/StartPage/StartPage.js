@@ -54,12 +54,12 @@ const Startpage = props => {
       {state.loginState._id && <Redirect to="/anvandare" />}
       <Col xs="12" md="12" lg="12">
         <LoginForm>
-          <Input bg={validColor} placeholder="Användarnamn" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
+          <Input bg={validColor} placeholder="E-post" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
           <Input bg={validColor} type="password" placeholder="Lösenord" id="Popover1" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
-          <LoginButton onClick={loginRequest} text="Logga In" width="50%" height="30px" fontsize="14px"></LoginButton>
+          <LoginButton onClick={loginRequest} text="Logga In" fontsize="14px"></LoginButton>
           <TextWrapper>
             <TextLinkAccount to={"skapa-konto"}>Skapa konto</TextLinkAccount>
-            <TextLinkPassword to={"/"}>Glömt lösenord</TextLinkPassword>
+            <TextLinkPassword to={"/aterstallning"}>Glömt lösenord</TextLinkPassword>
           </TextWrapper>
         </LoginForm>
       </Col>

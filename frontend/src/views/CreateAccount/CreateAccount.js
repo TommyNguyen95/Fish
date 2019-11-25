@@ -9,8 +9,8 @@ import { createAccountFieldsData } from '../../staticData';
 const CreateAccount = (props) => {
   const [createAccountDetails, setCreateAccountDetails] = useState([]);
   const [validateError, setvalidateError] = useState([]);
-  const [verifyEmail, setVerifyEmail] = useState(false);
   const state = useSubContext('loginState')[0];
+  const [accountDone, setAccountDone] = useState(false);
 
   const renderInputs = () => createAccountFieldsData.map(({ id, name, type, placeholder, capitalize }) => {
     if (name === 'confirmPassword') {
@@ -37,8 +37,7 @@ const CreateAccount = (props) => {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(createAccountDetails)
         })
-        .then(res => { console.log(res) })
-        .catch(res => { console.log(res) })
+      setAccountDone(true);
     } if (!createAccountDetails.ssn) {
       setvalidateError({ ...validateError, ssn: "#f8d7da" })
     } if (!createAccountDetails.confirmPassword || createAccountDetails.confirmPassword !== createAccountDetails.password) {
@@ -50,7 +49,6 @@ const CreateAccount = (props) => {
     } if (!createAccountDetails.firstname) {
       setvalidateError({ ...validateError, firstname: "#f8d7da" })
     }
-    setVerifyEmail(true)
   }
 
   const handleInputs = (e) => {
@@ -72,11 +70,10 @@ const CreateAccount = (props) => {
   return (
     <div>
       <BackButton back={props} />
-      {verifyEmail ? <VerifyPage props={props} /> :
-        <form>
-          {renderInputs()}
-          <Button text="Skapa konto" onClick={createAccount} />
-        </form>}
+      {accountDone ? <VerifyPage props={props} /> : <form>
+        {renderInputs()}
+        <Button text="Skapa konto" onClick={createAccount} />
+      </form>}
     </div>
   )
 }

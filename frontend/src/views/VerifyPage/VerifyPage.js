@@ -10,7 +10,7 @@ const VerifyPage = (props) => {
       <BackButton props={props.props} to="/" />
       <StyledText>
         Bekräfta din epost genom länken i mejlet skickat till dig!
-       </StyledText>
+      </StyledText>
     </div>
   )
 }

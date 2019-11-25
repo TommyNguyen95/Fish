@@ -4,7 +4,7 @@ import useSubContext from '../../state/useSubContext';
 
 const UserPage = () => {
 
-  const [state, dispatch] = useSubContext('loginState');
+  const state = useSubContext('loginState')[0];
 
   return (
     <div>

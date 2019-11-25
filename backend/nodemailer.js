@@ -15,7 +15,7 @@ async function activationMail(user) {
     secure: true,
     auth: {
       user: 'apikey',
-      pass: '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'
+      pass: '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'
     },
     tls: {
       rejectUnauthorized: false
@@ -250,7 +250,7 @@ async function sendResetPasswordLink(user) {
     secure: true,
     auth: {
       user: 'apikey',
-      pass: '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'
+      pass: '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'
     },
     tls: {
       rejectUnauthorized: false
@@ -487,7 +487,7 @@ async function resetPassword(user) {
     secure: true,
     auth: {
       user: 'apikey',
-      pass: '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'
+      pass: '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'
     },
     tls: {
       rejectUnauthorized: false

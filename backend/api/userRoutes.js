@@ -209,7 +209,7 @@ router.post('/api/user', async (req, res) => {
     res.json(result || error);
     if (!error) {
       // Let's remove this for now since it is using the credits we have from the free mailing program
-      // activate(save)
+      activate(save)
     }
   }
 })
@@ -224,10 +224,10 @@ router.get('/api/activate/:id', async (req, res) => {
   res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}` || error);
 
 })
-router.get('/api/sendresetlink/:id', async (req, res) => {
+router.post('/api/sendresetlink/:email', async (req, res) => {
 
 
-  let user = await User.findById(req.params.id)
+  let user = await User.findOne({ username: req.params.email })
 
   sendResetLink(user)
   res.json(`Klicka på länken i din email för att återställa lösenordet.` || error);
@@ -239,7 +239,7 @@ router.get('/api/resetpassword/:id', async (req, res) => {
   let user = await User.findById(req.params.id)
   let error;
 
-  resetPasswordLength(5)
+  resetPasswordLength(10)
 
   async function resetPasswordLength(length) {
     let newPassword = '';
@@ -262,7 +262,7 @@ router.get('/api/resetpassword/:id', async (req, res) => {
 router.post('/api/login', async (req, res) => {
   let { username, password } = req.body;
   password = encryptPassword(password);
-  let user = await User.findOne({ username, password })
+  let user = await User.findOne({ username, password }).populate('relations')
     .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
       console.log(err)
     });

@@ -1,4 +1,4 @@
-import { NAME_UPDATE, PASSWORD_UPDATE, RESET_STATE, SET_LOGO } from './loginActions';
+import { NAME_UPDATE, PASSWORD_UPDATE, RESET_STATE } from './loginActions';
 
 export default (state, action) => {
   switch (action.type) {
@@ -8,8 +8,6 @@ export default (state, action) => {
       return { ...state, password: action.value }
     case RESET_STATE:
       return { ...action.value }
-    case SET_LOGO:
-      return { showLogo: action.value }
     default:
       return state;
   }

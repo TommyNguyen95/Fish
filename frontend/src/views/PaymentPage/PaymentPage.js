@@ -49,7 +49,7 @@ const PaymentPage = (props) => {
   return (
     <div>
       <BackButton props={props} to="/anvandare" />
-      {transactionInfo ? <ConfirmPayment /> : <form>
+      {transactionInfo ? <ConfirmPayment props={props} /> : <form>
         <Input bg={validColor} onChange={(e) => dispatch({ type: 'TRANSACTION_EMAIL', value: e.target.value })} type="text" placeholder="Mottagarens Email" />
         <Input bg={validMoney} onChange={(e) => dispatch({ type: 'TRANSACTION_AMOUNT', value: parseInt(e.target.value) })} type="number" placeholder="Belopp" />
         <StyledTextarea onChange={(e) => dispatch({ type: 'TRANSACTION_MESSAGE', value: e.target.value })} placeholder="Meddelande" />
