@@ -9,6 +9,7 @@ const BackButton = (props) => {
   const dispatch = useSubContext('transactionState')[1];
 
   const back = () => {
+    console.log(props)
     if (props.back) {
       props.back.history.goBack()
     } else {
