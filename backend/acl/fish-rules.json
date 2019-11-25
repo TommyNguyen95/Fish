@@ -27,15 +27,17 @@
       "admin": "all"
     },
     "activate": {
-      "visitor": "get"
+      "visitor": "get",
+      "user": "get",
+      "admin": "get"
     },
     "resetpassword": {
       "visitor": "get",
       "user": "get"
     },
     "sendresetlink": {
-      "user": "get",
-      "visitor": "get"
+      "user": "post",
+      "visitor": "post"
     },
     "createadmin": {
       "visitor": "all"

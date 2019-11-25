@@ -4,20 +4,22 @@ import useSubContext from '../../state/useSubContext';
 
 const UserPage = () => {
 
-  const [state, dispatch] = useSubContext('loginState');
+  const state = useSubContext('loginState')[0];
+  console.log(state);
 
   return (
     <div>
       <StyledUserIconDiv>
         <StyledLink to="/profil">
-          <StyledText>SALDO: {state.userState.balance}</StyledText>
+          <StyledText>SALDO: {state.loginState.balance}</StyledText>
           <StyledUserIcon src="/images/usericon.svg" />
         </StyledLink>
       </StyledUserIconDiv>
       <StyledUserBox>
         <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>
-        {state.userState.role === 'admin' ? <StyledLink to={'/transaktioner'}> <StyledButton text='Alla transaktioner' /></StyledLink> : ''}
-        <StyledButton text='Betalningshistorik' fontsize="1.3rem" /></StyledUserBox>
+        {state.loginState.role === 'admin' ? <StyledLink to={'/transaktioner'}> <StyledButton text='Alla transaktioner' /></StyledLink> : ''}
+        <StyledLink to={'/historik'}> <StyledButton text='Betalningshistorik' fontsize="1.3rem" /></StyledLink>
+      </StyledUserBox>
     </div>
 
   )

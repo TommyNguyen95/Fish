@@ -83,6 +83,27 @@ router.post('/api/users', async (req, res) => {
 })
 
 /**
+ * Get user by username
+ */
+router.get('/api/user/:username', async (req, res) => {
+  User.find({})
+    .exec()
+    .then(data => {
+      res.status(200)
+      for (let user of data) {
+        if (user.username === req.params.username) {
+          if (req.session.user.role === 'admin' || 'user') {
+            res.status(200).send(user)
+            break
+          }
+        } else {
+          res.status(401)
+        }
+      }
+    })
+})
+
+/**
 * Get user by ID (TESTED - 02)
 */
 router.get('/api/user/:id', async (req, res) => {
@@ -101,6 +122,10 @@ router.get('/api/user/:id', async (req, res) => {
  * Delete a user (TESTED 03)
  */
 router.delete('/api/user/:id', async (req, res) => {
+
+  // console.log("DELETR");
+  // res.send('')
+
   try {
     if (req.session.user._id === req.params.id) {
       let user = await User.findById(req.session.user._id);
@@ -114,16 +139,24 @@ router.delete('/api/user/:id', async (req, res) => {
       res.send(deletedParent);
     } else {
       let parent = await User.findById(req.session.user._id)
+      let parentID = req.session.user._id;
       parent.relations.forEach(async (child, index) => {
         if (child == req.params.id) {
-          parent.relations.splice(index, 1);
-          const deletedChild = await User.findByIdAndDelete(req.params.id);
-          parent.save();
-          res.send(deletedChild);
+          // Delete the user itself
+          await User.findByIdAndDelete(req.params.id)
+          // Also pop it off parents relations
+          parent.relations.splice(index, 1)
+          parent.save()
+          // Re-fetch new and populated data and send back to frontend for state update
+          let updatedParent = await User.findOne({ _id: parentID }).populate('relations')
+            .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
+              console.log(err)
+            });
+          req.session.user = updatedParent
+          res.json({ updatedParent })
         }
       })
     }
-
     if (req.session.user.role === 'admin') {
       let deleteUser = await User.findById(req.params.id)
       if (deleteUser.parent) {
@@ -147,7 +180,6 @@ router.delete('/api/user/:id', async (req, res) => {
         res.send(deletedParent);
       }
     }
-
   } catch (e) {
     res.status(500).send();
   }
@@ -162,6 +194,7 @@ router.put('/api/user/edit/:id', async (req, res) => {
   user.ssn = req.body.ssn;
   user.relations = req.body.relations;
   user.transactions = req.body.transactions;
+  user.balance = req.body.balance;
   user.role = req.body.role;
   user.save(function (err) {
     if (err) {
@@ -208,7 +241,7 @@ router.post('/api/user', async (req, res) => {
     res.json(result || error);
     if (!error) {
       // Let's remove this for now since it is using the credits we have from the free mailing program
-      // activate(save)
+      activate(save)
     }
   }
 })
@@ -223,13 +256,17 @@ router.get('/api/activate/:id', async (req, res) => {
   res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}` || error);
 
 })
-router.get('/api/sendresetlink/:id', async (req, res) => {
+router.post('/api/sendresetlink/:email', async (req, res) => {
 
 
-  let user = await User.findById(req.params.id)
+  let user = await User.findOne({ username: req.params.email })
+  if (user) {
+    sendResetLink(user)
+    res.json({ string: `Klicka på länken i din email för att återställa lösenordet.`, result: true, link: 'Klicka här ifall det tar för lång tid!' } || error);
+  } else {
+    res.json({ string: `Ingen användare med angiven emailadress hittades.`, result: false, link: 'Klicka här ifall det tar för lång tid!' } || error);
+  }
 
-  sendResetLink(user)
-  res.json(`Klicka på länken i din email för att återställa lösenordet.` || error);
 
 })
 router.get('/api/resetpassword/:id', async (req, res) => {
@@ -238,7 +275,7 @@ router.get('/api/resetpassword/:id', async (req, res) => {
   let user = await User.findById(req.params.id)
   let error;
 
-  resetPasswordLength(5)
+  resetPasswordLength(10)
 
   async function resetPasswordLength(length) {
     let newPassword = '';
@@ -261,8 +298,8 @@ router.get('/api/resetpassword/:id', async (req, res) => {
 router.post('/api/login', async (req, res) => {
   let { username, password } = req.body;
   password = encryptPassword(password);
-  let user = await User.findOne({ username, password })
-    .select('username role relations active firstname lastname balance').exec().catch(err => {
+  let user = await User.findOne({ username, password }).populate('relations')
+    .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
       console.log(err)
     });
   if (user === null) {
@@ -277,13 +314,18 @@ router.post('/api/login', async (req, res) => {
 /**
  * check if/which user that is logged in
  */
-router.get('/api/login', (req, res) => {
-  // req.session.user = {}
-  res.json(req.session.user ?
-    req.session.user :
-    { status: 'not logged in' }
-  );
-});
+router.get('/api/login', async (req, res) => {
+  if (req.session.user) {
+    let user = await User.findOne({ username: req.session.user.username }).populate('relations')
+      .select('username role relations active firstname lastname balance transactions').exec().catch(err => {
+        console.log(err)
+      });
+    req.session.user = user;
+    res.json(req.session.user)
+  } else {
+    res.json({ status: 'not logged in' })
+  }
+})
 /**
  * logout
  */

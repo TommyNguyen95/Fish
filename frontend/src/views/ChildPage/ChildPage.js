@@ -1,17 +1,34 @@
 import React from 'react'
-import './ChildPageStyles.scss'
 import { Link } from 'react-router-dom'
+import Text from '../../components/Text/Text'
 import Button from '../../components/Button/Button'
+import BackButton from '../../components/BackButton';
+import './ChildPageStyles.scss'
+import useSubContext from '../../state/useSubContext';
+
+const ChildPage = (props) => {
+
+  const state = useSubContext('loginState')[0];
+
+  const Child = () => {
+    return (
+      state.loginState.relations
+        .filter(child => child._id === props.match.params.id)
+        .map((child, i) => {
+          return <div key={i} className="child-page-main">
+            <Text text="E-post" textInput={child.username}></Text>
+            <Text text="Belopp" textInput={child.balance}></Text>
+          </div>
+        })
+    )
+  }
 
 
-const ChildPage = () => {
   return (
     <div className="child-page-container">
-      <div className="child-page-main">
-        <h3>E-post: Skunk@lunk.1337</h3>
-        <h3>Belopp: 1337kr</h3>
-      </div>
-      <Link to="/transaktioner">
+      <BackButton back={props} />
+      <Child />
+      <Link to={{ pathname: '/historik', state: { child: props.match.params.id, url: 'barn' } }} >
         <Button text="Betalnings Historik" />
       </Link>
     </div>

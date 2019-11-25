@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import useSubContext from '../../state/useSubContext';
-import Input from '../../components/Input'
-import BackButton from '../../components/BackButton'
-import Button from '../../components/Button'
+import Input from '../../components/Input';
+import BackButton from '../../components/BackButton';
+import VerifyPage from '../VerifyPage';
+import Button from '../../components/Button';
 import { createAccountFieldsData } from '../../staticData';
-// import useFetch from '../../helpers/fetch'
+import axios from 'axios'
 
 const CreateAccount = (props) => {
   const [createAccountDetails, setCreateAccountDetails] = useState([]);
   const [validateError, setvalidateError] = useState([]);
   const state = useSubContext('loginState')[0];
+  const [accountDone, setAccountDone] = useState(false);
 
   const renderInputs = () => createAccountFieldsData.map(({ id, name, type, placeholder, capitalize }) => {
     if (name === 'confirmPassword') {
@@ -30,15 +32,12 @@ const CreateAccount = (props) => {
   const createAccount = async (e) => {
     e.preventDefault()
     if (createAccountDetails.password === createAccountDetails.confirmPassword && createAccountDetails.confirmPassword && createAccountDetails.lastname && createAccountDetails.firstname && createAccountDetails.ssn) {
-      await fetch(`${state.apiEndpoint}/api/user`,
-        {
-          method: "POST",
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(createAccountDetails)
-        })
-        .then(res => { console.log(res) })
-        .catch(res => { console.log(res) })
-      props.history.push("/bekraftat")
+      await axios({
+        method: 'post',
+        url: `${state.apiEndpoint}/api/user`,
+        data: createAccountDetails
+      });
+      setAccountDone(true);
     } if (!createAccountDetails.ssn) {
       setvalidateError({ ...validateError, ssn: "#f8d7da" })
     } if (!createAccountDetails.confirmPassword || createAccountDetails.confirmPassword !== createAccountDetails.password) {
@@ -71,10 +70,10 @@ const CreateAccount = (props) => {
   return (
     <div>
       <BackButton back={props} />
-      <form>
+      {accountDone ? <VerifyPage props={props} /> : <form>
         {renderInputs()}
         <Button text="Skapa konto" onClick={createAccount} />
-      </form>
+      </form>}
     </div>
   )
 }

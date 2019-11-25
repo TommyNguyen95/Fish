@@ -4,10 +4,11 @@ import {
   StyledText
 } from './StyledApprovedPage';
 
-const ApprovedPage = () => {
+const ApprovedPage = (props) => {
+
   return (
     <div>
-      <BackButton to="anvandare" />
+      <BackButton props={props.props.props} to="/anvandare" />
       <div className="success-checkmark">
         <div className="check-icon">
           <span className="icon-line line-tip"></span>
