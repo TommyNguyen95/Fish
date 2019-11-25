@@ -35,9 +35,9 @@ const ProfilePage = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const deleteUser = async () => {
+  const deleteUser = () => {
     if (window.confirm('Are you sure you want to delete you profile?')) {
-      await Axios.delete(`${state.apiEndpoint}/api/user/${userState._id}`)
+      Axios.delete(`${state.apiEndpoint}/api/user/${userState._id}`)
         .then(response => {
           dispatch({ type: "RESET_STATE", value: response.data })
           props.history.push("/")
@@ -45,8 +45,8 @@ const ProfilePage = (props) => {
     }
   }
 
-  const logOut = async () => {
-    await Axios.delete(`${state.apiEndpoint}/api/login`)
+  const logOut = () => {
+    Axios.delete(`${state.apiEndpoint}/api/login`)
       .then(res => {
         dispatch({ type: "RESET_STATE", value: res.data })
         props.history.push("/")
