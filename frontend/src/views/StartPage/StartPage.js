@@ -35,13 +35,19 @@ const Startpage = props => {
       }
     }).then(response => {
       state.loginState.isLoggedIn = true;
+      state.loginState.active = response.data.active;
       state.loginState.firstname = response.data.firstname;
       state.loginState.lastname = response.data.lastname;
       state.loginState.relations = response.data.relations;
       state.loginState.role = response.data.role;
       state.loginState.balance = response.data.balance;
       state.loginState.transactions = response.data.transactions;
-      props.history.push('/anvandare')
+      dispatch({ type: "RESET_STATE", value: state.loginState })
+
+      if (response.data.active) {
+        props.history.push('/anvandare')
+      }
+
 
 
     }).catch(response => {
