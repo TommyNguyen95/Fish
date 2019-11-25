@@ -30,7 +30,7 @@ async function activationMail(user) {
     text: "klicka här för att aktivera", // plain text body
     html:
       `
-      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+        <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html data-editor-version="2" class="sg-campaigns" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -185,47 +185,48 @@ async function activationMail(user) {
             height="100%"
             valign="top"
             bgcolor="">
-            <h2 style="text-align: center;"><strong><span style="font-family:lucida sans unicode,lucida grande,sans-serif;">Aktivera ditt konto genom att klicka på knappen!</span></strong></h2>
+            <h2 style="text-align: center;"><span style="color:#FFFFFF;"><strong><span style="font-family:lucida sans unicode,lucida grande,sans-serif;">Aktivera ditt konto genom att klicka p&aring; knappen!</span></strong></span></h2>
+
         </td>
       </tr>
     </table>
   <table border="0" cellPadding="0" cellSpacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed" width="100%"><tbody><tr><td align="center" class="outer-td" style="padding:0px 0px 0px 0px"><table border="0" cellPadding="0" cellSpacing="0" class="button-css__deep-table___2OZyb wrapper-mobile" style="text-align:center"><tbody><tr><td align="center" bgcolor="#FDD100" class="inner-td" style="border-radius:6px;font-size:16px;text-align:center;background-color:inherit"><a style="background-color:#FDD100;border:1px solid #333333;border-color:#000000;border-radius:6px;border-width:0px;color:#000000;display:inline-block;font-family:arial,helvetica,sans-serif;font-size:16px;font-weight:normal;letter-spacing:0px;line-height:16px;padding:12px 18px 12px 18px;text-align:center;text-decoration:none" href="${process.env.NODE_ENV == 'production' ? 'https://api.getfish.se' : 'http://localhost:3001'}/api/activate/${id}" target="_blank">KLICKA HÄR</a></td></tr></tbody></table></td></tr></tbody></table>
-  <table class="module"
-    role="module"
-    data-type="spacer"
-    border="0"
-    cellpadding="0"
-    cellspacing="0"
-    width="100%"
-    style="table-layout: fixed;">
-    <tr>
-      <td style="padding:0px 0px 200px 0px;"
-        role="module-content"
-        bgcolor="">
-      </td>
-    </tr>
-  </table>
+    <table class="module"
+           role="module"
+           data-type="spacer"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 200px 0px;"
+            role="module-content"
+            bgcolor="">
+        </td>
+      </tr>
+    </table>
   
-                              </td >
-                            </tr >
-                          </table >
-                          < !--[if mso]>
-                          </td ></tr ></table >
-                          </center >
-                          < ![endif]-- >
-                        </td >
-                      </tr >
-                    </table >
-                  </td >
-                </tr >
-              </table >
-            </td >
-          </tr >
-        </table >
-      </div >
-    </center >
-  </body >
-</html >
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if mso]>
+                          </td></tr></table>
+                          </center>
+                          <![endif]-->
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </center>
+  </body>
+</html>
       `
   });
 
@@ -420,48 +421,48 @@ async function sendResetPasswordLink(user) {
             height="100%"
             valign="top"
             bgcolor="">
-            <h2 style="text-align: center;"><strong><span style="font-family:lucida sans unicode,lucida grande,sans-serif;">&Aring;terst&auml;ll ditt l&ouml;senord&nbsp;genom att klicka p&aring; knappen!</span></strong></h2>
+            <h2 style="text-align: center;"><span style="color:#FFFFFF;"><strong><span style="font-family:lucida sans unicode,lucida grande,sans-serif;">&Aring;terst&auml;ll ditt l&ouml;senord&nbsp;genom att klicka p&aring; knappen!</span></strong></span></h2>
 
         </td>
       </tr>
     </table>
   <table border="0" cellPadding="0" cellSpacing="0" class="module" data-role="module-button" data-type="button" role="module" style="table-layout:fixed" width="100%"><tbody><tr><td align="center" class="outer-td" style="padding:0px 0px 0px 0px"><table border="0" cellPadding="0" cellSpacing="0" class="button-css__deep-table___2OZyb wrapper-mobile" style="text-align:center"><tbody><tr><td align="center" bgcolor="#FDD100" class="inner-td" style="border-radius:6px;font-size:16px;text-align:center;background-color:inherit"><a style="background-color:#FDD100;border:1px solid #333333;border-color:#000000;border-radius:6px;border-width:0px;color:#000000;display:inline-block;font-family:arial,helvetica,sans-serif;font-size:16px;font-weight:normal;letter-spacing:0px;line-height:16px;padding:12px 18px 12px 18px;text-align:center;text-decoration:none" href="${process.env.NODE_ENV == 'production' ? 'https://api.getfish.se' : 'http://localhost:3001'}/api/resetpassword/${id}" target="_blank">KLICKA HÄR</a></td></tr></tbody></table></td></tr></tbody></table>
-  <table class="module"
-    role="module"
-    data-type="spacer"
-    border="0"
-    cellpadding="0"
-    cellspacing="0"
-    width="100%"
-    style="table-layout: fixed;">
-    <tr>
-      <td style="padding:0px 0px 200px 0px;"
-        role="module-content"
-        bgcolor="">
-      </td>
-    </tr>
-  </table>
+    <table class="module"
+           role="module"
+           data-type="spacer"
+           border="0"
+           cellpadding="0"
+           cellspacing="0"
+           width="100%"
+           style="table-layout: fixed;">
+      <tr>
+        <td style="padding:0px 0px 200px 0px;"
+            role="module-content"
+            bgcolor="">
+        </td>
+      </tr>
+    </table>
   
-                              </td >
-                            </tr >
-                          </table >
-                          < !--[if mso]>
-                          </td ></tr ></table >
-                          </center >
-                          < ![endif]-- >
-                        </td >
-                      </tr >
-                    </table >
-                  </td >
-                </tr >
-              </table >
-            </td >
-          </tr >
-        </table >
-      </div >
-    </center >
-  </body >
-</html >
+                              </td>
+                            </tr>
+                          </table>
+                          <!--[if mso]>
+                          </td></tr></table>
+                          </center>
+                          <![endif]-->
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </center>
+  </body>
+</html>
       `
   });
 
