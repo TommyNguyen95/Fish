@@ -5,6 +5,7 @@ import UserPage from './views/UserPage';
 import PaymentPage from './views/PaymentPage';
 import CreateAccount from './views/CreateAccount';
 import ProfilePage from './views/ProfilePage/ProfilePage';
+import AdminPage from './views/AdminPage';
 import History from "./views/History/HistoryPage"
 import ChildPage from "./views/ChildPage/ChildPage"
 import RecoverPassword from './views/RecoverPassword';
@@ -76,6 +77,7 @@ const App = props => {
             <Route exact path="/skapa-konto" component={CreateAccount} />
             <Route exact path="/betala" component={PaymentPage} />
             <Route exact path="/profil" component={ProfilePage} />
+            <Route exact path="/transaktioner" component={AdminPage} />
             <Route exact path="/historik" component={History} />
             <Route exact path="/barn-profil/:id" component={ChildPage} />
           </Switch> : <Switch>

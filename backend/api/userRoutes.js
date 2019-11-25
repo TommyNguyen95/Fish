@@ -1,5 +1,6 @@
 const express = require('express')
 const User = require('../schemas/userSchema')
+const Transaction = require('../schemas/transactionSchema')
 const router = express.Router()
 const { reset, activate, sendResetLink } = require('../nodemailer')
 const encryptPassword = require('../helpers/encryptPassword')
@@ -43,11 +44,42 @@ router.post('/api/activatetestuser', async (req, res) => {
  * Get all users (TESTED - 01)
  */
 router.get('/api/users', async (req, res) => {
+  if (req.session.user.role !== 'admin') {
+    res.status(403).send();
+  }
   User.find({})
     .exec()
     .then(data => {
       res.status(200).send(data);
     })
+})
+/**
+ * To be used by admin. Searches for a user by email (must be exact) and returns user as well as transactions
+ * with populated "to" and "from" fields
+ */
+router.post('/api/users', async (req, res) => {
+  if (req.session.user.role !== 'admin') { res.status(403).send() }
+  const username = req.body.email;
+  const fields = {
+    username: 'username',
+    firstname: 'firstname',
+    lastname: 'lastname',
+    transactions: 'transactions',
+    created: 'created'
+  }
+  const user = await User.findOne({ username }).select(fields);
+  if (!user) { return res.status(404).send() }
+  const transactions = await Transaction.find({
+    $or: [{
+      to: user._id
+    }, {
+      from: user._id
+    }]
+  })
+    .populate('to from', 'username firstname lastname')
+    .exec();
+  user.transactions = transactions;
+  res.send(user);
 })
 
 /**
