@@ -5,7 +5,6 @@ import useSubContext from '../../state/useSubContext';
 const UserPage = (props) => {
 
   const state = useSubContext('loginState')[0];
-  console.log(state);
 
 
   return (
