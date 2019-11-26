@@ -1,0 +1,12 @@
+.pageNotFound{
+    h1{
+        text-align: center;
+        margin-top: 90px;
+        color: white;
+    }
+    @media screen and (max-width: 770px) {
+        h1 {
+          font-size: 20px;
+        }
+      }
+}

@@ -1,0 +1,8 @@
+.col-trans {
+  max-height: 35rem;
+  @media (max-width: 575.98px) {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
