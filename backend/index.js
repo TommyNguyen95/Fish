@@ -13,7 +13,7 @@ const fishRules = require('./acl/fish-rules.json')
 require('dotenv').config()
 
 let config = {
-  PORT: (process.env.NODE_ENV == 'production' ? 3020 : 3001),
+  PORT: 3001,
   salt: 'två laxar i en laxask1337',
   db: process.env.DB_HOST,
   db_test: process.env.DB_TEST
@@ -44,10 +44,12 @@ app.use(session({
 })
 )
 
-app.get('/', (req, res) => {
-  res.send('Välkommen till Fi$h super server')
-});
 app.use(acl(fishRules));
 app.use(userRoutes);
 app.use(transactionsRoutes);
 app.listen(config.PORT, () => console.log(`Gulligagruppens server is on port ${config.PORT}`));
+
+app.get('/', (req, res) => {
+  res.send('Välkommen till Fi$h super server')
+});
+

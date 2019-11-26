@@ -5,10 +5,12 @@
   "dependencies": {
     "axios": "^0.19.0",
     "bootstrap": "^4.3.1",
+    "dotenv": "^8.2.0",
     "easy-server-sent-events": "^1.0.8",
     "moment": "^2.24.0",
     "normalize.css": "^8.0.1",
     "react": "^16.11.0",
+    "react-amazing-proxy": "^1.0.57",
     "react-dom": "^16.11.0",
     "react-feather": "^2.0.3",
     "react-router-dom": "^5.1.2",
@@ -19,7 +21,7 @@
     "styled-components": "^4.4.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node node_modules/react-amazing-proxy/start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

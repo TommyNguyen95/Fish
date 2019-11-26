@@ -13,6 +13,7 @@ import PageNotFound from './views/PageNotFound/PageNotFound';
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
 import axios from 'axios';
+require('dotenv').config()
 
 axios.interceptors.request.use(
   function (config) {
