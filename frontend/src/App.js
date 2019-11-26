@@ -87,8 +87,7 @@ const App = props => {
               <Route exact path="/" component={StartPage} />
               <Route exact path="/skapa-konto" component={CreateAccount} />
               <Route exact path="/aterstallning" component={RecoverPassword} />
-              <Route exact path="/404" component={PageNotFound} />
-              <Redirect to="/404" />
+              <Route path="*" component={PageNotFound} />
             </Switch>}
         </Container>
       </Router>
