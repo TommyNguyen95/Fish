@@ -7,7 +7,7 @@ import {
 const ApprovedPage = (props) => {
 
   return (
-    <div>
+    <div className="success">
       <BackButton props={props.props.props} to="/anvandare" />
       <div className="success-checkmark">
         <div className="check-icon">

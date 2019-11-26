@@ -17,7 +17,7 @@ const UserPage = (props) => {
       </StyledUserIconDiv>
       <StyledUserBox>
         <StyledLink to={'/betala'}> <StyledButton text='Betala' /></StyledLink>
-        {state.loginState.role === 'admin' ? <StyledLink to={'/transaktioner'}> <StyledButton text='Alla transaktioner' /></StyledLink> : ''}
+        {state.loginState.role === 'admin' ? <StyledLink to={'/transaktioner'}> <StyledButton text='Sök användare' /></StyledLink> : ''}
         <StyledLink to={'/historik'}> <StyledButton text='Betalningshistorik' fontsize="1.3rem" /></StyledLink>
       </StyledUserBox>
     </div>
