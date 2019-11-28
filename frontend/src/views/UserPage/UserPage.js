@@ -1,17 +1,20 @@
 import React from 'react';
 import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage";
 import useSubContext from '../../state/useSubContext';
+import numeral from 'numeral'
 
 const UserPage = (props) => {
 
   const state = useSubContext('loginState')[0];
 
 
+  let balance = state.loginState.balance;
+
   return (
     <div>
       <StyledUserIconDiv>
         <StyledLink to="/profil">
-          <StyledText>SALDO: {state.loginState.balance}</StyledText>
+          <StyledText>SALDO: {balance.toLocaleString() + ' SEK'}</StyledText>
           <StyledUserIcon src="/images/usericon.svg" />
         </StyledLink>
       </StyledUserIconDiv>

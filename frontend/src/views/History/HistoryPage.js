@@ -45,7 +45,7 @@ const HistoryPage = (props) => {
                         <div className="msg-wrap"> {i.message}</div>
                     </div>
                     <div className="amount-div">
-                        <StyledP textstyle={_id === i.from ? '-' : ''}> {i.amount} KR</StyledP>
+                        <StyledP textstyle={_id === i.from ? '-' : ''}> {i.amount.toLocaleString()} SEK</StyledP>
                     </div>
                 </div>
             });
