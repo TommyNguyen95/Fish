@@ -198,6 +198,7 @@ router.put('/api/user/edit/:id', async (req, res) => {
     }
   })
 })
+
 /**
  * Create a user (TESTED 05, 06, 07)
  */
@@ -248,11 +249,21 @@ router.get('/api/activate/:id', async (req, res) => {
   let result = await user.save().catch(err => error = err);
   let error;
   res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}` || error);
-
 })
+
+router.patch('/api/activate/:id', async (req, res) => {
+  let user = await User.findById(req.params.id)
+  user.active = req.body.active
+  user.save(function (err) {
+    if (err) {
+      next(err)
+    } else {
+      res.status(200).send()
+    }
+  })
+})
+
 router.post('/api/sendresetlink/:email', async (req, res) => {
-
-
   let user = await User.findOne({ username: req.params.email })
   if (user) {
     sendResetLink(user)
