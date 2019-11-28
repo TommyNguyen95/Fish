@@ -257,7 +257,7 @@ router.patch('/api/activate/:id', async (req, res) => {
   if (!user) {
     res.status(404).send()
   }
-  user.active = false
+  user.active = req.body.active
   user.save()
   res.status(200).send(user)
 })
