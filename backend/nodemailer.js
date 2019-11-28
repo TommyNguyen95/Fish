@@ -1,4 +1,6 @@
 const nodemailer = require('nodemailer');
+require('dotenv').config()
+
 
 async function activationMail(user) {
   // Generate test SMTP service account from ethereal.email
@@ -10,21 +12,16 @@ async function activationMail(user) {
 
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
-    host: "smtp.sendgrid.net",
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-      user: 'apikey',
-      pass: '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'
-    },
-    tls: {
-      rejectUnauthorized: false
+      user: 'noreply.getfish@gmail.com',
+      pass: process.env.EMAILPW
     }
-  })
+  });
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"FI$H" <fishapplication@outlook.com>', // sender address
+    from: '"FI$H" <noreply.getfish@gmail.com>', // sender address
     to: username, // list of receivers
     subject: 'Welcome to FI$H-APP', // Subject line
     text: "klicka här för att aktivera", // plain text body
@@ -230,7 +227,7 @@ async function activationMail(user) {
       `
   });
 
-  // console.log('Message sent: %s', info.messageId);
+  console.log('Message sent: %s', info.messageId);
 
 }
 
@@ -247,21 +244,16 @@ async function sendResetPasswordLink(user) {
 
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
-    host: "smtp.sendgrid.net",
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-      user: 'apikey',
-      pass: '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'
-    },
-    tls: {
-      rejectUnauthorized: false
+      user: 'noreply.getfish@gmail.com',
+      pass: process.env.EMAILPW
     }
-  })
+  });
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"FI$H" <fishapplication@outlook.com>', // sender address
+    from: '"FI$H" <noreply.getfish@gmail.com>', // sender address
     to: username, // list of receivers
     subject: 'Welcome to FI$H-APP', // Subject line
     // text: `Ditt nya lösenord är : ${password}`, // plain text body
@@ -483,21 +475,16 @@ async function resetPassword(user, password) {
   let { username } = user
   // create reusable transporter object using the default SMTP transport
   const transporter = nodemailer.createTransport({
-    host: "smtp.sendgrid.net",
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
-      user: 'apikey',
-      pass: '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'
-    },
-    tls: {
-      rejectUnauthorized: false
+      user: 'noreply.getfish@gmail.com',
+      pass: process.env.EMAILPW
     }
-  })
+  });
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"FI$H" <fishapplication@outlook.com>', // sender address
+    from: '"FI$H" <noreply.getfish@gmail.com>', // sender address
     to: username, // list of receivers
     subject: 'Welcome to FI$H-APP', // Subject line
     // text: `Ditt nya lösenord är: ${password}`, // plain text body
