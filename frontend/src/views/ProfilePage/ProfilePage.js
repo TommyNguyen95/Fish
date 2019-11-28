@@ -11,6 +11,7 @@ import './ProfilePageStyles.scss'
 const ProfilePage = (props) => {
   const [state, dispatch] = useSubContext('loginState');
   const userState = state.loginState
+  console.log(userState, "state")
 
   const renderChildsAccounts = () => {
     if (userState.relations) {
@@ -35,21 +36,28 @@ const ProfilePage = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const deleteUser = () => {
-    if (window.confirm('Are you sure you want to delete you profile?')) {
-      Axios.delete(`${state.apiEndpoint}/api/user/${userState._id}`)
+  const handleActiveOrInactiveAccount = (active, callback) => {
+    if (window.confirm('Är du säker på att du vill avaktivera ditt konto?')) {
+      Axios.patch(`${state.apiEndpoint}/api/activate/${userState._id}`, { active })
         .then(response => {
-          dispatch({ type: "RESET_STATE", value: response.data })
-          props.history.push("/")
+          if (callback) {
+            callback({})
+          }
         })
     }
   }
 
-  const logOut = () => {
+  const resetState = (response) => {
+    dispatch({ type: "RESET_STATE", value: response })
+    props.history.push("/")
+  }
+
+  const logOut = (callback) => {
     Axios.delete(`${state.apiEndpoint}/api/login`)
       .then(res => {
-        dispatch({ type: "RESET_STATE", value: res.data })
-        props.history.push("/")
+        if (callback) {
+          callback(res.data)
+        }
       })
   }
 
@@ -66,8 +74,8 @@ const ProfilePage = (props) => {
             <Button text="Skapa barnkonto" />
           </Link>
       }
-      <Button text="Logga ut" onClick={logOut} />
-      <p className="remove-account" onClick={deleteUser}>Ta bort ditt konto</p>
+      <Button text="Logga ut" onClick={() => { logOut(resetState) }} />
+      <p className="remove-account" onClick={() => { handleActiveOrInactiveAccount(false, resetState) }}>Avaktivera ditt konto</p>
     </div>
   )
 }

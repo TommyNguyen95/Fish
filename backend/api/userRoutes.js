@@ -251,16 +251,15 @@ router.get('/api/activate/:id', async (req, res) => {
   res.json(`Ditt konto är nu aktiverat! Användarnamn: ${user.username}` || error);
 })
 
+// Deactivate account
 router.patch('/api/activate/:id', async (req, res) => {
   let user = await User.findById(req.params.id)
+  if (!user) {
+    res.status(404).send()
+  }
   user.active = req.body.active
-  user.save(function (err) {
-    if (err) {
-      next(err)
-    } else {
-      res.status(200).send()
-    }
-  })
+  user.save()
+  res.status(200).send(user)
 })
 
 router.post('/api/sendresetlink/:email', async (req, res) => {
