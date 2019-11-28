@@ -52,8 +52,6 @@ const AdminPage = () => {
   ));
 
   const handleInput = e => setSearchQuery(e.target.value);
-  console.log(user);
-
   return (
     <Row>
       <Col>
