@@ -29,7 +29,7 @@ const TransactionCard = ({
       <CardTitle className="font-weight-bold">Mottagare</CardTitle>
       <CardText>E-post: {toEmail}</CardText>
       <CardText>Namn: {toFirstName} {toLastName}</CardText>
-      <CardText className="font-weight-bold">Summa: {amount} kr</CardText>
+      <CardText className="font-weight-bold">Summa: {amount.toLocaleString()} sek</CardText>
       <CardText className="font-weight-bold">Datum: {formatDate()}</CardText>
     </Card>
   );

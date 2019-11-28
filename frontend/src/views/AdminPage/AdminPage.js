@@ -32,7 +32,7 @@ const AdminPage = () => {
   }
 
   const renderUserDetails = () => {
-    const { username, firstname, lastname, created } = user;
+    const { username, firstname, lastname, created, balance } = user;
     return (
       <Card>
         <CardHeader className="font-weight-bold">{firstname} {lastname}</CardHeader>
@@ -40,6 +40,7 @@ const AdminPage = () => {
           <CardText>
             <span className="font-weight-bold">{firstname} {lastname}</span> gick med <span className="font-weight-bold">{created.split("T")[0]}</span> och har e-postadressen <span className="font-weight-bold">{username}</span>
           </CardText>
+          <CardText className="font-weight-bold">Saldo: {balance.toLocaleString()} sek</CardText>
           <Button outline color="danger" onClick={deleteUser}>Ta bort konto</Button>
         </CardBody>
       </Card>
