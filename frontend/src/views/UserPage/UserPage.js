@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage";
 import useSubContext from '../../state/useSubContext';
-import numeral from 'numeral'
+
 
 const UserPage = (props) => {
 
