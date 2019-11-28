@@ -11,6 +11,7 @@ import './ProfilePageStyles.scss'
 const ProfilePage = (props) => {
   const [state, dispatch] = useSubContext('loginState');
   const userState = state.loginState
+  console.log(userState, "state")
 
   const renderChildsAccounts = () => {
     if (userState.relations) {
@@ -35,9 +36,9 @@ const ProfilePage = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const deleteUser = () => {
-    if (window.confirm('Are you sure you want to delete you profile?')) {
-      Axios.delete(`${state.apiEndpoint}/api/user/${userState._id}`)
+  const deactivateAccount = () => {
+    if (window.confirm('Är du säker på att du vill avaktivera ditt konto?')) {
+      Axios.patch(`${state.apiEndpoint}/api/activate/${userState._id}`)
         .then(response => {
           dispatch({ type: "RESET_STATE", value: response.data })
           props.history.push("/")
@@ -67,7 +68,7 @@ const ProfilePage = (props) => {
           </Link>
       }
       <Button text="Logga ut" onClick={logOut} />
-      <p className="remove-account" onClick={deleteUser}>Ta bort ditt konto</p>
+      <p className="remove-account" onClick={deactivateAccount}>Avaktivera ditt konto</p>
     </div>
   )
 }
