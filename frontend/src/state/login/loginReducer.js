@@ -7,7 +7,7 @@ export default (state, action) => {
     case PASSWORD_UPDATE:
       return { ...state, password: action.value }
     case RESET_STATE:
-      return { ...action.value }
+      return { ...state, ...action.value }
     default:
       return state;
   }

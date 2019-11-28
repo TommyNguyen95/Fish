@@ -26,14 +26,6 @@ axios.interceptors.request.use(
 
 const App = props => {
   const [state, dispatch] = useSubContext('loginState');
-
-  const redirect = () => {
-    if (state.loginState.active && window.location.pathname === '/') {
-      return <Redirect to="/anvandare" />
-    }
-  }
-
-
   const Logo = () => {
     return (
       <React.Fragment>
@@ -56,8 +48,8 @@ const App = props => {
         url: `${state.apiEndpoint}/api/login`
       }).then(response => {
         if (!response.data._id) return;
-        state.loginState.isLoggedIn = true;
         state.loginState = { ...response.data }
+        state.loginState.isLoggedIn = true;
         dispatch({ type: "RESET_STATE", value: state.loginState })
       }).catch(response => {
         console.log("error", response)
@@ -72,7 +64,7 @@ const App = props => {
       <Router>
         <Logo />
         <Container>
-          {state.loginState.active ? <Switch>
+          <Switch>
             <Route exact path="/anvandare" component={UserPage} />
             <Route exact path="/skapa-konto" component={CreateAccount} />
             <Route exact path="/betala" component={PaymentPage} />
@@ -81,14 +73,11 @@ const App = props => {
             <Route exact path="/historik" component={History} />
             <Route exact path="/barn-profil/:id" component={ChildPage} />
             <Route exact path="/404" component={PageNotFound} />
-            {redirect()}
-            <Redirect to="/404" />
-          </Switch> : <Switch>
-              <Route exact path="/" component={StartPage} />
-              <Route exact path="/skapa-konto" component={CreateAccount} />
-              <Route exact path="/aterstallning" component={RecoverPassword} />
-              <Route path="*" component={PageNotFound} />
-            </Switch>}
+            <Route exact path="/" component={StartPage} />
+            <Route exact path="/skapa-konto" component={CreateAccount} />
+            <Route exact path="/aterstallning" component={RecoverPassword} />
+            <Route path="*" component={PageNotFound} />
+          </Switch>
         </Container>
       </Router>
     </main>

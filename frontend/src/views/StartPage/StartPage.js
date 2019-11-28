@@ -20,6 +20,7 @@ const Startpage = props => {
    */
   const [state, dispatch] = useSubContext('loginState');
   const [validColor, setValidColor] = useState('');
+
   /**
    * Function that makes a post to the backend to both login the user
    * and check if the user is valid.
@@ -44,9 +45,9 @@ const Startpage = props => {
       state.loginState.transactions = response.data.transactions;
       dispatch({ type: "RESET_STATE", value: state.loginState })
 
-      if (response.data.active) {
-        props.history.push('/anvandare')
-      }
+      // if (response.data.active) {
+      //   props.history.push('/anvandare')
+      // }
 
 
 
@@ -54,10 +55,30 @@ const Startpage = props => {
       setValidColor('#f8d7da');
     })
   }
+  function checkPath(pathnames) {
+    let status = false;
+    pathnames.map(x => {
+      if (window.location.pathname === x) {
+        status = true
+      }
+    })
+    return status;
+  }
+
+  const redirector = () => {
+    if (!state.loginState.isLoggedIn) {
+      let stay = ['/aterstallning', '/skapa-konto']
+      return checkPath(stay) ? null : <Redirect to="/" />
+    }
+    if (state.loginState.isLoggedIn) {
+      let stay = ['/anvandare', '/betala', '/profil', '/transaktioner', '/historik', '/barn-profil']
+      return checkPath(stay) ? 'null' : <Redirect to="/anvandare" />
+    }
+  }
 
   return (
     <Row>
-      {state.loginState._id && <Redirect to="/anvandare" />}
+      {redirector()}
       <Col xs="12" md="12" lg="12">
         <LoginForm>
           <Input bg={validColor} placeholder="E-post" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
