@@ -60,7 +60,7 @@ router.get('/api/users', async (req, res) => {
 router.post('/api/users', async (req, res) => {
   if (req.session.user.role !== 'admin') { res.status(403).send() }
   const username = req.body.email;
-  const fields = "username firstname lastname transactions created balance";
+  const fields = "username firstname lastname transactions created balance active";
   const user = await User.findOne({ username }).select(fields);
   if (!user) { return res.status(404).send() }
   const transactions = await Transaction.find({

@@ -26,13 +26,13 @@ const AdminPage = () => {
     setUser(res.data)
   }
 
-  const deleteUser = async () => {
-    await axios.delete(`http://localhost:3001/api/user/${user._id}`);
-    setUser(null);
+  const handleInactivateAndActivate = async active => {
+    await axios.patch(`http://localhost:3001/api/activate/${user._id}`, { active });
+    setUser({ ...user, active });
   }
 
   const renderUserDetails = () => {
-    const { username, firstname, lastname, created, balance } = user;
+    const { username, firstname, lastname, created, balance, active } = user;
     return (
       <Card>
         <CardHeader className="font-weight-bold">{firstname} {lastname}</CardHeader>
@@ -41,7 +41,10 @@ const AdminPage = () => {
             <span className="font-weight-bold">{firstname} {lastname}</span> gick med <span className="font-weight-bold">{created.split("T")[0]}</span> och har e-postadressen <span className="font-weight-bold">{username}</span>
           </CardText>
           <CardText className="font-weight-bold">Saldo: {balance.toLocaleString()} sek</CardText>
-          <Button outline color="danger" onClick={deleteUser}>Ta bort konto</Button>
+          {active ?
+            <Button outline color="danger" onClick={() => handleInactivateAndActivate(false)}>Inaktivera konto</Button> :
+            <Button outline color="primary" onClick={() => handleInactivateAndActivate(true)}>Aktivera konto</Button>}
+
         </CardBody>
       </Card>
     )
