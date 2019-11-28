@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import useSubContext from '../../state/useSubContext';
 import axios from 'axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Row, Col } from 'reactstrap';
 import {
   TextLinkAccount,
   TextLinkPassword,
   LoginForm,
   LoginButton,
-  TextWrapper
+  TextWrapper,
 } from './StyledStartPage';
 import Input from '../../components/Input/Input';
+import './toastify.scss';
 
 const Startpage = props => {
 
@@ -46,9 +49,9 @@ const Startpage = props => {
 
       if (response.data.active) {
         props.history.push('/anvandare')
+      } else {
+        toast('Ditt konto är inte aktiverat eller har nyligen blivit avaktiverat, om detta uppstår så kontakta vår support. Mvh getfish.se')
       }
-
-
 
     }).catch(response => {
       setValidColor('#f8d7da');
@@ -60,6 +63,7 @@ const Startpage = props => {
       {state.loginState._id && <Redirect to="/anvandare" />}
       <Col xs="12" md="12" lg="12">
         <LoginForm>
+          <ToastContainer autoClose={10000} position={toast.POSITION.TOP_CENTER} />
           <Input bg={validColor} placeholder="E-post" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />
           <Input bg={validColor} type="password" placeholder="Lösenord" id="Popover1" onChange={(e) => dispatch({ type: "PASSWORD_UPDATE", value: e.target.value })} />
           <LoginButton onClick={loginRequest} text="Logga In" fontsize="14px"></LoginButton>
