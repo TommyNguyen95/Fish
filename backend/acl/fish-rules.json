@@ -28,8 +28,9 @@
     },
     "activate": {
       "visitor": "get",
-      "user": "get",
-      "admin": "get"
+      "user": "get patch",
+      "admin": "get patch",
+      "child": "get patch"
     },
     "resetpassword": {
       "visitor": "get",
