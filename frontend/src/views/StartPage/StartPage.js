@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom';
 import useSubContext from '../../state/useSubContext';
 import axios from 'axios';
 import { Row, Col } from 'reactstrap';
@@ -13,7 +12,6 @@ import {
 import Input from '../../components/Input/Input';
 
 const Startpage = props => {
-
   /**
    * Getting our state and dispatch and also pointing to what state we want to update.
    * Which in this case would be our loginState.
@@ -44,41 +42,13 @@ const Startpage = props => {
       state.loginState.balance = response.data.balance;
       state.loginState.transactions = response.data.transactions;
       dispatch({ type: "RESET_STATE", value: state.loginState })
-
-      // if (response.data.active) {
-      //   props.history.push('/anvandare')
-      // }
-
-
-
     }).catch(response => {
       setValidColor('#f8d7da');
     })
   }
-  function checkPath(pathnames) {
-    let status = false;
-    pathnames.map(x => {
-      if (window.location.pathname === x) {
-        status = true
-      }
-    })
-    return status;
-  }
-
-  const redirector = () => {
-    if (!state.loginState.isLoggedIn) {
-      let stay = ['/aterstallning', '/skapa-konto']
-      return checkPath(stay) ? null : <Redirect to="/" />
-    }
-    if (state.loginState.isLoggedIn) {
-      let stay = ['/anvandare', '/betala', '/profil', '/transaktioner', '/historik', '/barn-profil']
-      return checkPath(stay) ? 'null' : <Redirect to="/anvandare" />
-    }
-  }
 
   return (
     <Row>
-      {redirector()}
       <Col xs="12" md="12" lg="12">
         <LoginForm>
           <Input bg={validColor} placeholder="E-post" onChange={(e) => dispatch({ type: "NAME_UPDATE", value: e.target.value })} />

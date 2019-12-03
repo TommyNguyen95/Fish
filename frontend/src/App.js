@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 import StartPage from './views/StartPage';
 import UserPage from './views/UserPage';
@@ -24,17 +24,26 @@ axios.interceptors.request.use(
   }
 )
 
-const App = props => {
+const App = () => {
   const [state, dispatch] = useSubContext('loginState');
   const Logo = () => {
+    const [route, setRoute] = useState()
+    function logoToggler() {
+      if (state.loginState.role !== 'visitor') {
+        setRoute(<Redirect to="/anvandare" />)
+      } else {
+        setRoute(<Redirect to="/" />)
+      }
+    }
     return (
       <React.Fragment>
         {state.transactionState.showLogo &&
           <Container className="logo">
-            <Link to="/">
+            <span onClick={logoToggler}>
               <img src="/images/fishlogo.svg" alt="" />
               <p className="text-center">När du vill skicka en lax eller en röding</p>
-            </Link>
+            </span>
+            {route}
           </Container>
         }
       </React.Fragment>
@@ -47,7 +56,10 @@ const App = props => {
         method: 'get',
         url: `${state.apiEndpoint}/api/login`
       }).then(response => {
-        if (!response.data._id) return;
+        if (!response.data._id) {
+          state.loginState.role = 'visitor';
+          dispatch({ type: "RESET_STATE", value: state.loginState })
+        }
         state.loginState = { ...response.data }
         state.loginState.isLoggedIn = true;
         dispatch({ type: "RESET_STATE", value: state.loginState })
@@ -58,6 +70,30 @@ const App = props => {
     checkStatus()
     // eslint-disable-next-line
   }, [])
+
+
+  const redirector = () => {
+    if (!state.loginState.role) return;
+    function checkPath(pathnames) {
+      let status = false;
+      pathnames.map(x => {
+        if (window.location.pathname === x) {
+          status = true
+        }
+        return null
+      })
+      return status;
+    }
+    if (state.loginState.role === 'visitor') {
+      let stay = ['/aterstallning', '/skapa-konto']
+      return checkPath(stay) ? null : <Redirect to="/" />
+    }
+
+    if (state.loginState.role === 'child' || state.loginState.role === 'parent') {
+      let stay = ['/anvandare', '/betala', '/profil', '/transaktioner', '/historik', '/barn-profil']
+      return checkPath(stay) ? null : <Redirect to="/anvandare" />
+    }
+  }
 
   return (
     <main className="wrapper">
@@ -78,6 +114,7 @@ const App = props => {
             <Route exact path="/aterstallning" component={RecoverPassword} />
             <Route path="*" component={PageNotFound} />
           </Switch>
+          {redirector()}
         </Container>
       </Router>
     </main>

@@ -48,8 +48,10 @@ const ProfilePage = (props) => {
   const logOut = () => {
     Axios.delete(`${state.apiEndpoint}/api/login`)
       .then(res => {
-        dispatch({ type: "RESET_STATE", value: res.data })
-        props.history.push("/")
+        state.loginState = {
+          role: 'visitor'
+        }
+        dispatch({ type: "RESET_STATE", value: state })
       })
   }
 
