@@ -1,5 +1,7 @@
 // Make this bad boy global so we don't have to import it everywhere
-const express = require('express');
+const app = require('express')();
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
 const bodyParser = require('body-parser');
 const connectToDb = require('./config/db');
 const session = require('express-session');
@@ -20,9 +22,21 @@ let config = {
 }
 global.config = config
 
+io.on('connection', socket => {
+  console.log('User connected');
+
+  socket.on('message', (message) => {
+    console.log(message);
+
+  })
+
+  socket.on('disconnect', () => {
+    console.log('Disconnected');
+  })
+})
+
 // Initial connection to DB
 connectToDb()
-const app = express();
 app.use(bodyParser.json())
 
 app.use(cors({
@@ -50,4 +64,4 @@ app.get('/', (req, res) => {
 app.use(acl(fishRules));
 app.use(userRoutes);
 app.use(transactionsRoutes);
-app.listen(config.PORT, () => console.log(`Gulligagruppens server is on port ${config.PORT}`));
+http.listen(config.PORT, () => console.log(`Gulligagruppens server is on port ${config.PORT}`));

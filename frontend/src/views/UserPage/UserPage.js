@@ -2,11 +2,11 @@ import React from 'react';
 import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage";
 import useSubContext from '../../state/useSubContext';
 
-
-const UserPage = (props) => {
+const UserPage = ({ socket }) => {
 
   const state = useSubContext('loginState')[0];
 
+  socket.emit('message', 'HEJ HEJ')
 
   let balance = state.loginState.balance;
 

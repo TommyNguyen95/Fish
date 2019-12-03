@@ -13,6 +13,7 @@ import PageNotFound from './views/PageNotFound/PageNotFound';
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
 import axios from 'axios';
+import socketIo from 'socket.io-client';
 
 axios.interceptors.request.use(
   function (config) {
@@ -26,6 +27,7 @@ axios.interceptors.request.use(
 
 const App = props => {
   const [state, dispatch] = useSubContext('loginState');
+  const [socket, setSocket] = React.useState(null);
 
   const redirect = () => {
     if (state.loginState.active && window.location.pathname === '/') {
@@ -56,6 +58,7 @@ const App = props => {
         url: `${state.apiEndpoint}/api/login`
       }).then(response => {
         if (!response.data._id) return;
+        setSocket(socketIo('http://localhost:3001'))
         state.loginState.isLoggedIn = true;
         state.loginState = { ...response.data }
         dispatch({ type: "RESET_STATE", value: state.loginState })
@@ -73,21 +76,67 @@ const App = props => {
         <Logo />
         <Container>
           {state.loginState.active ? <Switch>
-            <Route exact path="/anvandare" component={UserPage} />
-            <Route exact path="/skapa-konto" component={CreateAccount} />
-            <Route exact path="/betala" component={PaymentPage} />
-            <Route exact path="/profil" component={ProfilePage} />
-            <Route exact path="/transaktioner" component={AdminPage} />
-            <Route exact path="/historik" component={History} />
-            <Route exact path="/barn-profil/:id" component={ChildPage} />
-            <Route exact path="/404" component={PageNotFound} />
+            <Route
+              exact
+              path="/anvandare"
+              render={() => <UserPage socket={socket} />}
+            />
+            <Route
+              exact
+              path="/skapa-konto"
+              component={CreateAccount}
+            />
+            <Route
+              exact
+              path="/betala"
+              render={() => <PaymentPage socket={socket} />}
+            />
+            <Route
+              exact
+              path="/profil"
+              render={() => <ProfilePage socket={socket} />}
+            />
+            <Route
+              exact
+              path="/transaktioner"
+              render={() => <AdminPage socket={socket} />}
+            />
+            <Route
+              exact
+              path="/historik"
+              render={() => <History socket={socket} />}
+            />
+            <Route
+              exact
+              path="/barn-profil/:id"
+              render={() => <ChildPage socket={socket} />}
+            />
+            <Route
+              exact
+              path="/404"
+              component={PageNotFound}
+            />
             {redirect()}
             <Redirect to="/404" />
           </Switch> : <Switch>
-              <Route exact path="/" component={StartPage} />
-              <Route exact path="/skapa-konto" component={CreateAccount} />
-              <Route exact path="/aterstallning" component={RecoverPassword} />
-              <Route path="*" component={PageNotFound} />
+              <Route
+                exact
+                path="/"
+                render={() => <StartPage socket={socket} />}
+              />
+              <Route
+                exact
+                path="/skapa-konto"
+                render={() => <CreateAccount socket={socket} />}
+              />
+              <Route
+                exact
+                path="/aterstallning"
+                render={() => <RecoverPassword socket={socket} />}
+              />
+              <Route
+                path="*"
+                component={PageNotFound} />
             </Switch>}
         </Container>
       </Router>
