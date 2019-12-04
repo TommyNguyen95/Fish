@@ -2,6 +2,7 @@
 const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+require('./socket/socket')(io);
 const bodyParser = require('body-parser');
 const connectToDb = require('./config/db');
 const session = require('express-session');
@@ -21,19 +22,6 @@ let config = {
   db_test: process.env.DB_TEST
 }
 global.config = config
-
-io.on('connection', socket => {
-  console.log('User connected');
-
-  socket.on('message', (message) => {
-    console.log(message);
-
-  })
-
-  socket.on('disconnect', () => {
-    console.log('Disconnected');
-  })
-})
 
 // Initial connection to DB
 connectToDb()

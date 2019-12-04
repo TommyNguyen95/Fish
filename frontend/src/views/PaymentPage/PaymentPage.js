@@ -8,13 +8,15 @@ import {
   StyledTextarea,
 } from './StyledPaymentPage';
 import axios from 'axios';
+import useSocket from '../../helpers/useSocket';
 
 const PaymentPage = (props) => {
-
+  useSocket(props.socket, props.setSocket)
   const [state, dispatch] = useSubContext('transactionState');
   const [transactionInfo, setTransactionInfo] = useState(false);
   const [validColor, setValidColor] = useState('');
   const [validMoney, setValidMoney] = useState('');
+
 
   /**
    * This function gets information for the transaction.

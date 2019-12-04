@@ -13,7 +13,6 @@ import PageNotFound from './views/PageNotFound/PageNotFound';
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
 import axios from 'axios';
-import socketIo from 'socket.io-client';
 
 axios.interceptors.request.use(
   function (config) {
@@ -58,7 +57,6 @@ const App = props => {
         url: `${state.apiEndpoint}/api/login`
       }).then(response => {
         if (!response.data._id) return;
-        setSocket(socketIo('http://localhost:3001'))
         state.loginState.isLoggedIn = true;
         state.loginState = { ...response.data }
         dispatch({ type: "RESET_STATE", value: state.loginState })
@@ -79,7 +77,7 @@ const App = props => {
             <Route
               exact
               path="/anvandare"
-              render={() => <UserPage socket={socket} />}
+              render={() => <UserPage socket={socket} setSocket={setSocket} />}
             />
             <Route
               exact
@@ -89,27 +87,27 @@ const App = props => {
             <Route
               exact
               path="/betala"
-              render={() => <PaymentPage socket={socket} />}
+              render={() => <PaymentPage socket={socket} setSocket={setSocket} />}
             />
             <Route
               exact
               path="/profil"
-              render={() => <ProfilePage socket={socket} />}
+              render={() => <ProfilePage socket={socket} setSocket={setSocket} />}
             />
             <Route
               exact
               path="/transaktioner"
-              render={() => <AdminPage socket={socket} />}
+              render={() => <AdminPage socket={socket} setSocket={setSocket} />}
             />
             <Route
               exact
               path="/historik"
-              render={() => <History socket={socket} />}
+              render={() => <History socket={socket} setSocket={setSocket} />}
             />
             <Route
               exact
               path="/barn-profil/:id"
-              render={() => <ChildPage socket={socket} />}
+              render={() => <ChildPage socket={socket} setSocket={setSocket} />}
             />
             <Route
               exact
@@ -122,17 +120,17 @@ const App = props => {
               <Route
                 exact
                 path="/"
-                render={() => <StartPage socket={socket} />}
+                render={() => <StartPage socket={socket} setSocket={setSocket} />}
               />
               <Route
                 exact
                 path="/skapa-konto"
-                render={() => <CreateAccount socket={socket} />}
+                render={() => <CreateAccount socket={socket} setSocket={setSocket} />}
               />
               <Route
                 exact
                 path="/aterstallning"
-                render={() => <RecoverPassword socket={socket} />}
+                render={() => <RecoverPassword socket={socket} setSocket={setSocket} />}
               />
               <Route
                 path="*"

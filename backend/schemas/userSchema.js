@@ -13,7 +13,8 @@ let userSchema = new Schema({
   transactions: Array,
   created: { type: Date, default: Date.now },
   ssn: { type: String, required: true },
-  active: { type: Boolean, default: false }
+  active: { type: Boolean, default: false },
+  socketIds: [{ type: String }]
 });
 
 module.exports = mongoose.model("User", userSchema);

@@ -7,8 +7,10 @@ import RelationList from '../../components/RelationList/RelationList'
 import Text from '../../components/Text'
 import BackButton from '../../components/BackButton';
 import './ProfilePageStyles.scss'
+import useSocket from '../../helpers/useSocket';
 
 const ProfilePage = (props) => {
+  useSocket(props.socket, props.setSocket)
   const [state, dispatch] = useSubContext('loginState');
   const userState = state.loginState
   console.log(userState, "state")

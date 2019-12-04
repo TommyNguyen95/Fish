@@ -1,17 +1,19 @@
 import React from 'react';
 import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage";
 import useSubContext from '../../state/useSubContext';
+import useSocket from '../../helpers/useSocket';
 
-const UserPage = ({ socket }) => {
-
+const UserPage = ({ socket, setSocket }) => {
+  useSocket(socket, setSocket);
   const state = useSubContext('loginState')[0];
-
-  socket.emit('message', 'HEJ HEJ')
+  console.log(state);
 
   let balance = state.loginState.balance;
 
+
   return (
     <div>
+      <button onClick={() => socket.emit('message', { msg: 'hello', id: socket.id, username: state.loginState.username })}>Skicka</button>
       <StyledUserIconDiv>
         <StyledLink to="/profil">
           <StyledText>SALDO: {balance.toLocaleString() + ' SEK'}</StyledText>

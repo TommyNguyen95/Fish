@@ -5,12 +5,13 @@ import Backbutton from "../../components/BackButton"
 import moment from 'moment';
 import { StyledP } from "./StyledHistory"
 import Axios from 'axios';
+import useSocket from '../../helpers/useSocket';
 
 
 
 
 const HistoryPage = (props) => {
-
+  useSocket(props.socket, props.setSocket)
   const [state, dispatch] = useSubContext('loginState');
   let fromChild;
 

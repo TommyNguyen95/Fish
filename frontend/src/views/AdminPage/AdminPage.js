@@ -14,11 +14,12 @@ import {
   CardText
 } from 'reactstrap';
 import TransactionCard from './components/TransactionCard';
+import useSocket from '../../helpers/useSocket';
 
-const AdminPage = () => {
+const AdminPage = ({ socket, setSocket }) => {
+  useSocket(socket, setSocket)
   const [user, setUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
-
 
   const getUser = async e => {
     e.preventDefault();
