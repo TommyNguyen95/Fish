@@ -1,4 +1,5 @@
 const path = require('path');
+console.log('maddafakka')
 const fs = require('fs');
 
 const publicPath = path.resolve(__dirname, './public');

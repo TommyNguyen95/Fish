@@ -1,12 +1,14 @@
+import axios from 'axios';
+
 class RegisterServiceWorker {
 
   constructor() {
     this.debug = false;
-    this.routeToServiceWorker = '/public/serviceWorker.js';
+    this.routeToServiceWorker = '/serviceWorker.js';
     // check browser support, if support call register
     'serviceWorker' in navigator && this.register();
-
-    console.log('körs denna kod??')
+    console.log(this.routeToServiceWorker)
+    console.log('körs denna kod?? registerServiceWorker')
   }
 
   log(...args) {
@@ -37,14 +39,21 @@ class RegisterServiceWorker {
       userVisibleOnly: true,
       applicationServerKey: this.urlBase64ToUint8Array(publicVapidKey)
     });
+
     this.log('push notifications registrered');
     // Send to subscribe on backend
     console.log('kkköööörs denna kod????')
-    await fetch('/api/push-subscribe', {
+    await fetch('localhost:3001/api/push-subscribe', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(subscription)
     });
+    /*
+    await axios('localhost:3001/api/push-subscribe', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(subscription)
+    }); */
     this.log('subscribed to push notifications');
   }
 
