@@ -21,15 +21,15 @@ const ConfirmPayment = (props) => {
    * creating a transaction with the correct message and amount
    * from our state.
    */
-  const sendTransaction = () => {
-    axios.post(`${state.apiEndpoint}/api/transactions`, {
+  const sendTransaction = async () => {
+    const data = {
       amount: state.transactionState.amount,
       message: state.transactionState.message,
       to: state.transactionState.receiverId,
       from: state.loginState._id
-    }).then(response => {
-    }).catch(response => {
-    })
+    }
+    await axios.post(`${state.apiEndpoint}/api/transactions`, data)
+    props.props.socket.emit('paymentMessage', data)
   }
 
   /**
