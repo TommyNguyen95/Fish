@@ -17,6 +17,7 @@ const ChildPage = (props) => {
         .filter(child => child._id === props.match.params.id)
         .map((child, i) => {
           return <div key={i} className="child-page-main">
+            <Text text="Namn" textInput={child.firstname} />
             <Text text="E-post" textInput={child.username}></Text>
             <Text text="Belopp" textInput={child.balance}></Text>
           </div>
