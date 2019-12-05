@@ -13,14 +13,17 @@ const socket = (io) => {
 
     socket.on('paymentMessage', async message => {
       const receiver = await User.findById(message.to);
+      const sender = await User.findById(message.from).select('username');
+      message.from = sender.username
+      delete message.to;
       if (receiver.socketIds.length) {
         receiver.socketIds.forEach(id => {
-          // PaymentMessage should emit the message data
-          // that will be displayed on the frontend
-          io.to(id).emit('paymentMessage', 'betalning har skett')
+          io.to(id).emit('paymentMessage', message);
         })
       }
     })
+
+    socket.on('message', () => console.log('message received'))
 
     socket.on('disconnect', async () => {
       console.log('User disconnected');
