@@ -120,17 +120,17 @@ const App = props => {
               <Route
                 exact
                 path="/"
-                render={() => <StartPage socket={socket} setSocket={setSocket} />}
+                component={StartPage}
               />
               <Route
                 exact
                 path="/skapa-konto"
-                render={() => <CreateAccount socket={socket} setSocket={setSocket} />}
+                component={CreateAccount}
               />
               <Route
                 exact
                 path="/aterstallning"
-                render={() => <RecoverPassword socket={socket} setSocket={setSocket} />}
+                component={RecoverPassword}
               />
               <Route
                 path="*"

@@ -13,7 +13,6 @@ const UserPage = ({ socket, setSocket }) => {
 
   return (
     <div>
-      <button onClick={() => socket.emit('message', { msg: 'hello', id: socket.id, username: state.loginState.username })}>Skicka</button>
       <StyledUserIconDiv>
         <StyledLink to="/profil">
           <StyledText>SALDO: {balance.toLocaleString() + ' SEK'}</StyledText>
