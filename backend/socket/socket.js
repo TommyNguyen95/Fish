@@ -23,8 +23,6 @@ const socket = (io) => {
       }
     })
 
-    socket.on('message', () => console.log('message received'))
-
     socket.on('disconnect', async () => {
       console.log('User disconnected');
       const data = await User.find({ socketIds: socket.id })

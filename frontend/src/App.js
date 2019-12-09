@@ -13,6 +13,8 @@ import PageNotFound from './views/PageNotFound/PageNotFound';
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 axios.interceptors.request.use(
   function (config) {
@@ -27,13 +29,13 @@ axios.interceptors.request.use(
 const App = props => {
   const [state, dispatch] = useSubContext('loginState');
   const [socket, setSocket] = React.useState(null);
+  toast.configure()
 
   const redirect = () => {
     if (state.loginState.active && window.location.pathname === '/') {
       return <Redirect to="/anvandare" />
     }
   }
-
 
   const Logo = () => {
     return (
