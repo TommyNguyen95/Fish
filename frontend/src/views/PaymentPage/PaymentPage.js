@@ -28,14 +28,16 @@ const PaymentPage = (props) => {
   const getInfoForTransaction = (e) => {
     e.preventDefault();
     if (state.loginState.balance >= state.transactionState.amount) {
-      axios.get(`${state.apiEndpoint}/api/user/${state.transactionState.email}`)
-        .then(response => {
-          state.transactionState.receiverId = response.data._id
-          state.transactionState.recieverBalance = response.data.balance;
-          setTransactionInfo(true)
-        }).catch(response => {
-          alert('Error, var vänlig att kontakta support om detta fortsätter.')
-        })
+      if (state.loginState.username !== state.transactionState.email) {
+        axios.get(`${state.apiEndpoint}/api/user/${state.transactionState.email}`)
+          .then(response => {
+            state.transactionState.receiverId = response.data._id
+            state.transactionState.recieverBalance = response.data.balance;
+            setTransactionInfo(true)
+          }).catch(response => {
+            alert('Error, var vänlig att kontakta support om detta fortsätter.')
+          })
+      }
     } else {
       setValidMoney('#f8d7da')
 
