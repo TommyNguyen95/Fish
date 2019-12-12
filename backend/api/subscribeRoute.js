@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router()
+const webpush = require('web-push')
 
 // Subscribe route
 router.post('/api/push-subscribe', async (req, res) => {
@@ -7,23 +8,17 @@ router.post('/api/push-subscribe', async (req, res) => {
   // Send 201 - resource created
   res.status(201).json({ subscribing: true });
 
-  console.log('subscription', subscription);
-
   // Send some notifications...
   // this might not be what you do directly on subscription
   // normally
-  sendNotification(subscription, { body: 'Welcome!' });
-  setTimeout(
-    () => sendNotification(subscription, console.log('tjena??'), { body: 'Still there?' }),
-    3000
-  );
+  sendNotification(subscription, { body: 'Välkommen till f!$h!' });
 });
 
 
 // A function that sends notifications
 async function sendNotification(subscription, payload) {
   let toSend = {
-    title: 'Our site name',
+    title: 'Getfish.se',
     icon: '/logo192.png',
     ...payload
   };

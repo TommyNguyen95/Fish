@@ -18,7 +18,7 @@ const webpush = require('web-push');
 require('dotenv').config()
 
 let config = {
-  PORT: (process.env.NODE_ENV == 'production' ? 3020 : 3001),
+  PORT: (process.env.NODE_ENV == 'production' ? 3001 : 3001),
   salt: 'två laxar i en laxask1337',
   db: process.env.DB_HOST,
   db_test: process.env.DB_TEST
@@ -41,7 +41,7 @@ connectToDb()
 app.use(bodyParser.json())
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://192.168.1.30:3000'],
+  origin: ['http://localhost:3000', 'http://192.168.1.30:3000', 'https://getfish.se'],
   credentials: true,
 }));
 

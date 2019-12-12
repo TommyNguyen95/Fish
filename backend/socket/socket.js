@@ -2,8 +2,6 @@ const User = require('../schemas/userSchema');
 
 const socket = (io) => {
   io.on('connection', socket => {
-    console.log('User connected');
-
     socket.on('initialMessage', async username => {
       const data = await User.find({ username })
       const user = data[0];
@@ -24,9 +22,9 @@ const socket = (io) => {
     })
 
     socket.on('disconnect', async () => {
-      console.log('User disconnected');
       const data = await User.find({ socketIds: socket.id })
       const user = data[0]
+      console.log(data)
       user.socketIds = user.socketIds.filter(id => id !== socket.id)
       user.save()
     })

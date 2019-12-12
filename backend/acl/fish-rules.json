@@ -46,6 +46,10 @@
     "activatetestuser": {
       "visitor": "all",
       "user": "all"
+    },
+    "push-subscribe": {
+      "visitor": "all",
+      "user": "all"
     }
   }
 }
