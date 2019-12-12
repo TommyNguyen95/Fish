@@ -61,6 +61,7 @@ class ServiceWorker {
 
   addPushEventListener() {
     self.addEventListener('push', e => {
+      console.log(e, 'hämid')
       const data = e.data.json();
       this.log('Push notification received');
       let title = data.title;

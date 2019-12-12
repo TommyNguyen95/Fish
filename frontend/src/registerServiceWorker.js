@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 class RegisterServiceWorker {
 
   constructor() {
@@ -43,17 +41,11 @@ class RegisterServiceWorker {
     this.log('push notifications registrered');
     // Send to subscribe on backend
     console.log('kkköööörs denna kod????')
-    await fetch('localhost:3001/api/push-subscribe', {
+    await fetch('http://localhost:3001/api/push-subscribe', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify(subscription)
     });
-    /*
-    await axios('localhost:3001/api/push-subscribe', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json' },
-      body: JSON.stringify(subscription)
-    }); */
     this.log('subscribed to push notifications');
   }
 
