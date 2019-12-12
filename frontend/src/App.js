@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import StartPage from './views/StartPage';
 import UserPage from './views/UserPage';
 import PaymentPage from './views/PaymentPage';
@@ -9,7 +9,6 @@ import AdminPage from './views/AdminPage';
 import History from "./views/History/HistoryPage"
 import ChildPage from "./views/ChildPage/ChildPage"
 import RecoverPassword from './views/RecoverPassword';
-import PageNotFound from './views/PageNotFound/PageNotFound';
 import { Container } from 'reactstrap';
 import useSubContext from './state/useSubContext';
 import axios from 'axios';
@@ -42,10 +41,10 @@ const App = props => {
       <React.Fragment>
         {state.transactionState.showLogo &&
           <Container className="logo">
-            <Link to="/">
+            <span>
               <img src="/images/fishlogo.svg" alt="" />
               <p className="text-center">När du vill skicka en lax eller en röding</p>
-            </Link>
+            </span>
           </Container>
         }
       </React.Fragment>
@@ -94,7 +93,7 @@ const App = props => {
             <Route
               exact
               path="/profil"
-              render={() => <ProfilePage socket={socket} setSocket={setSocket} />}
+              render={(props) => <ProfilePage socket={socket} setSocket={setSocket} {...props} />}
             />
             <Route
               exact
@@ -104,20 +103,14 @@ const App = props => {
             <Route
               exact
               path="/historik"
-              render={() => <History socket={socket} setSocket={setSocket} />}
+              render={(props) => <History socket={socket} setSocket={setSocket} {...props} />}
             />
             <Route
               exact
               path="/barn-profil/:id"
-              render={() => <ChildPage socket={socket} setSocket={setSocket} />}
-            />
-            <Route
-              exact
-              path="/404"
-              component={PageNotFound}
+              render={(props) => <ChildPage socket={socket} setSocket={setSocket} {...props} />}
             />
             {redirect()}
-            <Redirect to="/404" />
           </Switch> : <Switch>
               <Route
                 exact
@@ -134,9 +127,6 @@ const App = props => {
                 path="/aterstallning"
                 component={RecoverPassword}
               />
-              <Route
-                path="*"
-                component={PageNotFound} />
             </Switch>}
         </Container>
       </Router>

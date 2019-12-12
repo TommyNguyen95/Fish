@@ -6,10 +6,8 @@ import useSocket from '../../helpers/useSocket';
 const UserPage = ({ socket, setSocket }) => {
   useSocket(socket, setSocket);
   const state = useSubContext('loginState')[0];
-  console.log(state);
 
   let balance = state.loginState.balance;
-
 
   return (
     <div>

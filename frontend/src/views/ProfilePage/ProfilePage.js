@@ -13,7 +13,6 @@ const ProfilePage = (props) => {
   useSocket(props.socket, props.setSocket)
   const [state, dispatch] = useSubContext('loginState');
   const userState = state.loginState
-  console.log(userState, "state")
 
   const renderChildsAccounts = () => {
     if (userState.relations) {

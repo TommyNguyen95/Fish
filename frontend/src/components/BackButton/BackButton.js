@@ -9,11 +9,7 @@ const BackButton = (props) => {
   const dispatch = useSubContext('transactionState')[1];
 
   const back = () => {
-    if (props.back) {
-      props.back.history.goBack()
-    } else {
-      props.props.history.push(props.to)
-    }
+    window.history.back();
     dispatch({ type: 'SET_LOGO', value: true })
   }
 

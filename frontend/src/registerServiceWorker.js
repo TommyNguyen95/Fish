@@ -5,8 +5,6 @@ class RegisterServiceWorker {
     this.routeToServiceWorker = '/serviceWorker.js';
     // check browser support, if support call register
     'serviceWorker' in navigator && this.register();
-    console.log(this.routeToServiceWorker)
-    console.log('körs denna kod?? registerServiceWorker')
   }
 
   log(...args) {
@@ -40,7 +38,6 @@ class RegisterServiceWorker {
 
     this.log('push notifications registrered');
     // Send to subscribe on backend
-    console.log('kkköööörs denna kod????')
     await fetch('http://localhost:3001/api/push-subscribe', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
