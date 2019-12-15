@@ -23,12 +23,12 @@ const AdminPage = ({ socket, setSocket }) => {
 
   const getUser = async e => {
     e.preventDefault();
-    const res = await axios.post(`http://localhost:3001/api/users`, { email: searchQuery });
+    const res = await axios.post(`/api/users`, { email: searchQuery });
     setUser(res.data)
   }
 
   const handleInactivateAndActivate = async active => {
-    await axios.patch(`http://localhost:3001/api/activate/${user._id}`, { active });
+    await axios.patch(`/api/activate/${user._id}`, { active });
     setUser({ ...user, active });
   }
 

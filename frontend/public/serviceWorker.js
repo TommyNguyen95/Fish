@@ -14,8 +14,8 @@ class ServiceWorker {
   // ironboy 2019
 
   constructor() {
-    this.debug = false;
-    this.version = 1.0;
+    this.debug = true;
+    this.version = 1.1;
     this.production = false;
     this.myRoute = 'serviceWorker.js';
     this.lastRequestTime = 0;
@@ -55,13 +55,15 @@ class ServiceWorker {
         return e.respondWith(this.fetch(e));
       }
     });
-    this.addPushEventListener();
+    if ("pushManager" in ServiceWorkerRegistration.prototype) {
+      this.addPushEventListener();
+    }
     this.log('added event listeners');
   }
 
   addPushEventListener() {
     self.addEventListener('push', e => {
-      console.log(e, 'hämid')
+      // console.log(e, 'hämid')
       const data = e.data.json();
       this.log('Push notification received');
       let title = data.title;

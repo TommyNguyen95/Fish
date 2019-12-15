@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useSubContext from '../../state/useSubContext';
 import Input from '../../components/Input';
 import BackButton from '../../components/BackButton';
 import VerifyPage from '../VerifyPage';
@@ -10,7 +9,6 @@ import axios from 'axios'
 const CreateAccount = (props) => {
   const [createAccountDetails, setCreateAccountDetails] = useState([]);
   const [validateError, setvalidateError] = useState([]);
-  const state = useSubContext('loginState')[0];
   const [accountDone, setAccountDone] = useState(false);
 
   const renderInputs = () => createAccountFieldsData.map(({ id, name, type, placeholder, capitalize }) => {
@@ -34,7 +32,7 @@ const CreateAccount = (props) => {
     if (createAccountDetails.password === createAccountDetails.confirmPassword && createAccountDetails.confirmPassword && createAccountDetails.lastname && createAccountDetails.firstname && createAccountDetails.ssn) {
       await axios({
         method: 'post',
-        url: `${state.apiEndpoint}/api/user`,
+        url: `/api/user`,
         data: createAccountDetails
       });
       setAccountDone(true);

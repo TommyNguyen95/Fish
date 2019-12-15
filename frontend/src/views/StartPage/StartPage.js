@@ -31,7 +31,7 @@ const Startpage = props => {
     e.preventDefault();
     axios({
       method: 'post',
-      url: `${state.apiEndpoint}/api/login`,
+      url: `/api/login`,
       data: {
         username: state.loginState.username,
         password: state.loginState.password,

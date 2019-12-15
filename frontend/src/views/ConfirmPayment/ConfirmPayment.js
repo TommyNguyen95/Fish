@@ -28,7 +28,7 @@ const ConfirmPayment = (props) => {
       to: state.transactionState.receiverId,
       from: state.loginState._id
     }
-    await axios.post(`${state.apiEndpoint}/api/transactions`, data)
+    await axios.post(`/api/transactions`, data)
     props.props.socket.emit('paymentMessage', data)
   }
 

@@ -29,7 +29,7 @@ const ProfilePage = (props) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      await Axios.get(`${state.apiEndpoint}/api/login`).then(res => {
+      await Axios.get(`/api/login`).then(res => {
         dispatch({ type: "RESET_STATE", value: res.data })
       })
     }
@@ -39,7 +39,7 @@ const ProfilePage = (props) => {
 
   const handleActiveOrInactiveAccount = (active, callback) => {
     if (window.confirm('Är du säker på att du vill avaktivera ditt konto?')) {
-      Axios.patch(`${state.apiEndpoint}/api/activate/${userState._id}`, { active })
+      Axios.patch(`/api/activate/${userState._id}`, { active })
         .then(response => {
           if (callback) {
             callback({})
@@ -54,7 +54,7 @@ const ProfilePage = (props) => {
   }
 
   const logOut = (callback) => {
-    Axios.delete(`${state.apiEndpoint}/api/login`)
+    Axios.delete(`/api/login`)
       .then(res => {
         if (callback) {
           callback(res.data)

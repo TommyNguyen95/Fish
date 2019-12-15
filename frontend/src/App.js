@@ -55,7 +55,7 @@ const App = props => {
     async function checkStatus() {
       axios({
         method: 'get',
-        url: `${state.apiEndpoint}/api/login`
+        url: `/api/login`
       }).then(response => {
         if (!response.data._id) return;
         state.loginState.isLoggedIn = true;

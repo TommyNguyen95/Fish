@@ -6,7 +6,6 @@ import {
 } from './StyledRecoverPassword';
 import BackButton from '../../components/BackButton';
 import Input from '../../components/Input/Input';
-import useSubContext from '../../state/useSubContext';
 import axios from 'axios';
 import './recoverstyle.scss'
 import { TextLinkAccount } from '../StartPage/StyledStartPage'
@@ -19,11 +18,10 @@ const RecoverPassword = (props) => {
   const [emailString, setEmailString] = useState(false);
   const [showLink, setShowLink] = useState(false);
   const [userFind, setUserFind] = useState(false);
-  const state = useSubContext('loginState')[0];
 
   const sendNewPassword = (e) => {
     e.preventDefault()
-    axios.post(`${state.apiEndpoint}/api/sendresetlink/${email.email}`).then(response => {
+    axios.post(`/api/sendresetlink/${email.email}`).then(response => {
       if (response.data.result) {
         setEmailString(response.data.string)
         setEmailSent(true)
@@ -36,10 +34,7 @@ const RecoverPassword = (props) => {
         setShowLink(response.data.link)
         setEmailString(response.data.string)
         setTimeout(function () { window.location.replace('/') }, 6000);
-
-
       }
-
     })
 
 

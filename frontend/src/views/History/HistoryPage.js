@@ -18,7 +18,7 @@ const HistoryPage = (props) => {
   let { transactions, _id, relations } = state.loginState
 
   useEffect(() => {
-    Axios.get(`${state.apiEndpoint}/api/login`).then(res => {
+    Axios.get(`/api/login`).then(res => {
       dispatch({ type: "RESET_STATE", value: res.data })
     })
     // eslint-disable-next-line

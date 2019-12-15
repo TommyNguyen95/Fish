@@ -6,10 +6,10 @@ import './RelationListStyles.scss'
 
 
 const RelationList = ({ userdata }) => {
-  const [state, dispatch] = useSubContext('loginState');
+  const dispatch = useSubContext('loginState')[1];
 
   const deleteChildOnClick = () => {
-    axios.delete(`${state.apiEndpoint}/api/user/${userdata._id}`)
+    axios.delete(`/api/user/${userdata._id}`)
       .then(response => {
         dispatch({ type: "RESET_STATE", value: response.data.updatedParent })
       })
