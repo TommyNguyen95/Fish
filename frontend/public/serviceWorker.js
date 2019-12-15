@@ -14,8 +14,8 @@ class ServiceWorker {
   // ironboy 2019
 
   constructor() {
-    this.debug = true;
-    this.version = 1.1;
+    this.debug = false;
+    this.version = 1.15;
     this.production = false;
     this.myRoute = 'serviceWorker.js';
     this.lastRequestTime = 0;
@@ -107,6 +107,7 @@ class ServiceWorker {
     await this.deleteOldCaches();
     // The request (url etc.) from the fetch event object:
     let req = e.request;
+    // console.log("req", req)
     let url = req.url.split('#')[0];
     let method = req.method;
     let res;

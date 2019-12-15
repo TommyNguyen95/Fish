@@ -1,4 +1,17 @@
 const User = require('../schemas/userSchema');
+const webpush = require('web-push')
+
+async function sendNotification(subscription, payload) {
+  let toSend = {
+    title: 'Getfish.se',
+    icon: '/logo192.png',
+    ...payload
+  };
+  await webpush.sendNotification(
+    subscription, JSON.stringify(toSend)
+  ).catch(err => console.log(err));
+}
+
 
 const socket = (io) => {
   io.on('connection', socket => {
@@ -15,6 +28,8 @@ const socket = (io) => {
       message.from = sender.username
       delete message.to;
       if (receiver.socketIds.length) {
+        // console.log("SENDING TO: ", receiver.sub)
+        sendNotification(receiver.sub, { body: 'Ny betalning mottagen!' });
         receiver.socketIds.forEach(id => {
           io.to(id).emit('paymentMessage', message);
         })

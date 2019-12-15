@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router()
 const webpush = require('web-push')
+const User = require('../schemas/userSchema');
 
 // Subscribe route
 router.post('/api/push-subscribe', async (req, res) => {
@@ -8,12 +9,15 @@ router.post('/api/push-subscribe', async (req, res) => {
   // Send 201 - resource created
   res.status(201).json({ subscribing: true });
 
+  let thisUser = await User.findOne({ username: req.session.user.username })
+  thisUser.sub = subscription
+  thisUser.save()
+
   // Send some notifications...
   // this might not be what you do directly on subscription
   // normally
   sendNotification(subscription, { body: 'Välkommen till f!$h!' });
 });
-
 
 // A function that sends notifications
 async function sendNotification(subscription, payload) {

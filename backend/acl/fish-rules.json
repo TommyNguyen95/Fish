@@ -50,6 +50,10 @@
     "push-subscribe": {
       "visitor": "all",
       "user": "all"
+    },
+    "pushmsg": {
+      "visitor": "all",
+      "user": "all"
     }
   }
 }

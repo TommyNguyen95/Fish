@@ -10,6 +10,7 @@ let userSchema = new Schema({
   balance: { type: Number, default: 200 },
   relations: [{ type: Schema.Types.ObjectId, ref: 'User' }],
   parent: String,
+  sub: Schema.Types.Mixed,
   transactions: Array,
   created: { type: Date, default: Date.now },
   ssn: { type: String, required: true },
