@@ -8,7 +8,7 @@ export default (socket, setSocket) => {
   const [state, dispatch] = useSubContext('loginState');
   useEffect(() => {
     if (!socket) {
-      const newSocket = socketIo('ws://localhost:3001');
+      const newSocket = socketIo('localhost:3001');
       setSocket(newSocket)
       newSocket.emit('initialMessage', state.loginState.username)
       newSocket.on('paymentMessage', ({ from, amount }) => {
