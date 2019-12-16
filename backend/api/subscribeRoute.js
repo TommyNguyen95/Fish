@@ -9,9 +9,12 @@ router.post('/api/push-subscribe', async (req, res) => {
   // Send 201 - resource created
   res.status(201).json({ subscribing: true });
 
-  let thisUser = await User.findOne({ username: req.session.user.username })
-  thisUser.sub = subscription
-  thisUser.save()
+  if (req.session.user) {
+    let thisUser = await User.findOne({ username: req.session.user.username })
+    thisUser.sub = subscription
+    thisUser.save()
+  }
+
 
   // Send some notifications...
   // this might not be what you do directly on subscription

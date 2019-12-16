@@ -320,6 +320,7 @@ router.post('/api/login', async (req, res) => {
  * check if/which user that is logged in
  */
 router.get('/api/login', async (req, res) => {
+  console.log("Fetching login")
   if (req.session.user) {
     let user = await User.findOne({ username: req.session.user.username }).populate('relations')
       .select('username role relations active firstname lastname balance transactions').exec().catch(err => {

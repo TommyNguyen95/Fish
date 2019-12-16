@@ -31,7 +31,7 @@ const ChildPage = (props) => {
       <BackButton back={props} />
       <Child />
       <Link to={{ pathname: '/historik', state: { child: props.match.params.id, url: 'barn' } }} >
-        <Button text="Betalnings Historik" />
+        <Button text="Betalningshistorik" />
       </Link>
     </div>
   )

@@ -22,6 +22,11 @@ router.post('/api/transactions', async (req, res) => {
   let reciever = await User.findById(req.body.to);
   let sender = await User.findById(req.body.from)
 
+  if (!reciever || !sender) {
+    res.send("sender or receiver not found")
+    return
+  }
+
   let err, trans = new Transactions({
     ...req.body,
     receiver: {
