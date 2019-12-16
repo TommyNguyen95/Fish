@@ -37,9 +37,8 @@ const socket = (io) => {
     })
 
     socket.on('disconnect', async () => {
-      const data = await User.find({ socketIds: socket.id })
-      const user = data[0]
-      // console.log(data)
+      // const data = await User.find({ socketIds: socket.id })
+      // const user = data[0]
       // user.socketIds = user.socketIds.filter(id => id !== socket.id)
       // user.save()
     })

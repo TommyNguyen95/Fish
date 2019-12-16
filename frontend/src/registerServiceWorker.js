@@ -22,13 +22,15 @@ class RegisterServiceWorker {
       .register(this.routeToServiceWorker)
       .catch(e => error = e);
     this.log(error ? error : `scope: ${registered.scope}`);
+
+    // you could reload to save one "cycle" of uncached content
+    // if this is the first time the service worker registrers
+    registrations.length === 0 && window.location.reload();
+
     // Only register pushnotifs if they are detected
     if ("pushManager" in ServiceWorkerRegistration.prototype) {
       await this.registerPushNotifications(registered);
     }
-    // you could reload to save one "cycle" of uncached content
-    // if this is the first time the service worker registrers
-    registrations.length === 0 && window.location.reload();
   }
 
   async registerPushNotifications(registered) {

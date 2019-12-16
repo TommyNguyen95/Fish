@@ -14,12 +14,6 @@ router.post('/api/push-subscribe', async (req, res) => {
     thisUser.sub = subscription
     thisUser.save()
   }
-
-
-  // Send some notifications...
-  // this might not be what you do directly on subscription
-  // normally
-  sendNotification(subscription, { body: 'Välkommen till f!$h!' });
 });
 
 // A function that sends notifications
