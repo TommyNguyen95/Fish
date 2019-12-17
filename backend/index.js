@@ -15,6 +15,8 @@ const dbtoggler = require('./dbtoggler');
 const acl = require('./acl/acl');
 const fishRules = require('./acl/fish-rules.json')
 const webpush = require('web-push');
+const sse = require('easy-server-sent-events');
+
 require('dotenv').config()
 
 let config = {
@@ -58,6 +60,15 @@ app.use(session({
   })
 })
 )
+
+const options = {
+  endpoint: '/api/sse',
+  script: '/sse.js'
+}
+
+const { SSE, send } = sse(options)
+app.use(SSE)
+global.sendSSE = send
 
 app.get('/', (req, res) => {
   res.send('Välkommen till Fi$h super server')

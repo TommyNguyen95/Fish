@@ -16,6 +16,13 @@ router.post('/api/push-subscribe', async (req, res) => {
   }
 });
 
+router.post('/api/push-subscribe-event', async (req, res) => {
+  const subscriber = await User.findOne({ username: req.body.username })
+
+  const subscription = subscriber.subscriptions[subscriber.subscroptions.length - 1]
+  sendNotification(subscription, { body: `${req.body.firstname} fishade ${req.body.amount} svenska kronor` })
+})
+
 // A function that sends notifications
 async function sendNotification(subscription, payload) {
   let toSend = {
