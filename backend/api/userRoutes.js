@@ -339,6 +339,7 @@ router.delete('/api/login', async (req, res) => {
   user.sub = "";
   user.save()
   delete req.session.user;
+  delete req.session.sub;
   res.json({ status: 'logged out' });
 });
 

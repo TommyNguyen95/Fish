@@ -47,8 +47,13 @@ const Startpage = props => {
       state.loginState.transactions = response.data.transactions;
       dispatch({ type: "RESET_STATE", value: state.loginState })
 
+      // Renew sub
+      fetch('/api/push-subscribe', {
+        method: 'POST'
+      });
+
       if (response.data.active) {
-        props.history.push('/anvandare')
+        window.location.reload();
       } else {
         toast('Ditt konto är inte aktiverat eller har nyligen blivit avaktiverat, om detta uppstår så kontakta vår support. Mvh getfish.se')
       }

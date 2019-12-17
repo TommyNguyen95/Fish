@@ -15,7 +15,7 @@ class ServiceWorker {
 
   constructor() {
     this.debug = false;
-    this.version = 1.04;
+    this.version = 1.06;
     this.production = false;
     this.myRoute = 'serviceWorker.js';
     this.lastRequestTime = 0;
@@ -213,7 +213,7 @@ class ServiceWorker {
     if (method !== 'GET') { return true; }
 
     // Server Sent Evens should probably never be cached
-    if (route.indexOf('/api/sse/') === 0) { return true; }
+    if (route.indexOf('/api/sse') === 0) { return true; }
     if (route.indexOf('/api/') === 0) { return true; }
 
     // Let chrome extensions through

@@ -15,8 +15,6 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SSE from 'easy-server-sent-events/sse';
-
-
 const sse = new SSE('/api/sse');
 
 sse.listen('message', (data) => {
@@ -68,12 +66,12 @@ const App = props => {
         state.loginState.isLoggedIn = true;
         state.loginState = { ...response.data }
         dispatch({ type: "RESET_STATE", value: state.loginState })
+        toast(`Välkommen tillbaka ${state.loginState.firstname}!`)
       }).catch(response => {
         console.log("error", response)
       })
     }
     checkStatus()
-    // eslint-disable-next-line
   }, [])
 
   return (

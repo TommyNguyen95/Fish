@@ -37,13 +37,12 @@ async function sendNotification(subscription, payload) {
 }
 
 
-transactionSchema.pre("save", function (next) {
-  User.findOne({ username: this.receiver.username })
-    .exec().then(data => {
-      sendNotification(data.sub, { body: `${this.sender.username} fishade dig ${this.amount} SEK` })
-      next()
-    })
-    .catch(err => console.log(err));
+transactionSchema.pre("save", async function (next) {
+  let user = await User.findOne({ username: this.receiver.username }).catch(err => console.log(err));
+  if (user.sub) {
+    await sendNotification(user.sub, { body: `${this.sender.username} fishade dig ${this.amount} SEK` })
+  }
+  next()
 });
 
 module.exports = mongoose.model('transactions', transactionSchema);
