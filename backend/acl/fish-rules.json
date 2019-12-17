@@ -54,6 +54,10 @@
     "pushmsg": {
       "visitor": "all",
       "user": "all"
+    },
+    "sse": {
+      "visitor": "all",
+      "user": "all"
     }
   }
 }

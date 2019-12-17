@@ -14,10 +14,10 @@ import {
   CardText
 } from 'reactstrap';
 import TransactionCard from './components/TransactionCard';
-import useSocket from '../../helpers/useSocket';
 
-const AdminPage = ({ socket, setSocket }) => {
-  useSocket(socket, setSocket)
+
+const AdminPage = () => {
+
   const [user, setUser] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
 

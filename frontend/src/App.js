@@ -27,7 +27,6 @@ axios.interceptors.request.use(
 
 const App = props => {
   const [state, dispatch] = useSubContext('loginState');
-  const [socket, setSocket] = React.useState(null);
   toast.configure()
 
   const redirect = () => {
@@ -78,7 +77,7 @@ const App = props => {
             <Route
               exact
               path="/anvandare"
-              render={() => <UserPage socket={socket} setSocket={setSocket} />}
+              render={() => <UserPage />}
             />
             <Route
               exact
@@ -88,27 +87,27 @@ const App = props => {
             <Route
               exact
               path="/betala"
-              render={() => <PaymentPage socket={socket} setSocket={setSocket} />}
+              render={() => <PaymentPage />}
             />
             <Route
               exact
               path="/profil"
-              render={(props) => <ProfilePage socket={socket} setSocket={setSocket} {...props} />}
+              render={(props) => <ProfilePage  {...props} />}
             />
             <Route
               exact
               path="/transaktioner"
-              render={() => <AdminPage socket={socket} setSocket={setSocket} />}
+              render={() => <AdminPage />}
             />
             <Route
               exact
               path="/historik"
-              render={(props) => <History socket={socket} setSocket={setSocket} {...props} />}
+              render={(props) => <History  {...props} />}
             />
             <Route
               exact
               path="/barn-profil/:id"
-              render={(props) => <ChildPage socket={socket} setSocket={setSocket} {...props} />}
+              render={(props) => <ChildPage  {...props} />}
             />
             {redirect()}
           </Switch> : <Switch>

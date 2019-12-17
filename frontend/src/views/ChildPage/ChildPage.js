@@ -5,10 +5,8 @@ import Button from '../../components/Button/Button'
 import BackButton from '../../components/BackButton';
 import './ChildPageStyles.scss'
 import useSubContext from '../../state/useSubContext';
-import useSocket from '../../helpers/useSocket';
 
 const ChildPage = (props) => {
-  useSocket(props.socket, props.setSocket)
   const state = useSubContext('loginState')[0];
 
   const Child = () => {

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import { StyledUserBox, StyledUserIconDiv, StyledUserIcon, StyledText, StyledButton, StyledLink } from "./StyledUserPage";
 import useSubContext from '../../state/useSubContext';
-import useSocket from '../../helpers/useSocket';
+
 import Axios from 'axios';
 
-const UserPage = ({ socket, setSocket }) => {
-  useSocket(socket, setSocket);
+const UserPage = () => {
+
   const dispatch = useSubContext('loginState')[1];
   const tmpstate = useSubContext('loginState')[0];
 

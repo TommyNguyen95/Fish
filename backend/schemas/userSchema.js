@@ -15,7 +15,6 @@ let userSchema = new Schema({
   created: { type: Date, default: Date.now },
   ssn: { type: String, required: true },
   active: { type: Boolean, default: true },
-  socketIds: [{ type: String }]
 });
 
 module.exports = mongoose.model("User", userSchema);

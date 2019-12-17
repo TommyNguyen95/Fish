@@ -1,8 +1,6 @@
 // Make this bad boy global so we don't have to import it everywhere
 const app = require('express')();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http);
-require('./socket/socket')(io);
 const bodyParser = require('body-parser');
 const connectToDb = require('./config/db');
 const session = require('express-session');

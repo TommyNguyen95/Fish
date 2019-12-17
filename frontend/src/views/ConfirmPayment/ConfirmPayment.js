@@ -29,11 +29,10 @@ const ConfirmPayment = (props) => {
       from: state.loginState._id
     }
     await axios.post(`/api/transactions`, data)
-    props.props.socket.emit('paymentMessage', data)
   }
 
   const sendSubscription = async () => {
-    await fetch('/api/push-subscribe-event', {
+    await fetch('/api/sse/', {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

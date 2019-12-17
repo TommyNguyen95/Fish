@@ -213,8 +213,7 @@ class ServiceWorker {
     if (method !== 'GET') { return true; }
 
     // Server Sent Evens should probably never be cached
-    if (route.indexOf('/socket.io/') === 0) { return true; }
-    if (route.indexOf('/api/socket.io/') === 0) { return true; }
+    if (route.indexOf('/api/sse/') === 0) { return true; }
     if (route.indexOf('/api/') === 0) { return true; }
 
     // Let chrome extensions through
