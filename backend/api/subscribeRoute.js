@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router()
-const webpush = require('web-push')
 const User = require('../schemas/userSchema');
 
 // Subscribe route
@@ -17,23 +16,7 @@ router.post('/api/push-subscribe', async (req, res) => {
 });
 
 router.post('/api/sse', async (req, res) => {
-  const subscriber = await User.findOne({ username: req.body.username })
-
-  const subscription = subscriber.subscriptions[subscriber.subscroptions.length - 1]
-  sendNotification(subscription, { body: `${req.body.firstname} fishade ${req.body.amount} svenska kronor` })
   res.status(200).send("ok")
 })
-
-// A function that sends notifications
-async function sendNotification(subscription, payload) {
-  let toSend = {
-    title: 'Getfish.se',
-    icon: '/logo192.png',
-    ...payload
-  };
-  await webpush.sendNotification(
-    subscription, JSON.stringify(toSend)
-  ).catch(err => console.log(err));
-}
 
 module.exports = router;
