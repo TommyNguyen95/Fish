@@ -43,7 +43,7 @@ transactionSchema.pre("save", function (next) {
       sendNotification(data.sub, { body: `${this.sender.username} fishade dig ${this.amount} SEK` })
       next()
     })
-    .catch(err => errorHandler.handle('pushError', err));
+    .catch(err => console.log(err));
 });
 
 module.exports = mongoose.model('transactions', transactionSchema);

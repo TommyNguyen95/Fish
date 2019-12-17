@@ -31,20 +31,6 @@ const ConfirmPayment = (props) => {
     await axios.post(`/api/transactions`, data)
   }
 
-  const sendSubscription = async () => {
-    await fetch('/api/sse/', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: state.loginState.firstname,
-        amount: state.transactionState.amount,
-        email: state.loginState.username,
-      })
-    })
-  }
-
   /**
    * Checks validation that the email you sent to exists and
    * also checks for if your usernamer is correct in the verification input
@@ -53,7 +39,6 @@ const ConfirmPayment = (props) => {
    */
   const checkValidationForTransaction = () => {
     sendTransaction();
-    sendSubscription();
     dispatch({ type: 'SET_LOGO', value: false })
     setPaymentConfirmed(true)
     return;

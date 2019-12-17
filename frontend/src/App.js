@@ -14,6 +14,14 @@ import useSubContext from './state/useSubContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SSE from 'easy-server-sent-events/sse';
+
+
+const sse = new SSE('/api/sse');
+
+sse.listen('message', (data) => {
+  toast(data)
+});
 
 axios.interceptors.request.use(
   function (config) {

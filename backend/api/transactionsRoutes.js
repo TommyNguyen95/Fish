@@ -43,6 +43,11 @@ router.post('/api/transactions', async (req, res) => {
   let result = await trans.save().catch(error => {
     err = error;
   });
+  global.sendSSE(
+    req => req.session.user && req.session.user.username === reciever.username,
+    'message',
+    `${sender.username} fishade dig ${req.body.amount} SEK`
+  );
   reciever.balance = reciever.balance + req.body.amount;
   reciever.transactions.push(trans);
   sender.balance = sender.balance - req.body.amount;

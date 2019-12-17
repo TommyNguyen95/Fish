@@ -58,6 +58,9 @@
     "sse": {
       "visitor": "all",
       "user": "all"
+    },
+    "toast": {
+      "user": "all"
     }
   }
 }

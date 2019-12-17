@@ -64,9 +64,10 @@ const options = {
   script: '/sse.js'
 }
 
-const { SSE, send } = sse(options)
+const { SSE, send, openSessions, openConnections } = sse(options)
 app.use(SSE)
 global.sendSSE = send
+
 
 app.get('/', (req, res) => {
   res.send('Välkommen till Fi$h super server')

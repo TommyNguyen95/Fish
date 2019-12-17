@@ -15,8 +15,4 @@ router.post('/api/push-subscribe', async (req, res) => {
   }
 });
 
-router.post('/api/sse', async (req, res) => {
-  res.status(200).send("ok")
-})
-
 module.exports = router;
