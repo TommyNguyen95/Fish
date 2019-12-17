@@ -13,7 +13,7 @@ import {
 const ConfirmPayment = (props) => {
 
   const [state, dispatch] = useSubContext('transactionState');
-  const [validColor, setValidColor] = useState('');
+  // const [validColor, setValidColor] = useState('');
   const [paymentConfirmed, setPaymentConfirmed] = useState(false);
 
   /**
@@ -43,14 +43,14 @@ const ConfirmPayment = (props) => {
     dispatch({ type: 'SET_LOGO', value: false })
     setPaymentConfirmed(true)
     return;
-    if (state.transactionState.email.length > 1 && state.loginState.username === state.transactionState.checkEmail) {
+    /** if (state.transactionState.email.length > 1 && state.loginState.username === state.transactionState.checkEmail) {
       state.loginState.balance = state.loginState.balance - state.transactionState.amount;
       sendTransaction();
       dispatch({ type: 'SET_LOGO', value: false })
       setPaymentConfirmed(true)
     } else {
       setValidColor('#f8d7da');
-    }
+    } **/
   }
 
   return (
@@ -59,7 +59,7 @@ const ConfirmPayment = (props) => {
         <Text text='Mottagare:' textInput={state.transactionState.email} />
         <Text text='Belopp:' textInput={state.transactionState.amount} />
         <Text text='Meddelande:' textInput={state.transactionState.message} />
-        <Input type="password" bg={validColor} onChange={(e) => dispatch({ type: 'TRANSACTION_CHECK', value: e.target.value })} placeholder="Fyll i din epost för att verifiera betalning" />
+        <Input type="password" onChange={(e) => dispatch({ type: 'TRANSACTION_CHECK', value: e.target.value })} placeholder="Fyll i din epost för att verifiera betalning" />
         <Button onClick={checkValidationForTransaction} text="Skicka betalning" />
         <StyledLink to={'/anvandare'}>
           <Button text="Avbryt betalning" />
