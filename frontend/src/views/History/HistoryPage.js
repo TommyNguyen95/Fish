@@ -59,23 +59,26 @@ const HistoryPage = (props) => {
     return relations.map((i, index) => {
 
       if (i._id === props.location.state.child) {
+
         if (i.transactions.length === 0) { return <p className="no-transaction-text" key={index}> Inga transaktioner :(</p> }
-        return i.transactions.reverse().map(k => {
+
+        return i.transactions.slice(0).reverse().map((k, index) => {
+
 
           let { firstname, lastname, username } = k.receiver
           return (<div className="single-wrapper" key={index}>
             <div className="single-trans-wrap">
               <small className="date">{moment(i.date).format('YYYY-MM-DD')}</small>
               <div className="single-trans-box">
-                {_id !== i.from ? (<p className="persontext">{i.sender.firstname + ' ' + i.sender.lastname}</p>) : (<p>{firstname + ' ' + lastname}</p>)}
-                {_id !== i.from ? (<small>{i.sender.username}</small>) : (<small>{username}</small>)}
+                {_id !== i.from ? (<p className="persontext">{k.sender.firstname + ' ' + k.sender.lastname}</p>) : (<p>{firstname + ' ' + lastname}</p>)}
+                {_id !== i.from ? (<small>{k.sender.username}</small>) : (<small>{username}</small>)}
 
               </div>
 
-              <div className="msg-wrap"> {i.message}</div>
+              <div className="msg-wrap"> {k.message}</div>
             </div>
             <div className="amount-div">
-              <StyledP textstyle={_id === i.from ? '-' : ''}> {i.amount} KR</StyledP>
+              <StyledP textstyle={_id !== k.from ? '-' : ''}> {k.amount.toLocaleString()} KR</StyledP>
             </div>
           </div>)
 
