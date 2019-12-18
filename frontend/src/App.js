@@ -17,10 +17,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import SSE from 'easy-server-sent-events/sse';
 const sse = new SSE('/api/sse');
 
-sse.listen('message', (data) => {
-  toast(data)
-});
-
 axios.interceptors.request.use(
   function (config) {
     config.withCredentials = true
@@ -34,6 +30,8 @@ axios.interceptors.request.use(
 const App = props => {
   const [state, dispatch] = useSubContext('loginState');
   toast.configure()
+
+
 
   const redirect = () => {
     if (state.loginState.active && window.location.pathname === '/') {
@@ -57,6 +55,21 @@ const App = props => {
   }
 
   useEffect(() => {
+    sse.listen('message', (payData) => {
+      axios({
+        method: 'get',
+        url: `/api/login`
+      }).then(response => {
+        if (!response.data._id) return;
+        state.loginState.isLoggedIn = true;
+        state.loginState = { ...response.data }
+        dispatch({ type: "RESET_STATE", value: state.loginState })
+        toast(payData)
+      }).catch(response => {
+        console.log("error", response)
+      })
+    });
+
     async function checkStatus() {
       axios({
         method: 'get',
