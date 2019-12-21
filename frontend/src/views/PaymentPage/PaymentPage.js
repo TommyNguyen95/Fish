@@ -25,7 +25,7 @@ const PaymentPage = (props) => {
    */
   const getInfoForTransaction = (e) => {
     e.preventDefault();
-    if (state.loginState.balance >= state.transactionState.amount) {
+    if (state.loginState.balance >= state.transactionState.amount && state.transactionState.amount > 0) {
       if (state.loginState.username !== state.transactionState.email) {
         axios.get(`/api/user/${state.transactionState.email}`)
           .then(response => {
