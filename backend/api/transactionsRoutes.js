@@ -27,6 +27,11 @@ router.post('/api/transactions', async (req, res) => {
     return
   }
 
+  if (req.body.amount <= 0) {
+    res.send("you cant fish less than 1kr")
+    return
+  }
+
   let err, trans = new Transactions({
     ...req.body,
     receiver: {
